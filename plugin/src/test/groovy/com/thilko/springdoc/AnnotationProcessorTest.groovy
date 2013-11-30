@@ -19,15 +19,16 @@ class AnnotationProcessorTest extends Specification {
     }
 
     def "parser can be initialized with classes"() {
-        when:
+        given:
         def f = new File("plugin/src/main/java/com/thilko/springdoc/CustomerController.java")
         def options = ["-proc:only", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
         def t = compiler.getTask(null, fileManager, collector, options , null, fileManager.getJavaFileObjects(f))
 
+        when:
         t.call()
 
         then:
-        println(collector.getDiagnostics())
-        1 == 1
+        collector.getDiagnostics().isEmpty()
+        new File("index.html").exists()
     }
 }

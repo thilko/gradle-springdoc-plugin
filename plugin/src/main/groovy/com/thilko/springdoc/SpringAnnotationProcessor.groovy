@@ -14,11 +14,15 @@ class SpringAnnotationProcessor extends AbstractProcessor{
 
     @Override
     boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        annotations.each {
-            roundEnv.getElementsAnnotatedWith(it)
+        if(roundEnv.processingOver()){
+            return true
         }
 
-        return false
+        def classes = annotations.collect{roundEnv.getElementsAnnotatedWith(it)}.flatten()
+        def doc = SpringDoc.withClasses(classes)
+        doc.generate()
+
+        return true
     }
 
     @Override
