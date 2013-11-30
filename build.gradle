@@ -1,0 +1,14 @@
+subprojects {
+    apply plugin: "groovy"
+    apply plugin: "java"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile 'org.springframework:spring-webmvc:3.2.5.RELEASE'
+
+        testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+    }
+}
