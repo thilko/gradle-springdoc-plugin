@@ -17,7 +17,7 @@ class AnnotationProcessorTest extends Specification {
         new File("index.html").exists()
     }
 
-    def "html doc contains all classes"(){
+    def "html doc contains all classes"() {
         given:
         def compiler = TestCompiler.javaCompiler()
         compiler.withTestSources();
@@ -26,11 +26,12 @@ class AnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        new File("index.html").getText().contains("CustomerController")
-        new File("index.html").getText().contains("StatisticsController")
+        !compiler.hasDiagnostics()
+        indexHtml().contains("CustomerController")
+        indexHtml().contains("StatisticsController")
     }
 
-    def "html doc contains the operations"(){
+    def "html doc contains the operations"() {
         given:
         def compiler = TestCompiler.javaCompiler()
         compiler.withTestSources();
@@ -39,7 +40,13 @@ class AnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        new File("index.html").getText().contains("userPerMonth")
-        new File("index.html").getText().contains("askMe")
+        !compiler.hasDiagnostics()
+        indexHtml().contains("userPerMonth")
+        indexHtml().contains("askMe")
     }
+
+    private def indexHtml() {
+        new File("index.html").getText()
+    }
+
 }
