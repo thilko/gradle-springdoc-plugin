@@ -29,4 +29,17 @@ class AnnotationProcessorTest extends Specification {
         new File("index.html").getText().contains("CustomerController")
         new File("index.html").getText().contains("StatisticsController")
     }
+
+    def "html doc contains the operations"(){
+        given:
+        def compiler = TestCompiler.javaCompiler()
+        compiler.withTestSources();
+
+        when:
+        compiler.call();
+
+        then:
+        new File("index.html").getText().contains("userPerMonth")
+        new File("index.html").getText().contains("askMe")
+    }
 }
