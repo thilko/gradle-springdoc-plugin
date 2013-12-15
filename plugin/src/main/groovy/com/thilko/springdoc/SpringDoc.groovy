@@ -43,8 +43,10 @@ class SpringDoc {
                                         tbody {
                                             endpoint.operations().each { op ->
                                                 tr {
-                                                    th op.name
-                                                    th op.httpMethod
+                                                    td op.name
+                                                    td {
+                                                        span(class: "label label-primary", op.httpMethod)
+                                                    }
                                                 }
                                             }
                                         }
@@ -54,9 +56,9 @@ class SpringDoc {
                         }
                     }
                 }
-                script(src: "http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js", async: "true", "")
                 script(src: "http://code.jquery.com/jquery-1.10.1.min.js", async: "true", "")
                 script(src: "http://code.jquery.com/jquery-migrate-1.2.1.min.js", async: "true", "")
+                script(src: "http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js", async: "true", "")
             }
         }
     }
@@ -65,7 +67,7 @@ class SpringDoc {
         return classes.collect { Endpoint.create(it) }
     }
 
-    private static builder() {
+    private builder() {
         return new MarkupBuilder(new PrintWriter(new File("index.html")))
     }
 
