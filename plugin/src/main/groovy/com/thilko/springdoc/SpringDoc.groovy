@@ -23,24 +23,40 @@ class SpringDoc {
             }
             body {
                 h1 "Api Documentation"
-                endpoints().each { endpoint ->
-                    h2 endpoint.className()
-                    table(class: "endpoint") {
-                        tr {
-                            th "Operation"
-                            th "Method"
-                        }
-
-                        endpoint.operations().each { op ->
-                            tr {
-                                th op.name
-                                th op.httpMethod
+                div(class: "panel-group", id: "accordion") {
+                    endpoints().eachWithIndex { endpoint, idx ->
+                        div(class: "panel panel-default") {
+                            div(class: "panel-heading") {
+                                h4(class: "panel-title") {
+                                    a("data-toggle": "collapse", "data-parent": "#accordion", href: "#collapse$idx", endpoint.className())
+                                }
+                            }
+                            div(id: "collapse$idx", class: "panel-collapse collapse") {
+                                div(class: "panel-body") {
+                                    table(class: "endpoint") {
+                                        thead {
+                                            tr {
+                                                th "Operation"
+                                                th "Method"
+                                            }
+                                        }
+                                        tbody {
+                                            endpoint.operations().each { op ->
+                                                tr {
+                                                    th op.name
+                                                    th op.httpMethod
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
                 }
-
-                script(src: "http://netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js")
+                script(src: "http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js", async: "true", "")
+                script(src: "http://code.jquery.com/jquery-1.10.1.min.js", async: "true", "")
+                script(src: "http://code.jquery.com/jquery-migrate-1.2.1.min.js", async: "true", "")
             }
         }
     }
