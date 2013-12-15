@@ -31,11 +31,15 @@ class Endpoint {
         }
     }
 
-    def apiMethod(executable) {
+    private static def apiMethod(executable) {
         Method.fromElement(executable)
     }
 
     private static boolean constructor(executable) {
         executable.simpleName.contentEquals("<init>")
+    }
+
+    int getMethodCount() {
+        return methods.size();
     }
 }

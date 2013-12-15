@@ -47,4 +47,8 @@ class TestCompiler {
     public hasDiagnostics() {
         !collector.diagnostics.isEmpty()
     }
+
+    def customerController() {
+        task.elements.getTypeElement("com.thilko.springdoc.CustomerController")
+    }
 }
