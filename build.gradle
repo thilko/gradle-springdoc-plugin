@@ -7,7 +7,7 @@ subprojects {
     }
 
     dependencies {
-        compile 'org.springframework:spring-webmvc:3.2.5.RELEASE'
+        compile 'org.springframework:spring-webmvc:4.0.0.RELEASE'
 
         testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
     }
