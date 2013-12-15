@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CustomerController {
 
     @RequestMapping
-    public void askMe(){
+    public void askMe() {
 
 
     }

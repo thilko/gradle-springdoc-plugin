@@ -45,9 +45,7 @@ class SpringDoc {
     }
 
     private endpoints() {
-        def bla = classes.collect { Endpoint.create(it) }
-
-        return bla
+        return classes.collect { Endpoint.create(it) }
     }
 
     private builder() {

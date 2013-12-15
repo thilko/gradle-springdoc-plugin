@@ -45,7 +45,19 @@ class AnnotationProcessorTest extends Specification {
         indexHtml().contains("askMe")
     }
 
-    private def indexHtml() {
+    def "html doc does not contain the constructor method"() {
+        given:
+        def compiler = TestCompiler.javaCompiler()
+        compiler.withTestSources();
+
+        when:
+        compiler.call();
+
+        then:
+        !indexHtml().contains("&lt;init&gt;")
+    }
+
+    private static def indexHtml() {
         new File("index.html").getText()
     }
 

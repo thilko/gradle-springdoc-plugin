@@ -1,22 +1,37 @@
 package com.thilko.springdoc
 
-
 class Endpoint {
+
     def endpoint
 
+    def methods = []
+
     static def create(def endpoint) {
-        return new Endpoint(endpoint)
+        def docEndpoint = new Endpoint(endpoint)
+        endpoint.accept(new EndpointVisitor(), docEndpoint)
+
+        return docEndpoint
     }
 
-    private Endpoint(def endpoint){
+    private Endpoint(def endpoint) {
         this.endpoint = endpoint
     }
 
-    def operations(){
-        endpoint.getEnclosedElements()
+    def operations() {
+        this.methods
     }
 
-    def className(){
+    def className() {
         endpoint.simpleName
+    }
+
+    def applyExecutable(def executable) {
+        if (!constructor(executable)) {
+            this.methods << executable;
+        }
+    }
+
+    private static boolean constructor(executable) {
+        executable.simpleName.contentEquals("<init>")
     }
 }
