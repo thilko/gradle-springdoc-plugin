@@ -27,8 +27,12 @@ class Endpoint {
 
     def applyExecutable(def executable) {
         if (!constructor(executable)) {
-            this.methods << executable;
+            this.methods << apiMethod(executable);
         }
+    }
+
+    def apiMethod(executable) {
+        Method.fromElement(executable)
     }
 
     private static boolean constructor(executable) {

@@ -19,12 +19,13 @@ class SpringDoc {
             head {
                 title "Api documentation"
                 link(href: "http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css", rel: "stylesheet")
+                link(href: "mvcdoc.css", rel: "stylesheet")
             }
             body {
                 h1 "Api Documentation"
                 endpoints().each { endpoint ->
                     h2 endpoint.className()
-                    table {
+                    table(class: "endpoint") {
                         tr {
                             th "Operation"
                             th "Method"
@@ -32,8 +33,8 @@ class SpringDoc {
 
                         endpoint.operations().each { op ->
                             tr {
-                                th op.simpleName
-                                th "BLA"
+                                th op.name
+                                th op.httpMethod
                             }
                         }
                     }

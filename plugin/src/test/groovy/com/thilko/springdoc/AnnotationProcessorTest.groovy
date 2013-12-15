@@ -57,6 +57,18 @@ class AnnotationProcessorTest extends Specification {
         !indexHtml().contains("&lt;init&gt;")
     }
 
+    def "html doc contains the HTTP method of operations"() {
+        given:
+        def compiler = TestCompiler.javaCompiler()
+        compiler.withTestSources();
+
+        when:
+        compiler.call();
+
+        then:
+        indexHtml().contains("GET")
+    }
+
     private static def indexHtml() {
         new File("index.html").getText()
     }
