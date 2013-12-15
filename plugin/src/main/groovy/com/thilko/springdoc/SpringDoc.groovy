@@ -65,7 +65,7 @@ class SpringDoc {
         return classes.collect { Endpoint.create(it) }
     }
 
-    private builder() {
+    private static builder() {
         return new MarkupBuilder(new PrintWriter(new File("index.html")))
     }
 
