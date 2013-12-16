@@ -44,7 +44,7 @@ class TestCompiler {
         sources = []
     }
 
-    public hasDiagnostics() {
+    public hasErrors() {
         !collector.diagnostics.isEmpty()
     }
 

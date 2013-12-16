@@ -13,7 +13,7 @@ class AnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        !compiler.hasDiagnostics()
+        !compiler.hasErrors()
         new File("index.html").exists()
     }
 
@@ -26,7 +26,7 @@ class AnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        !compiler.hasDiagnostics()
+        !compiler.hasErrors()
         indexHtml().contains("CustomerController")
         indexHtml().contains("StatisticsController")
     }
@@ -40,7 +40,7 @@ class AnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        !compiler.hasDiagnostics()
+        !compiler.hasErrors()
         indexHtml().contains("userPerMonth")
         indexHtml().contains("askMe")
     }
