@@ -11,7 +11,7 @@ sourceSets {
     generated
 }
 
-task generateHtml(type: JavaCompile){
+task generateHtml(type: JavaCompile) {
     source = sourceSets.main.java
     classpath = sourceSets.main.output + configurations.compile
 

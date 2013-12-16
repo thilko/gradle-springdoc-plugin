@@ -8,5 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StatisticsController {
 
     @RequestMapping("/user/month/average")
-    public void userPerMonth(){}
+    public void userPerMonth() {
+    }
 }

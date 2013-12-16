@@ -44,9 +44,9 @@ class SpringDoc {
                                         tbody {
                                             endpoint.operations().each { op ->
                                                 tr {
-                                                    td op.name
+                                                    td op.name()
                                                     td {
-                                                        span(class: "label label-primary", op.httpMethod)
+                                                        span(class: "label label-primary", op.httpMethod())
                                                     }
                                                 }
                                             }

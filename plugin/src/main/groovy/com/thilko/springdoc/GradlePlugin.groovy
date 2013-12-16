@@ -4,11 +4,11 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 
-class GradlePlugin implements Plugin<Project>{
+class GradlePlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.task("springdoc"){
+        project.task("springdoc") {
             println "hello from compile"
 
 

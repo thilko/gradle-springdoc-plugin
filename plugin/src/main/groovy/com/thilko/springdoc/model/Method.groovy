@@ -4,19 +4,37 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 class Method {
 
-    def name
-    def httpMethod
-    def httpMethodCssClass
+    def executableElement
+
+    def cssClasses = ["GET": "label-primary",
+            "POST": "label-success"]
 
     static def fromElement(executable) {
         new Method(executable)
     }
 
     private Method(executable) {
-        def requestAnnotation = (RequestMapping) executable.getAnnotation(RequestMapping.class)
-        this.name = executable.simpleName
-        this.httpMethod = requestAnnotation.method().length == 0 ? "GET" : requestAnnotation.method().first().name()
-        this.httpMethodCssClass = "label-primary"
+        this.executableElement = executable
+    }
+
+    def name() {
+        this.executableElement.simpleName
+    }
+
+    def httpMethod() {
+        !hasRequestMethod() ? "GET" : requestMappingAnnotation().method().first().name()
+    }
+
+    private boolean hasRequestMethod() {
+        requestMappingAnnotation().method().length > 0
+    }
+
+    private requestMappingAnnotation() {
+        (RequestMapping) executableElement.getAnnotation(RequestMapping.class)
+    }
+
+    def httpMethodCssClass() {
+        this.cssClasses[httpMethod()]
     }
 
 }

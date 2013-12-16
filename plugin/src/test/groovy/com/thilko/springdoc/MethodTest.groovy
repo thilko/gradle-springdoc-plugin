@@ -19,7 +19,7 @@ class MethodTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[0].httpMethod == "GET"
+        endpoint.methods[0].httpMethod() == "GET"
     }
 
     def "httpMethod returns POST if annotated with HttpMethod.POST"() {
@@ -27,7 +27,7 @@ class MethodTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[1].httpMethod == "POST"
+        endpoint.methods[1].httpMethod() == "POST"
     }
 
     def "httpMethodCssClass returns 'label-primary' for GET"() {
@@ -35,7 +35,15 @@ class MethodTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[0].httpMethodCssClass == "label-primary"
+        endpoint.methods[0].httpMethodCssClass() == "label-primary"
+    }
+
+    def "httpMethodCssClass returns 'label-success' for POST"() {
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[1].httpMethodCssClass() == "label-success"
     }
 
     def "name returns correct name of the annotated method"() {
@@ -43,6 +51,6 @@ class MethodTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[0].name.contentEquals("askMe")
+        endpoint.methods[0].name().contentEquals("askMe")
     }
 }
