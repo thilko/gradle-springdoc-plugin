@@ -39,6 +39,7 @@ class SpringDoc {
                                             tr {
                                                 th "Operation"
                                                 th "Method"
+                                                th "Path"
                                             }
                                         }
                                         tbody {
@@ -48,6 +49,7 @@ class SpringDoc {
                                                     td {
                                                         span(class: op.httpMethodCssClass(), op.httpMethod())
                                                     }
+                                                    td op.path()
                                                 }
                                             }
                                         }

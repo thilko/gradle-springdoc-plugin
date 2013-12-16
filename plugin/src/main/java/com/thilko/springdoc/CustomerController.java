@@ -11,15 +11,15 @@ public class CustomerController {
     public void askMe() {
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/data", method = RequestMethod.POST)
     public void uploadData() {
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @RequestMapping(value = "/user", method = RequestMethod.PUT)
     public void createNewUser() {
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
     public void deleteUser() {
     }
 }

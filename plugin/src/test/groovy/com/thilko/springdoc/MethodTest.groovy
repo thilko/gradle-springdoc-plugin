@@ -70,4 +70,20 @@ class MethodTest extends Specification {
         then:
         endpoint.methods[0].name().contentEquals("askMe")
     }
+
+    def "path returns / if no value RequestMapping is set"() {
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[0].path() == "/"
+    }
+
+    def "path returns correct value if value of RequestMapping is set"() {
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[1].path() == "/data"
+    }
 }

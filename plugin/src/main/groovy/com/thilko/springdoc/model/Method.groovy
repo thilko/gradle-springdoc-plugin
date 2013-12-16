@@ -39,4 +39,9 @@ class Method {
         this.cssClasses[httpMethod()]
     }
 
+    def path() {
+        def value = requestMappingAnnotation().value()
+        value.length == 0 ? "/" : value.first()
+    }
+
 }
