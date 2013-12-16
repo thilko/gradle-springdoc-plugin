@@ -6,6 +6,7 @@ class Method {
 
     def name
     def httpMethod
+    def httpMethodCssClass
 
     static def fromElement(executable) {
         new Method(executable)
@@ -15,6 +16,7 @@ class Method {
         def requestAnnotation = (RequestMapping) executable.getAnnotation(RequestMapping.class)
         this.name = executable.simpleName
         this.httpMethod = requestAnnotation.method().length == 0 ? "GET" : requestAnnotation.method().first().name()
+        this.httpMethodCssClass = "label-primary"
     }
 
 }
