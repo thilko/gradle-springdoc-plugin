@@ -3,12 +3,15 @@ package com.thilko.springdoc
 import spock.lang.Specification
 
 class AnnotationProcessorTest extends Specification {
+    def compiler
+
+    def setup() {
+        compiler = TestCompiler.javaCompiler()
+        compiler.withTestSources();
+    }
+
 
     def "parser can be initialized with classes"() {
-        given:
-        def compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
-
         when:
         compiler.call();
 
@@ -18,10 +21,6 @@ class AnnotationProcessorTest extends Specification {
     }
 
     def "html doc contains all classes"() {
-        given:
-        def compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
-
         when:
         compiler.call();
 
@@ -32,10 +31,6 @@ class AnnotationProcessorTest extends Specification {
     }
 
     def "html doc contains the operations"() {
-        given:
-        def compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
-
         when:
         compiler.call();
 
@@ -46,10 +41,6 @@ class AnnotationProcessorTest extends Specification {
     }
 
     def "html doc does not contain the constructor method"() {
-        given:
-        def compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
-
         when:
         compiler.call();
 
@@ -58,10 +49,6 @@ class AnnotationProcessorTest extends Specification {
     }
 
     def "html doc contains the HTTP method of operations"() {
-        given:
-        def compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
-
         when:
         compiler.call();
 
