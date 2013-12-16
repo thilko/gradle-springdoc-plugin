@@ -14,4 +14,12 @@ public class CustomerController {
     @RequestMapping(method = RequestMethod.POST)
     public void uploadData() {
     }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void createNewUser() {
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE)
+    public void deleteUser() {
+    }
 }

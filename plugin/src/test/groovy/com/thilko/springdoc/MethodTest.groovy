@@ -46,6 +46,23 @@ class MethodTest extends Specification {
         endpoint.methods[1].httpMethodCssClass() == "label label-success"
     }
 
+    def "httpMethodCssClass returns 'label label-info' for PUT"() {
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[2].httpMethodCssClass() == "label label-info"
+    }
+
+    def "httpMethodCssClass returns 'label label-danger' for DELETE"() {
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[3].httpMethodCssClass() == "label label-danger"
+    }
+
+
     def "name returns correct name of the annotated method"() {
         when:
         def endpoint = Endpoint.create(compiler.customerController())
