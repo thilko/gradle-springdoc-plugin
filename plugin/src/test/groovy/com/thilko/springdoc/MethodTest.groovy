@@ -30,7 +30,7 @@ class MethodTest extends Specification {
         endpoint.methods[1].httpMethod() == "POST"
     }
 
-    def "httpMethodCssClass returns 'label-primary' for GET"() {
+    def "httpMethodCssClass returns 'label label-primary' for GET"() {
         when:
         def endpoint = Endpoint.create(compiler.customerController())
 
@@ -38,7 +38,7 @@ class MethodTest extends Specification {
         endpoint.methods[0].httpMethodCssClass() == "label-primary"
     }
 
-    def "httpMethodCssClass returns 'label-success' for POST"() {
+    def "httpMethodCssClass returns 'label label-success' for POST"() {
         when:
         def endpoint = Endpoint.create(compiler.customerController())
 

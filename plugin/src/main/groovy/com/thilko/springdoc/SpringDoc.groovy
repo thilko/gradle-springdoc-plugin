@@ -46,7 +46,7 @@ class SpringDoc {
                                                 tr {
                                                     td op.name()
                                                     td {
-                                                        span(class: "label label-primary", op.httpMethod())
+                                                        span(class: op.httpMethodCssClass(), op.httpMethod())
                                                     }
                                                 }
                                             }

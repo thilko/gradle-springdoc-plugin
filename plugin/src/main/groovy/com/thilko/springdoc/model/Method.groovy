@@ -6,8 +6,8 @@ class Method {
 
     def executableElement
 
-    def cssClasses = ["GET": "label-primary",
-            "POST": "label-success"]
+    def cssClasses = ["GET": "label label-primary",
+            "POST": "label label-success"]
 
     static def fromElement(executable) {
         new Method(executable)
