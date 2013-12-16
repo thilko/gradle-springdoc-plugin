@@ -1,4 +1,4 @@
-package com.thilko.springdoc
+package com.thilko.springdoc.model
 
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.util.ElementScanner7

@@ -1,4 +1,4 @@
-package com.thilko.springdoc
+package com.thilko.springdoc.model
 
 class Endpoint {
 

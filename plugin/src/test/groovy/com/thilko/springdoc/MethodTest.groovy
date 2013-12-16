@@ -1,5 +1,6 @@
 package com.thilko.springdoc
 
+import com.thilko.springdoc.model.Endpoint
 import spock.lang.Specification
 
 
