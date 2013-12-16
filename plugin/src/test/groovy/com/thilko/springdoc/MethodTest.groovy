@@ -35,7 +35,7 @@ class MethodTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[0].httpMethodCssClass() == "label-primary"
+        endpoint.methods[0].httpMethodCssClass() == "label label-primary"
     }
 
     def "httpMethodCssClass returns 'label label-success' for POST"() {
@@ -43,7 +43,7 @@ class MethodTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[1].httpMethodCssClass() == "label-success"
+        endpoint.methods[1].httpMethodCssClass() == "label label-success"
     }
 
     def "name returns correct name of the annotated method"() {
