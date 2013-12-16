@@ -34,7 +34,7 @@ class SpringDoc {
                             }
                             div(id: "collapse$idx", class: "panel-collapse collapse") {
                                 div(class: "panel-body") {
-                                    table(class: "endpoint") {
+                                    table(class: "endpoint table table-striped") {
                                         thead {
                                             tr {
                                                 th "Operation"
