@@ -1,11 +1,9 @@
 apply plugin: "groovy"
-apply plugin: "java"
 apply plugin: 'maven-publish'
 
 dependencies {
     compile gradleApi()
     compile localGroovy()
-
 }
 
 sourceSets {
