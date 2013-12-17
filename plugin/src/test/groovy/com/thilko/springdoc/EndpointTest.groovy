@@ -16,6 +16,6 @@ class EndpointTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methodCount == 1
+        endpoint.methodCount == 4
     }
 }

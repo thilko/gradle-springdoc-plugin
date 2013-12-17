@@ -10,5 +10,6 @@ subprojects {
         compile 'org.springframework:spring-webmvc:4.0.0.RELEASE'
 
         testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+        testCompile files("${System.properties['java.home']}/../lib/tools.jar")
     }
 }

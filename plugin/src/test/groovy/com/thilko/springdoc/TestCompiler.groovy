@@ -32,8 +32,8 @@ class TestCompiler {
     public call() {
         def options = ["-proc:only", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
         def fileObjects = fileManager.getJavaFileObjects(
-                "plugin/src/main/java/com/thilko/springdoc/CustomerController.java",
-                "plugin/src/main/java/com/thilko/springdoc/StatisticsController.java")
+                "src/main/java/com/thilko/springdoc/CustomerController.java",
+                "src/main/java/com/thilko/springdoc/StatisticsController.java")
 
         task = (JavacTask) compiler.getTask(null, fileManager, collector, options, null, fileObjects)
         task.parse()
@@ -46,6 +46,9 @@ class TestCompiler {
 
     public hasErrors() {
         !collector.diagnostics.isEmpty()
+
+        println collector.diagnostics
+
     }
 
     def customerController() {
