@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class EndpointTest extends Specification {
 
-    def "an endpoint as methods"() {
+    def "an endpoint has methods"() {
         given:
         def compiler = TestCompiler.javaCompiler()
         compiler.withTestSources();
