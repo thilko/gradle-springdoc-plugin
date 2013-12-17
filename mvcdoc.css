@@ -1,3 +1,7 @@
 .panel-default>.panel-heading {
     background-color: #CED8F6;
 }
+
+.method {
+    width: 7%;
+}

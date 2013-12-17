@@ -37,18 +37,18 @@ class SpringDoc {
                                     table(class: "endpoint table table-striped") {
                                         thead {
                                             tr {
+                                                th(class: "method", "Method")
                                                 th "Operation"
-                                                th "Method"
                                                 th "Path"
                                             }
                                         }
                                         tbody {
                                             endpoint.operations().each { op ->
                                                 tr {
-                                                    td op.name()
                                                     td {
                                                         span(class: op.httpMethodCssClass(), op.httpMethod())
                                                     }
+                                                    td op.name()
                                                     td op.path()
                                                 }
                                             }
@@ -59,9 +59,9 @@ class SpringDoc {
                         }
                     }
                 }
-                script(src: "http://code.jquery.com/jquery-1.10.1.min.js", async: "true", "")
-                script(src: "http://code.jquery.com/jquery-migrate-1.2.1.min.js", async: "true", "")
-                script(src: "http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js", async: "true", "")
+                script(src: "http://code.jquery.com/jquery-1.10.1.min.js", "")
+                script(src: "http://code.jquery.com/jquery-migrate-1.2.1.min.js", "")
+                script(src: "http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js", "")
             }
         }
     }
