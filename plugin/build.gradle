@@ -10,6 +10,11 @@ sourceSets {
     generated
 }
 
+ext {
+    SONATYPE_USER = System.env.SONATYPE_USER
+    SONATYPE_PASSWORD = System.env.SONATYPE_PASSWORD
+}
+
 group = 'com.thilko.springdoc'
 version = '0.1'
 
@@ -21,14 +26,19 @@ publishing {
     }
 }
 
-task generateHtml(type: JavaCompile) {
-    source = sourceSets.main.java
-    classpath = sourceSets.main.output + configurations.compile
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                authentication(userName: "$SONATYPE_USER", password: "$SONATYPE_PASSWORD")
+            }
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: "$SONATYPE_USER", password: "$SONATYPE_PASSWORD")
+            }
 
-    options.compilerArgs = [
-            "-proc:only",
-            "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"
-    ]
-    // specify output of generated code
-    destinationDir = sourceSets.generated.java.srcDirs.iterator().next()
+            pom.groupId = 'com.thilko.spring'
+            pom.artifactId = 'gradle-springdoc-plugin'
+            pom.version = '0.1.SNAPSHOT'
+        }
+    }
 }
