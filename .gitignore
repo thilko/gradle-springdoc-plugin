@@ -44,3 +44,6 @@
 out
 .gradle/*
 index.html
+
+test/build
+plugin/build
