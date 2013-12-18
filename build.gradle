@@ -1,15 +1,42 @@
-subprojects {
-    apply plugin: "groovy"
-    apply plugin: "java"
+apply plugin: "groovy"
+apply plugin: 'maven'
 
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+
+    compile 'org.springframework:spring-webmvc:4.0.0.RELEASE'
+
+    testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+    testCompile files("${System.properties['java.home']}/../lib/tools.jar")
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    generated
+}
+
+ext {
+    SONATYPE_USER = System.env.SONATYPE_USER
+    SONATYPE_PASSWORD = System.env.SONATYPE_PASSWORD
+}
+
+uploadArchives {
     repositories {
-        mavenCentral()
-    }
+        mavenDeployer {
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                authentication(userName: "$SONATYPE_USER", password: "$SONATYPE_PASSWORD")
+            }
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: "$SONATYPE_USER", password: "$SONATYPE_PASSWORD")
+            }
 
-    dependencies {
-        compile 'org.springframework:spring-webmvc:4.0.0.RELEASE'
-
-        testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
-        testCompile files("${System.properties['java.home']}/../lib/tools.jar")
+            pom.groupId = 'com.thilko.spring'
+            pom.artifactId = 'gradle-springdoc-plugin'
+            pom.version = '0.1.SNAPSHOT'
+        }
     }
 }

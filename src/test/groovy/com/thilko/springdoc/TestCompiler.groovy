@@ -34,7 +34,7 @@ class TestCompiler {
 
     public call() {
         Path currentRelativePath = Paths.get("");
-        String path = currentRelativePath.toAbsolutePath().toString() + "/plugin/src/test/java";
+        String path = currentRelativePath.toAbsolutePath().toString() + "/src/test/java";
 
         def options = ["-proc:only", "-Aoutfile=index.html", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
         def fileObjects = fileManager.getJavaFileObjects(
