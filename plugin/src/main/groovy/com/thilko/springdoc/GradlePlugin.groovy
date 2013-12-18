@@ -8,10 +8,16 @@ class GradlePlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-        project.task("springdoc") {
-            println "hello from compile"
+        project.task("generateSpringDoc") {
+            source = sourceSets.main.java
+            classpath = sourceSets.main.output + configurations.compile
 
-
+            options.compilerArgs = [
+                    "-proc:only",
+                    "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"
+            ]
+            // specify output of generated code
+            destinationDir = sourceSets.generated.java.srcDirs.iterator().next()
         }
     }
 }
