@@ -1,5 +1,5 @@
 apply plugin: "groovy"
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
 
 dependencies {
     compile gradleApi()
@@ -13,17 +13,6 @@ sourceSets {
 ext {
     SONATYPE_USER = System.env.SONATYPE_USER
     SONATYPE_PASSWORD = System.env.SONATYPE_PASSWORD
-}
-
-group = 'com.thilko.springdoc'
-version = '0.1'
-
-publishing {
-    repositories {
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots"
-        }
-    }
 }
 
 uploadArchives {
