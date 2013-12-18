@@ -7,7 +7,10 @@ import javax.tools.JavaFileObject
 import javax.tools.StandardJavaFileManager
 import javax.tools.ToolProvider
 import java.nio.charset.Charset
+import java.nio.file.Path
+import java.nio.file.Paths
 
+import static java.lang.String.format
 
 class TestCompiler {
 
@@ -30,10 +33,13 @@ class TestCompiler {
     }
 
     public call() {
+        Path currentRelativePath = Paths.get("");
+        String path = currentRelativePath.toAbsolutePath().toString() + "/plugin/src/test/java";
+
         def options = ["-proc:only", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
         def fileObjects = fileManager.getJavaFileObjects(
-                "src/main/java/com/thilko/springdoc/CustomerController.java",
-                "src/main/java/com/thilko/springdoc/StatisticsController.java")
+                format("%s/com/thilko/springdoc/CustomerController.java", path),
+                format("%s/com/thilko/springdoc/StatisticsController.java", path));
 
         task = (JavacTask) compiler.getTask(null, fileManager, collector, options, null, fileObjects)
         task.parse()
@@ -46,9 +52,6 @@ class TestCompiler {
 
     public hasErrors() {
         !collector.diagnostics.isEmpty()
-
-        println collector.diagnostics
-
     }
 
     def customerController() {
