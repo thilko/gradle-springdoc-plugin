@@ -17,9 +17,13 @@ class SpringAnnotationProcessor extends AbstractProcessor {
 
         def classes = annotations.collect { roundEnv.getElementsAnnotatedWith(it) }.flatten()
         def doc = SpringDoc.withClasses(classes)
-        doc.generate()
+        doc.generate(outfile())
 
         return true
+    }
+
+    String outfile() {
+        return processingEnv.options["outfile"]
     }
 
     @Override
@@ -30,6 +34,11 @@ class SpringAnnotationProcessor extends AbstractProcessor {
     @Override
     SourceVersion getSupportedSourceVersion() {
         return SourceVersion.RELEASE_7;
+    }
+
+    @Override
+    Set<String> getSupportedOptions() {
+        return ["outfile"] as Set<String>
     }
 }
 

@@ -15,8 +15,8 @@ class SpringDoc {
         this.classes = classes
     }
 
-    public generate() {
-        builder().html {
+    public generate(outFile) {
+        builder(outFile).html {
             head {
                 title "Api documentation"
                 link(href: "http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css", rel: "stylesheet")
@@ -70,8 +70,8 @@ class SpringDoc {
         return classes.collect { Endpoint.create(it) }
     }
 
-    private builder() {
-        return new MarkupBuilder(new PrintWriter(new File("index.html")))
+    private builder(outFile) {
+        return new MarkupBuilder(new PrintWriter(new File(outFile)))
     }
 
 }

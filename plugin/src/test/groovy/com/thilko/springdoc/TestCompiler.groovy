@@ -36,7 +36,7 @@ class TestCompiler {
         Path currentRelativePath = Paths.get("");
         String path = currentRelativePath.toAbsolutePath().toString() + "/plugin/src/test/java";
 
-        def options = ["-proc:only", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
+        def options = ["-proc:only", "-Aoutfile=index.html", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
         def fileObjects = fileManager.getJavaFileObjects(
                 format("%s/com/thilko/springdoc/CustomerController.java", path),
                 format("%s/com/thilko/springdoc/StatisticsController.java", path));
@@ -51,7 +51,9 @@ class TestCompiler {
     }
 
     public hasErrors() {
+        println(collector.diagnostics)
         !collector.diagnostics.isEmpty()
+
     }
 
     def customerController() {
