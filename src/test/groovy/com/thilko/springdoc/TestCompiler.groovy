@@ -51,7 +51,6 @@ class TestCompiler {
     }
 
     public hasErrors() {
-        println(collector.diagnostics)
         !collector.diagnostics.isEmpty()
 
     }
