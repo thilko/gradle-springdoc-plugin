@@ -28,7 +28,7 @@ class SpringDocPlugin implements Plugin<Project> {
                 classpath = it.sourceSets.main.output + project.configurations.compile
 
                 options.compilerArgs = [
-                        "-Aoutfile=index.html",
+                        "-s", "${project.buildDir}",
                         "-proc:only",
                         "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"
                 ]
