@@ -28,5 +28,7 @@ buildscript {
 apply plugin: 'springdoc'
 ```
 
+You got a build task ```generateSpringDoc``` which produces HTML documentation in ```buildDir```.
+
 
 
