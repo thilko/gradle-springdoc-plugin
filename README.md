@@ -11,7 +11,22 @@ Usage
 
 Include the plugin in your gradle script like this:
 
-apply plugin: "springdoc"
+```
+buildscript {
+    repositories {
+        maven {
+            url uri('https://oss.sonatype.org/content/groups/public')
+        }
+        maven {
+            url uri('http://repo1.maven.org/maven2')
+        }
+    }
+    dependencies {
+        classpath "com.thilko.spring:gradle-springdoc-plugin:0.1.SNAPSHOT"
+    }
+}
+apply plugin: 'springdoc'
+```
 
 
 
