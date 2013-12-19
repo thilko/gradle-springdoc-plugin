@@ -9,18 +9,31 @@ class SpringDocPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
+        project.plugins.apply("java")
+
+        project.dependencies {
+            compile "com.thilko.spring:gradle-springdoc-plugin:0.1.SNAPSHOT"
+            compile localGroovy()
+        }
+
+        project.repositories {
+            maven {
+                url ('https://oss.sonatype.org/content/groups/public')
+            }
+        }
+
         project.task(type: JavaCompile, "generateSpringDoc") {
             project.afterEvaluate {
+                source = it.sourceSets.main.java
+                classpath = it.sourceSets.main.output + project.configurations.compile
 
-            source = it.sourceSets.main.java
-            classpath = it.sourceSets.main.output + project.configurations.compile
+                options.compilerArgs = [
+                        "-Aoutfile=index.html",
+                        "-proc:only",
+                        "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"
+                ]
 
-            options.compilerArgs = [
-                    "-proc:only",
-                    "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"
-            ]
-            // specify output of generated code
-            destinationDir = it.sourceSets.generated.java.srcDirs.iterator().next()
+                destinationDir = it.sourceSets.main.java.srcDirs.iterator().next()
             }
         }
     }
