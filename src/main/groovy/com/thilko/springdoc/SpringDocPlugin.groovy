@@ -33,7 +33,7 @@ class SpringDocPlugin implements Plugin<Project> {
                         "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"
                 ]
 
-                destinationDir = it.sourceSets.main.java.srcDirs.iterator().next()
+                destinationDir = project.buildDir
             }
         }
     }
