@@ -2,6 +2,7 @@ package com.thilko.springdoc
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.compile.JavaCompile
 
 
@@ -18,11 +19,22 @@ class SpringDocPlugin implements Plugin<Project> {
 
         project.repositories {
             maven {
-                url ('https://oss.sonatype.org/content/groups/public')
+                url('https://oss.sonatype.org/content/groups/public')
+            }
+            mavenCentral()
+        }
+
+        project.task(type: Copy, "copyCss") {
+            project.afterEvaluate {
+                println project.configurations.compile.filter { it.name.startsWith('gradle-springdoc-plugin') }.singleFile
+
+                from project.zipTree(project.configurations.compile.filter { it.name.startsWith('gradle-springdoc-plugin') }.singleFile)
+                include "springdoc.css"
+                into project.buildDir
             }
         }
 
-        project.task(type: JavaCompile, "generateSpringDoc") {
+        project.task(type: JavaCompile, "generateSpringDoc", dependsOn: project.copyCss) {
             project.afterEvaluate {
                 source = it.sourceSets.main.java
                 classpath = it.sourceSets.main.output + project.configurations.compile
@@ -36,5 +48,8 @@ class SpringDocPlugin implements Plugin<Project> {
                 destinationDir = project.buildDir
             }
         }
+
+
     }
+
 }

@@ -20,7 +20,7 @@ class SpringDoc {
             head {
                 title "Api documentation"
                 link(href: "http://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css", rel: "stylesheet")
-                link(href: "mvcdoc.css", rel: "stylesheet")
+                link(href: "springdoc.css", rel: "stylesheet")
             }
             body {
                 h1 "Api Documentation"
