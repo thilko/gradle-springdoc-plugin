@@ -26,8 +26,6 @@ class SpringDocPlugin implements Plugin<Project> {
 
         project.task(type: Copy, "copyCss") {
             project.afterEvaluate {
-                println project.configurations.compile.filter { it.name.startsWith('gradle-springdoc-plugin') }.singleFile
-
                 from project.zipTree(project.configurations.compile.filter { it.name.startsWith('gradle-springdoc-plugin') }.singleFile)
                 include "springdoc.css"
                 into project.buildDir
