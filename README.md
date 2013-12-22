@@ -33,6 +33,6 @@ You got a build task ```generateSpringDoc``` which produces HTML documentation i
 
 Not yet implemented
 =======================
-[*] Support all spring mvc annotations
-[*] Display example requests/reponses as JSON
-[*] Send example request to a remote endpoint
+- [ ] Support all spring mvc annotations
+- [ ] Display example requests/reponses as JSON
+- [ ] Send example request to a remote endpoint
