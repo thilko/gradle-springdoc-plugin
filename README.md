@@ -1,10 +1,10 @@
 gradle-springdoc-plugin
 =======================
 
-Generate html documentation from spring annotations. Project is in an early development stage.
+Dry out your rest api documentation and generate html from your spring mvc annotations.
 
-The plugin contains an annotation processor wich is called with an extra task. You java sources are
-compiled and html document with twitter bootstrap is generated.
+To be used as gradle plugin. The plugin uses an annotation processor to parse the AST at compile time. I use
+twitter bootstrap for the generated html page.
 
 Usage
 =======================
@@ -31,4 +31,8 @@ apply plugin: 'springdoc'
 You got a build task ```generateSpringDoc``` which produces HTML documentation in ```buildDir```.
 
 
-
+Not yet implemented
+=======================
+[*] Support all spring mvc annotations
+[*] Display example requests/reponses as JSON
+[*] Send example request to a remote endpoint
