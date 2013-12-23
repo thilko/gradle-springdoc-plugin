@@ -56,6 +56,14 @@ class AnnotationProcessorTest extends Specification {
         indexHtml().contains("GET")
     }
 
+    def "html doc contains the HTTP parameters of operations"() {
+        when:
+        compiler.call();
+
+        then:
+        indexHtml().contains("question")
+    }
+
     private static def indexHtml() {
         new File("index.html").getText()
     }

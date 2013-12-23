@@ -40,6 +40,7 @@ class SpringDoc {
                                                 th(class: "method", "Method")
                                                 th "Operation"
                                                 th "Path"
+                                                th "Parameters"
                                             }
                                         }
                                         tbody {
@@ -50,6 +51,17 @@ class SpringDoc {
                                                     }
                                                     td op.name()
                                                     td op.path()
+                                                    td {
+                                                        table {
+                                                            tbody {
+                                                                op.parameter().each { param ->
+                                                                    tr {
+                                                                        td param.name()
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
