@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CustomerController {
 
     @RequestMapping
-    public void askMe(@RequestParam("question") String question,
+    public void askMe(@RequestParam(value = "question", defaultValue = "How much is the fish?") String question,
                       @RequestParam("priority") Integer priority
                       ) { }
 
@@ -19,7 +19,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
-    public void createNewUser() {
+    public void createNewUser(@RequestParam(value = "name", required = false) String name) {
     }
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
