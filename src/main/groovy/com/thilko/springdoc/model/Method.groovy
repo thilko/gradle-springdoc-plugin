@@ -44,7 +44,7 @@ class Method {
         value.length == 0 ? "/" : value.first()
     }
 
-    def parameter(){
+    def parameters(){
         executableElement.parameters.collect {
             Parameter.fromVariableElement(it)
         }

@@ -16,7 +16,7 @@ class ParameterTest extends Specification {
 
     def "name returns 'question' if annotation 'value' is 'question'"(){
         when:
-        def parameter = Endpoint.create(compiler.customerController()).methods[0].parameter()
+        def parameter = Endpoint.create(compiler.customerController()).methods[0].parameters()
 
         then:
         parameter[0].name() == "question"
