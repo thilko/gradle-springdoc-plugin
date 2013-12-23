@@ -86,4 +86,12 @@ class MethodTest extends Specification {
         then:
         endpoint.methods[1].path() == "/data"
     }
+
+    def "parameter returns all params that are annotated on the mpi method"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[0].parameter().size() == 2
+    }
 }
