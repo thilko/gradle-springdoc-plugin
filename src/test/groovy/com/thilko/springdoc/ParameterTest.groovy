@@ -6,19 +6,21 @@ import spock.lang.Specification
 
 class ParameterTest extends Specification {
 
-    def compiler
+    def customerController
 
     def setup() {
-        compiler = TestCompiler.javaCompiler()
+        def compiler = TestCompiler.javaCompiler()
         compiler.withTestSources();
         compiler.call();
+
+        customerController = compiler.customerController()
     }
 
     def "name returns 'question' if annotation 'value' is 'question'"(){
         when:
-        def parameter = Endpoint.create(compiler.customerController()).methods[0].parameter()
+        def parameter = Endpoint.create(customerController).methods[0].parameter("question")
 
         then:
-        parameter[0].name() == "question"
+        parameter.name() == "question"
     }
 }

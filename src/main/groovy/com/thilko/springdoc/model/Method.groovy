@@ -44,10 +44,13 @@ class Method {
         value.length == 0 ? "/" : value.first()
     }
 
-    def parameter(){
+    def parameter() {
         executableElement.parameters.collect {
             Parameter.fromVariableElement(it)
         }
     }
 
+    def parameter(name) {
+        parameter().find { it.name() == name }
+    }
 }
