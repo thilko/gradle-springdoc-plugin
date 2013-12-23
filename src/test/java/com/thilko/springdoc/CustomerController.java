@@ -11,7 +11,8 @@ public class CustomerController {
 
     @RequestMapping
     public void askMe(@RequestParam("question") String question,
-                      @RequestParam("priority") Integer priority) { }
+                      @RequestParam("priority") Integer priority
+                      ) { }
 
     @RequestMapping(value = "/data", method = RequestMethod.POST)
     public void uploadData() {
