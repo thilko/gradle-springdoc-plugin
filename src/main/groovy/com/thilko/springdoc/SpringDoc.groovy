@@ -44,7 +44,7 @@ class SpringDoc {
                                             }
                                         }
                                         tbody {
-                                            endpoint.operations().each { op ->
+                                            endpoint.methods().each { op ->
                                                 tr {
                                                     td {
                                                         span(class: op.httpMethodCssClass(), op.httpMethod())

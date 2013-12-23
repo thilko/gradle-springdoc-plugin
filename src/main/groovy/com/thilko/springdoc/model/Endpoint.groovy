@@ -17,7 +17,7 @@ class Endpoint {
         this.endpoint = endpoint
     }
 
-    def operations() {
+    def methods() {
         this.methods
     }
 
