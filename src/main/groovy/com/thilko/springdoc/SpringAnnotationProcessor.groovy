@@ -33,11 +33,6 @@ class SpringAnnotationProcessor extends AbstractProcessor {
     SourceVersion getSupportedSourceVersion() {
         return SourceVersion.RELEASE_7;
     }
-
-    @Override
-    Set<String> getSupportedOptions() {
-        return ["outfile"] as Set<String>
-    }
 }
 
 
