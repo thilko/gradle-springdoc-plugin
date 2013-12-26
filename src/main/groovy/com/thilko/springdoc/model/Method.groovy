@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 class Method {
 
-    def executableElement
+    private executableElement
 
     def cssClasses = ["GET": "label label-primary",
             "POST": "label label-success",
