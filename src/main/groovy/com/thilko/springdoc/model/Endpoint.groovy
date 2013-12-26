@@ -2,7 +2,7 @@ package com.thilko.springdoc.model
 
 class Endpoint {
 
-    def endpoint
+    private endpoint
 
     def methods = []
 
