@@ -4,23 +4,23 @@ import org.springframework.web.bind.annotation.RequestMapping
 
 class Method {
 
-    private executableElement
+    private methodElement
 
     def cssClasses = ["GET": "label label-primary",
             "POST": "label label-success",
             "PUT": "label label-info",
             "DELETE": "label label-danger"]
 
-    static def fromElement(executable) {
-        new Method(executable)
+    static def fromElement(methodElement) {
+        new Method(methodElement)
     }
 
-    private Method(executable) {
-        this.executableElement = executable
+    private Method(methodElement) {
+        this.methodElement = methodElement
     }
 
     def name() {
-        this.executableElement.simpleName
+        this.methodElement.simpleName
     }
 
     def httpMethod() {
@@ -32,7 +32,7 @@ class Method {
     }
 
     private requestMappingAnnotation() {
-        (RequestMapping) executableElement.getAnnotation(RequestMapping.class)
+        (RequestMapping) methodElement.getAnnotation(RequestMapping.class)
     }
 
     def httpMethodCssClass() {
@@ -45,7 +45,7 @@ class Method {
     }
 
     def parameter() {
-        executableElement.parameters.collect {
+        methodElement.parameters.collect {
             Parameter.fromVariableElement(it)
         }
     }
