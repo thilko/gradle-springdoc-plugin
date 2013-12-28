@@ -56,10 +56,9 @@ class SpringDoc {
                                         def apiMethodContent = "api-endpoint${idx}_${apiMethod.name()}"
                                         div(class: "tab-pane", id: "$apiMethodContent") {
                                             div(class: "well") {
-                                                h3 {
+                                                h4 {
                                                     span(class: apiMethod.httpMethodCssClass(), apiMethod.httpMethod())
                                                     span apiMethod.path()
-                                                    span apiMethod.name()
                                                 }
                                             }
                                             table(class: "table table-hover") {
