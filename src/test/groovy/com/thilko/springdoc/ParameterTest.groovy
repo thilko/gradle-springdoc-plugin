@@ -32,6 +32,14 @@ class ParameterTest extends Specification {
         parameter.defaultValue() == "How much is the fish?"
     }
 
+    def "defaultValue() returns '' if not set"(){
+        when:
+        def parameter = Endpoint.create(customerController).methods[2].parameter("name")
+
+        then:
+        parameter.defaultValue() == ""
+    }
+
     def "required() returns 'true' if required not set"(){
         when:
         def parameter = Endpoint.create(customerController).methods[0].parameter("question")

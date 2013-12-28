@@ -1,6 +1,7 @@
 package com.thilko.springdoc.model
 
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ValueConstants
 
 
 class Parameter {
@@ -20,7 +21,8 @@ class Parameter {
     }
 
     def defaultValue(){
-        requestMappingAnnotation().defaultValue()
+        def defaultValue = requestMappingAnnotation().defaultValue()
+        defaultValue == ValueConstants.DEFAULT_NONE ? "" : defaultValue
     }
 
     def required(){
