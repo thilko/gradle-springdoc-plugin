@@ -103,6 +103,15 @@ class MethodTest extends Specification {
         endpoint.methods[4].responseClass() == "java.lang.String"
     }
 
+    def "responseClass returns 'com.thilko.springdoc.User' if method returns a User"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[5].responseClass() == "com.thilko.springdoc.User"
+    }
+
+
     def "responseClass returns 'void' if method returns nothing"(){
         when:
         def endpoint = Endpoint.create(compiler.customerController())
