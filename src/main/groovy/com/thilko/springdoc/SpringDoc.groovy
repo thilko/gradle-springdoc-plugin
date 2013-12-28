@@ -63,7 +63,7 @@ class SpringDoc {
                                                 }
                                             }
                                             table(class: "table table-hover") {
-                                                caption "Parameters"
+                                                caption "Method Parameters"
                                                 thead {
                                                     th "Name"
                                                     th "Required"
