@@ -53,4 +53,8 @@ class Method {
     def parameter(name) {
         parameter().find { it.name() == name }
     }
+
+    def responseClass(){
+        methodElement.returnType.toString()
+    }
 }

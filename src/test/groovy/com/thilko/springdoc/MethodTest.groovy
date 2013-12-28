@@ -94,4 +94,12 @@ class MethodTest extends Specification {
         then:
         endpoint.methods[0].parameter().size() == 2
     }
+
+    def "responseClass returns 'String' if method returns a string"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[4].responseClass() == "java.lang.String"
+    }
 }
