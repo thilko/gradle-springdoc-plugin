@@ -61,7 +61,19 @@ class SpringDoc {
                                                     span apiMethod.path()
                                                 }
                                             }
-                                            table(class: "table table-hover") {
+                                            table(class: "table table-hover"){
+                                                tbody{
+                                                    tr{
+                                                        td "Method name"
+                                                        td apiMethod.name()
+                                                    }
+                                                    tr{
+                                                        td "Response class"
+                                                        td apiMethod.responseClass()
+                                                    }
+                                                }
+                                            }
+                                            table(class: "table table-bordered table-striped") {
                                                 caption "Method Parameters"
                                                 thead {
                                                     th "Name"

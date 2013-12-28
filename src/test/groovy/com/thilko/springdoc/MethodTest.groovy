@@ -102,4 +102,12 @@ class MethodTest extends Specification {
         then:
         endpoint.methods[4].responseClass() == "java.lang.String"
     }
+
+    def "responseClass returns 'void' if method returns nothing"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[3].responseClass() == "void"
+    }
 }
