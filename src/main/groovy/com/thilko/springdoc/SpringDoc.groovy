@@ -23,46 +23,69 @@ class SpringDoc {
                 link(href: "springdoc.css", rel: "stylesheet")
             }
             body {
-                h1 "Api Documentation"
                 div(class: "panel-group", id: "accordion") {
                     endpoints().eachWithIndex { endpoint, idx ->
                         div(class: "panel panel-default") {
                             div(class: "panel-heading") {
-                                h4(class: "panel-title") {
+                                h2(class: "panel-title") {
                                     a("data-toggle": "collapse", "data-parent": "#accordion", href: "#collapse$idx", endpoint.className())
                                 }
                             }
                             div(id: "collapse$idx", class: "panel-collapse collapse") {
-                                div(class: "panel-body") {
-                                    table(class: "endpoint table table-striped") {
-                                        thead {
-                                            tr {
-                                                th(class: "method", "Method")
-                                                th "Operation"
-                                                th "Path"
-                                                th "Parameters"
-                                            }
-                                        }
-                                        tbody {
-                                            endpoint.methods().each { op ->
-                                                tr {
-                                                    td {
-                                                        span(class: op.httpMethodCssClass(), op.httpMethod())
+                                div(class: "panel-group", id: "accordion2") {
+                                    endpoint.methods().eachWithIndex { apiMethod, methodIdx ->
+                                        def apiMethodIdx = endpoint.className() + apiMethod.name()
+
+                                        div(class: "panel panel-default") {
+                                            div(class: "panel-heading") {
+                                                h3(class: "panel-title") {
+                                                    span(class: apiMethod.httpMethodCssClass(), apiMethod.httpMethod())
+                                                    span {
+                                                        a("data-toggle": "collapse", "data-parent": "#accordion2", href: "#collapse$apiMethodIdx", apiMethod.name())
                                                     }
-                                                    td op.name()
-                                                    td op.path()
-                                                    td {
+                                                    span(apiMethod.path())
+                                                }
+                                            }
+                                            div(id: "collapse$apiMethodIdx", class: "panel-collapse collapse") {
+                                                ul(class: "nav nav-tabs") {
+                                                    li(class: "active") {
+                                                        a("href": "#documentation", "data-toggle": "tab", "Documentation")
+                                                    }
+                                                    li {
+                                                        a("href": "#parameter", "data-toggle": "tab", "Parameter")
+                                                    }
+                                                    li {
+                                                        a("href": "#request", "data-toggle": "tab", "Request")
+                                                    }
+                                                    li {
+                                                        a("href": "#response", "data-toggle": "tab", "Response")
+                                                    }
+                                                }
+
+                                                div(class: "tab-content") {
+                                                    div(class: "tab-pane active", id: "documentation") {
+                                                        p "Lorum ipsum"
+                                                    }
+                                                    div(class: "tab-pane", id: "parameter") {
                                                         table {
                                                             tbody {
-                                                                op.parameter().each { param ->
+                                                                apiMethod.parameter().each { param ->
                                                                     tr {
-                                                                        td param.name()
+                                                                        td(param.name())
                                                                     }
                                                                 }
                                                             }
                                                         }
+
+                                                    }
+                                                    div(class: "tab-pane", id: "request") {
+                                                        p "Lorum ipsum"
+                                                    }
+                                                    div(class: "tab-pane", id: "response") {
+                                                        p "Lorum ipsum"
                                                     }
                                                 }
+
                                             }
                                         }
                                     }
@@ -71,6 +94,21 @@ class SpringDoc {
                         }
                     }
                 }
+                div(class: "container") {
+                    div(class: "row") {
+                        div(class: "col-md-1") {
+                            ul(class: "nav nav-pills nav-stacked") {
+                                li(class: "active") {
+                                    a(href: "#", "test")
+                                }
+                                li {
+                                    a(href: "#", "hallo")
+                                }
+                            }
+                        }
+                    }
+                }
+
                 script(src: "http://code.jquery.com/jquery-1.10.1.min.js", "")
                 script(src: "http://code.jquery.com/jquery-migrate-1.2.1.min.js", "")
                 script(src: "http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js", "")

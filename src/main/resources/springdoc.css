@@ -2,6 +2,6 @@
     background-color: #CED8F6;
 }
 
-.method {
-    width: 7%;
+.panel-collapse .collapse .method {
+    background-color: #FFFFE3;
 }
