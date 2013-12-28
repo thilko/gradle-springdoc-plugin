@@ -21,7 +21,7 @@ class Endpoint {
         this.methods
     }
 
-    def className() {
+    def name() {
         endpoint.simpleName
     }
 

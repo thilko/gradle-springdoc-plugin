@@ -32,7 +32,7 @@ class SpringDoc {
                                     div(class: "panel panel-default") {
                                         div(class: "panel-heading") {
                                             h2(class: "panel-title") {
-                                                a("data-toggle": "collapse", "data-parent": "#api-endpoint", href: "#$endpointIdx", endpoint.className())
+                                                a("data-toggle": "collapse", "data-parent": "#api-endpoint", href: "#$endpointIdx", endpoint.name())
                                             }
                                         }
                                         div(id: "$endpointIdx", class: "panel-collapse collapse") {
