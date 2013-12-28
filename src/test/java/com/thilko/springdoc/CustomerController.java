@@ -19,7 +19,8 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.PUT)
-    public void createNewUser(@RequestParam(value = "name", required = false) String name) {
+    public User createNewUser(@RequestParam(value = "name", required = false) String name) {
+        return null;
     }
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
@@ -31,8 +32,4 @@ public class CustomerController {
         return null;
     }
 
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    public User createNewUser() {
-        return null;
-    }
 }

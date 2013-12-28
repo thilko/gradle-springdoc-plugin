@@ -108,7 +108,7 @@ class MethodTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[5].responseClass() == "com.thilko.springdoc.User"
+        endpoint.methods[2].responseClass() == "com.thilko.springdoc.User"
     }
 
 
