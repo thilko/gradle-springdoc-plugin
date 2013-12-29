@@ -1,7 +1,19 @@
 .panel-default>.panel-heading {
-    background-color: #CED8F6;
+    background-color: #FFFFE3;
 }
 
-.panel-collapse .collapse .method {
-    background-color: #FFFFE3;
+.methodColumn{
+    width: 10%;
+}
+
+.sidebar {
+    margin: 20px 0 0 20px;
+}
+
+.sidebar ul > li > a {
+    text-decoration: none;
+}
+
+.content {
+    margin: 20px 0 0 0;
 }
