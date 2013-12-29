@@ -90,6 +90,10 @@ class SpringDoc {
                                                     }
                                                 }
                                             }
+                                            h4 "Response as JSON"
+                                            div(class: "well"){
+                                                pre apiMethod.responseAsJson()
+                                            }
                                         }
                                     }
                                 }
@@ -110,7 +114,7 @@ class SpringDoc {
         return classes.collect { Endpoint.create(it) }
     }
 
-    private builder(outFile) {
+    private static builder(outFile) {
         return new MarkupBuilder(new PrintWriter(new File(outFile)))
     }
 
