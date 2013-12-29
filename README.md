@@ -31,8 +31,10 @@ apply plugin: 'springdoc'
 You got a build task ```generateSpringDoc``` which produces HTML documentation in ```buildDir```.
 
 
-Not yet implemented
+Not yet implemented / TODOs
 =======================
+- [ ] Response refactoring
+- [ ] rename project to gradle-springdoc-plugin
 - [ ] Support all spring mvc annotations
-- [ ] Display example requests/reponses as JSON
+- [ ] Display example requests/responses as JSON
 - [ ] Send example request to a remote endpoint
