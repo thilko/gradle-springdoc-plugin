@@ -4,6 +4,8 @@ import groovy.json.JsonBuilder
 import groovy.json.JsonOutput
 import org.springframework.web.bind.annotation.RequestMapping
 
+import javax.lang.model.type.TypeKind
+
 class Method {
 
     private methodElement
@@ -61,6 +63,10 @@ class Method {
     }
 
     def responseAsJson(){
+        if(methodElement.returnType.kind == TypeKind.VOID){
+            return ""
+        }
+
         def domainClass = this.class.classLoader.loadClass(responseClass())
         def instance = domainClass.newInstance()
         JsonOutput.prettyPrint(new JsonOutput().toJson(instance))

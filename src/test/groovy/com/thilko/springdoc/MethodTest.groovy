@@ -134,4 +134,12 @@ class MethodTest extends Specification {
 }"""
 
     }
+
+    def "responseAsJson returns '' when response is void"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[3].responseAsJson() == ""
+    }
 }
