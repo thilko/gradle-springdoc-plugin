@@ -119,4 +119,19 @@ class MethodTest extends Specification {
         then:
         endpoint.methods[3].responseClass() == "void"
     }
+
+    def "responseAsJson returns json"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[2].responseAsJson() ==
+"""{
+    "firstName": null,
+    "id": null,
+    "lastName": null,
+    "dateOfBirth": null
+}"""
+
+    }
 }

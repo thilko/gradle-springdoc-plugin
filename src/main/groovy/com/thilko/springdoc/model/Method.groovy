@@ -1,5 +1,7 @@
 package com.thilko.springdoc.model
 
+import groovy.json.JsonBuilder
+import groovy.json.JsonOutput
 import org.springframework.web.bind.annotation.RequestMapping
 
 class Method {
@@ -56,5 +58,11 @@ class Method {
 
     def responseClass(){
         methodElement.returnType.toString()
+    }
+
+    def responseAsJson(){
+        def domainClass = this.class.classLoader.loadClass(responseClass())
+        def instance = domainClass.newInstance()
+        JsonOutput.prettyPrint(new JsonOutput().toJson(instance))
     }
 }

@@ -2,5 +2,8 @@ package com.thilko.springdoc
 
 
 class User {
-    def Long id;
+    def id;
+    def firstName;
+    def lastName;
+    def dateOfBirth;
 }
