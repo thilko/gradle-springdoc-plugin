@@ -69,7 +69,7 @@ class SpringDoc {
                                                     }
                                                     tr{
                                                         td "Response class"
-                                                        td apiMethod.responseClass()
+                                                        td apiMethod.response().className()
                                                     }
                                                 }
                                             }
@@ -92,7 +92,7 @@ class SpringDoc {
                                             }
                                             h4 "Response as JSON"
                                             div(class: "well"){
-                                                pre apiMethod.responseAsJson()
+                                                pre apiMethod.response().asJson()
                                             }
                                         }
                                     }

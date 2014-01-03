@@ -33,8 +33,6 @@ You got a build task ```generateSpringDoc``` which produces HTML documentation i
 
 Not yet implemented / TODOs
 =======================
-- [ ] Response refactoring
-- [ ] rename project to gradle-springdoc-plugin
 - [ ] Support all spring mvc annotations
 - [ ] Display example requests/responses as JSON
 - [ ] Send example request to a remote endpoint

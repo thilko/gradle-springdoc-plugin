@@ -61,17 +61,4 @@ class Method {
     def response(){
         Response.fromReturnType(methodElement.returnType)
     }
-    def responseClass(){
-        methodElement.returnType.toString()
-    }
-
-    def responseAsJson(){
-        if(methodElement.returnType.kind == TypeKind.VOID){
-            return ""
-        }
-
-        def domainClass = this.class.classLoader.loadClass(responseClass())
-        def instance = domainClass.newInstance()
-        JsonOutput.prettyPrint(new JsonOutput().toJson(instance))
-    }
 }
