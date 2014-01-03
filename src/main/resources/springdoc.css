@@ -12,6 +12,7 @@
 
 .sidebar ul > li > a {
     text-decoration: none;
+    margin: 1px auto 0 15px;
 }
 
 .content {
