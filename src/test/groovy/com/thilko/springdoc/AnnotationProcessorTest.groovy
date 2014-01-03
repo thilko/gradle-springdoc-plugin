@@ -64,6 +64,14 @@ class AnnotationProcessorTest extends Specification {
         indexHtml().contains("question")
     }
 
+    def "html doc contains an example url"() {
+        when:
+        compiler.call();
+
+        then:
+        indexHtml().contains("http://example.com/ask?question=&priority=")
+    }
+
     private static def indexHtml() {
         new File("index.html").getText()
     }

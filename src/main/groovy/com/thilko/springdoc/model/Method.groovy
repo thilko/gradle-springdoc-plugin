@@ -1,10 +1,6 @@
 package com.thilko.springdoc.model
 
-import groovy.json.JsonBuilder
-import groovy.json.JsonOutput
 import org.springframework.web.bind.annotation.RequestMapping
-
-import javax.lang.model.type.TypeKind
 
 class Method {
 
@@ -54,11 +50,20 @@ class Method {
         }
     }
 
+    def url() {
+        def base = "http://example.com/${path()}"
+        if (!parameter().isEmpty()) {
+            def parameter = parameter().collect { "${it.name()}=" }.join("&")
+            base += "?${parameter}"
+        }
+        return base
+    }
+
     def parameter(name) {
         parameter().find { it.name() == name }
     }
 
-    def response(){
+    def response() {
         Response.fromReturnType(methodElement.returnType)
     }
 }

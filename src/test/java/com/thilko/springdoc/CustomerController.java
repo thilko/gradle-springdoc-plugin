@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CustomerController {
 
-    @RequestMapping
+    @RequestMapping("ask")
     public void askMe(@RequestParam(value = "question", defaultValue = "How much is the fish?") String question,
                       @RequestParam("priority") Integer priority
-                      ) { }
+    ) {
+    }
 
     @RequestMapping(value = "/data", method = RequestMethod.POST)
     public void uploadData() {
@@ -29,6 +30,11 @@ public class CustomerController {
 
     @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
     public String getUserById() {
+        return null;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public User all() {
         return null;
     }
 

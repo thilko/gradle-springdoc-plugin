@@ -61,6 +61,9 @@ class SpringDoc {
                                                     span apiMethod.path()
                                                 }
                                             }
+                                            div(class: "well") {
+                                                span apiMethod.url()
+                                            }
                                             table(class: "table table-hover"){
                                                 tbody{
                                                     tr{

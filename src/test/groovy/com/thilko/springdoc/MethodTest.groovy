@@ -76,7 +76,7 @@ class MethodTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[0].path() == "/"
+        endpoint.methods[5].path() == "/"
     }
 
     def "path returns correct value if value of RequestMapping is set"() {
@@ -95,59 +95,19 @@ class MethodTest extends Specification {
         endpoint.methods[0].parameter().size() == 2
     }
 
-    def "responseClass returns 'String' if method returns a string"(){
-        when:
-        def endpoint = Endpoint.create(compiler.customerController())
-
-        then:
-        endpoint.methods[4].responseClass() == "java.lang.String"
-    }
-
-    def "responseClass returns 'com.thilko.springdoc.User' if method returns a User"(){
-        when:
-        def endpoint = Endpoint.create(compiler.customerController())
-
-        then:
-        endpoint.methods[2].responseClass() == "com.thilko.springdoc.User"
-    }
-
-
-    def "responseClass returns 'void' if method returns nothing"(){
-        when:
-        def endpoint = Endpoint.create(compiler.customerController())
-
-        then:
-        endpoint.methods[3].responseClass() == "void"
-    }
-
-    def "responseAsJson returns json"(){
-        when:
-        def endpoint = Endpoint.create(compiler.customerController())
-
-        then:
-        endpoint.methods[2].responseAsJson() ==
-"""{
-    "firstName": null,
-    "id": null,
-    "lastName": null,
-    "dateOfBirth": null
-}"""
-
-    }
-
-    def "responseAsJson returns '' when response is void"(){
-        when:
-        def endpoint = Endpoint.create(compiler.customerController())
-
-        then:
-        endpoint.methods[3].responseAsJson() == ""
-    }
-
-    def "response() returns a response object representing the returning data"(){
+    def "response returns a response object representing the returning data"(){
         when:
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
         endpoint.methods[0].response() != null
+    }
+
+    def "url returns an example url"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[0].url() == "http://example.com/ask?question=&priority="
     }
 }
