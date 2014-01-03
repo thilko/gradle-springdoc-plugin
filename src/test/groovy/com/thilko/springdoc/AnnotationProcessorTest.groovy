@@ -69,7 +69,7 @@ class AnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        indexHtml().contains("http://example.com/ask?question=&priority=")
+        indexHtml().contains("http://example.com/ask?question=&amp;priority=")
     }
 
     private static def indexHtml() {

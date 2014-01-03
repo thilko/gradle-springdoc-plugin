@@ -51,7 +51,7 @@ class Method {
     }
 
     def url() {
-        def base = "http://example.com/${path()}"
+        def base = "http://example.com${path()}"
         if (!parameter().isEmpty()) {
             def parameter = parameter().collect { "${it.name()}=" }.join("&")
             base += "?${parameter}"

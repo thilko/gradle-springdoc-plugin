@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CustomerController {
 
-    @RequestMapping("ask")
+    @RequestMapping("/ask")
     public void askMe(@RequestParam(value = "question", defaultValue = "How much is the fish?") String question,
                       @RequestParam("priority") Integer priority
     ) {
