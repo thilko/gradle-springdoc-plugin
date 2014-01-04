@@ -24,11 +24,15 @@ class Method {
     }
 
     def httpMethod() {
+        if (noApi()) {
+            return ""
+        }
+
         !hasRequestMethod() ? "GET" : requestMappingAnnotation().method().first().name()
     }
 
     private boolean hasRequestMethod() {
-        requestMappingAnnotation()?.method()?.length > 0
+        requestMappingAnnotation().method().length > 0
     }
 
     private requestMappingAnnotation() {
@@ -40,7 +44,7 @@ class Method {
     }
 
     def path() {
-        if(noApi()){
+        if (noApi()) {
             return ""
         }
 
@@ -54,7 +58,7 @@ class Method {
         }
     }
 
-    def noApi(){
+    def noApi() {
         requestMappingAnnotation() == null
     }
 
