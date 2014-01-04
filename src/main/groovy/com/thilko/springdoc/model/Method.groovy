@@ -28,7 +28,7 @@ class Method {
     }
 
     private boolean hasRequestMethod() {
-        requestMappingAnnotation().method().length > 0
+        requestMappingAnnotation()?.method()?.length > 0
     }
 
     private requestMappingAnnotation() {
@@ -40,7 +40,11 @@ class Method {
     }
 
     def path() {
-        def value = requestMappingAnnotation().value()
+        def value = requestMappingAnnotation()?.value()
+        if(value == null){
+            return ""
+        }
+
         value.length == 0 ? "/" : value.first()
     }
 
