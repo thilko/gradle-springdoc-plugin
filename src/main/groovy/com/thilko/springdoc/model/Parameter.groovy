@@ -17,19 +17,19 @@ class Parameter {
     }
 
     def name(){
-        requestMappingAnnotation().value()
+        requestParamAnnotation()?.value()
     }
 
     def defaultValue(){
-        def defaultValue = requestMappingAnnotation().defaultValue()
-        defaultValue == ValueConstants.DEFAULT_NONE ? "" : defaultValue
+        def defaultValue = requestParamAnnotation()?.defaultValue()
+        (defaultValue == ValueConstants.DEFAULT_NONE || defaultValue == null) ? "" : defaultValue
     }
 
     def required(){
-        requestMappingAnnotation().required()
+        requestParamAnnotation()?.required()
     }
 
-    private requestMappingAnnotation(){
+    private requestParamAnnotation(){
         ((RequestParam)variableElement.getAnnotation(RequestParam.class))
     }
 }
