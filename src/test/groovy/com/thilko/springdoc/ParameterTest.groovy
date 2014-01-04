@@ -18,7 +18,7 @@ class ParameterTest extends Specification {
 
     def "name() returns 'question' if annotation 'value' is 'question'"(){
         when:
-        def parameter = Endpoint.create(customerController).methods[0].parameter("question")
+        def parameter = Endpoint.create(customerController).methods[0].queryParameter("question")
 
         then:
         parameter.name() == "question"
@@ -26,7 +26,7 @@ class ParameterTest extends Specification {
 
     def "defaultValue() returns 'How much is the fish'"(){
         when:
-        def parameter = Endpoint.create(customerController).methods[0].parameter("question")
+        def parameter = Endpoint.create(customerController).methods[0].queryParameter("question")
 
         then:
         parameter.defaultValue() == "How much is the fish?"
@@ -34,7 +34,7 @@ class ParameterTest extends Specification {
 
     def "defaultValue() returns '' if not set"(){
         when:
-        def parameter = Endpoint.create(customerController).methods[2].parameter("name")
+        def parameter = Endpoint.create(customerController).methods[2].queryParameter("name")
 
         then:
         parameter.defaultValue() == ""
@@ -42,7 +42,7 @@ class ParameterTest extends Specification {
 
     def "required() returns 'true' if required not set"(){
         when:
-        def parameter = Endpoint.create(customerController).methods[0].parameter("question")
+        def parameter = Endpoint.create(customerController).methods[0].queryParameter("question")
 
         then:
         parameter.required()
@@ -50,7 +50,7 @@ class ParameterTest extends Specification {
 
     def "required() returns 'false' if required set to false"(){
         when:
-        def parameter = Endpoint.create(customerController).methods[2].parameter("name")
+        def parameter = Endpoint.create(customerController).methods[2].queryParameter("name")
 
         then:
         !parameter.required()

@@ -53,10 +53,10 @@ class Method {
         value.length == 0 ? "/" : value.first()
     }
 
-    def parameter() {
+    def queryParameter() {
         methodElement.parameters
                 .findAll { it.getAnnotation(RequestParam.class) != null }
-                .collect { Parameter.fromVariableElement(it) }
+                .collect { QueryParameter.fromVariableElement(it) }
     }
 
     def noApi() {
@@ -65,15 +65,15 @@ class Method {
 
     def url() {
         def base = "http://example.com${path()}"
-        if (!parameter().isEmpty()) {
-            def parameter = parameter().collect { "${it.name()}=" }.join("&")
+        if (!queryParameter().isEmpty()) {
+            def parameter = queryParameter().collect { "${it.name()}=" }.join("&")
             base += "?${parameter}"
         }
         return base
     }
 
-    def parameter(name) {
-        parameter().find { it.name() == name }
+    def queryParameter(name) {
+        queryParameter().find { it.name() == name }
     }
 
     def response() {

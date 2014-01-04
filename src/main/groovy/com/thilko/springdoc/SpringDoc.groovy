@@ -84,7 +84,7 @@ class SpringDoc {
                                                     th "Default"
                                                 }
                                                 tbody {
-                                                    apiMethod.parameter().each { param ->
+                                                    apiMethod.queryParameter().each { param ->
                                                         tr {
                                                             td param.name()
                                                             td param.required()

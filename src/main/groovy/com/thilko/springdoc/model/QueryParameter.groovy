@@ -4,15 +4,15 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ValueConstants
 
 
-class Parameter {
+class QueryParameter {
 
     private variableElement
 
     def static fromVariableElement(variableElement) {
-        new Parameter(variableElement)
+        new QueryParameter(variableElement)
     }
 
-    private Parameter(variableElement){
+    private QueryParameter(variableElement){
         this.variableElement = variableElement
     }
 
