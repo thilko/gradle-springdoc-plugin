@@ -54,6 +54,10 @@ class Method {
         }
     }
 
+    def noApi(){
+        requestMappingAnnotation() == null
+    }
+
     def url() {
         def base = "http://example.com${path()}"
         if (!parameter().isEmpty()) {

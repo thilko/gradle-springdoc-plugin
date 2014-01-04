@@ -110,4 +110,12 @@ class MethodTest extends Specification {
         then:
         endpoint.methods[0].url() == "http://example.com/ask?question=&priority="
     }
+
+    def "noApi returns true if method has no @RequestMapping annotation"(){
+        when:
+        def endpoint = Endpoint.create(compiler.statisticsController())
+
+        then:
+        endpoint.methods[1].noApi()
+    }
 }
