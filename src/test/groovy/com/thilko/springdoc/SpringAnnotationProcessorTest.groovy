@@ -2,7 +2,7 @@ package com.thilko.springdoc
 
 import spock.lang.Specification
 
-class AnnotationProcessorTest extends Specification {
+class SpringAnnotationProcessorTest extends Specification {
     def compiler
 
     def setup() {
