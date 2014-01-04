@@ -38,4 +38,9 @@ public class CustomerController {
         return null;
     }
 
+    @RequestMapping(value="/user/nubs/{userId}", method = RequestMethod.GET)
+    public User nubs(@RequestParam("test")String test, Long id) {
+        return null;
+    }
+
 }

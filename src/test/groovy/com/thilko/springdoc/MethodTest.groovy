@@ -103,6 +103,15 @@ class MethodTest extends Specification {
         endpoint.methods[0].parameter().size() == 2
     }
 
+    def "parameter returns only parameter annotated with @RequestParam"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[6].parameter().size() == 1
+        endpoint.methods[6].parameter()[0].name() == "test"
+    }
+
     def "response returns a response object representing the returning data"(){
         when:
         def endpoint = Endpoint.create(compiler.customerController())

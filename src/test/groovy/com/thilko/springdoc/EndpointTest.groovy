@@ -19,7 +19,7 @@ class EndpointTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methodCount == 6
+        endpoint.methodCount == 7
     }
 
     def "an endpoint has not annotated methods"() {

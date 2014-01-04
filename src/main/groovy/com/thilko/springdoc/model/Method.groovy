@@ -1,6 +1,7 @@
 package com.thilko.springdoc.model
 
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 
 class Method {
 
@@ -53,9 +54,9 @@ class Method {
     }
 
     def parameter() {
-        methodElement.parameters.collect {
-            Parameter.fromVariableElement(it)
-        }
+        methodElement.parameters
+                .findAll { it.getAnnotation(RequestParam.class) != null }
+                .collect { Parameter.fromVariableElement(it) }
     }
 
     def noApi() {
