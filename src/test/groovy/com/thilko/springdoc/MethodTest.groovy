@@ -87,14 +87,6 @@ class MethodTest extends Specification {
         endpoint.methods[1].path() == "/data"
     }
 
-    def "path returns an empty string if method does not belongs to an api"(){
-        when:
-        def endpoint = Endpoint.create(compiler.statisticsController())
-
-        then:
-        endpoint.methods[1].path() == ""
-    }
-
     def "parameter returns all params that are annotated on the mpi method"(){
         when:
         def endpoint = Endpoint.create(compiler.customerController())
@@ -126,13 +118,5 @@ class MethodTest extends Specification {
 
         then:
         endpoint.methods[0].url() == "http://example.com/ask?question=&priority="
-    }
-
-    def "noApi returns true if method has no @RequestMapping annotation"(){
-        when:
-        def endpoint = Endpoint.create(compiler.statisticsController())
-
-        then:
-        endpoint.methods[1].noApi()
     }
 }

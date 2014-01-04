@@ -1,5 +1,7 @@
 package com.thilko.springdoc.model
 
+import org.springframework.web.bind.annotation.RequestMapping
+
 class Endpoint {
 
     private endpoint
@@ -26,16 +28,20 @@ class Endpoint {
     }
 
     def applyExecutable(def executable) {
-        if (!constructor(executable)) {
-            this.methods << apiMethod(executable);
+        if (!isConstructor(executable) && isApiMethod(executable)) {
+            this.methods << createApiMethod(executable);
         }
     }
 
-    private static def apiMethod(executable) {
+    private static isApiMethod(def executable) {
+        executable.getAnnotation(RequestMapping.class) != null
+    }
+
+    private static def createApiMethod(executable) {
         Method.fromElement(executable)
     }
 
-    private static boolean constructor(executable) {
+    private static boolean isConstructor(executable) {
         executable.simpleName.contentEquals("<init>")
     }
 

@@ -43,4 +43,6 @@ public class CustomerController {
         return null;
     }
 
+    public void notAnApiMethod(){}
+
 }

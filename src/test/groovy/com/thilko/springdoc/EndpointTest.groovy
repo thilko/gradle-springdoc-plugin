@@ -22,12 +22,11 @@ class EndpointTest extends Specification {
         endpoint.methodCount == 7
     }
 
-    def "an endpoint has not annotated methods"() {
+    def "methods returns only public api methods"() {
         when:
-        def endpoint = Endpoint.create(compiler.statisticsController())
+        def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods[1].name().contentEquals("visitorPerMinute") == true
+        endpoint.methods.find { it.name().toString() == "notAnApiMethod" } == null
     }
-
 }
