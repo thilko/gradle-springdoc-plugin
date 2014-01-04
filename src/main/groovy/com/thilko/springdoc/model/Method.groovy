@@ -40,11 +40,11 @@ class Method {
     }
 
     def path() {
-        def value = requestMappingAnnotation()?.value()
-        if(value == null){
+        if(noApi()){
             return ""
         }
 
+        def value = requestMappingAnnotation().value()
         value.length == 0 ? "/" : value.first()
     }
 
