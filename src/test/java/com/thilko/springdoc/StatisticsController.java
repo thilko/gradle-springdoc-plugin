@@ -9,14 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StatisticsController {
 
     @RequestMapping("/user/month/average")
-    public void userPerMonth() {
-    }
+    public void userPerMonth() { }
 
 
-    public void visitorPerMinute() {
-    }
+    public void visitorPerMinute() { }
 
     @RequestMapping("/user/month/{year}")
-    public void userPerYear(@PathVariable("year") int year) {
-    }
+    public void userPerYear(@PathVariable("year") int year) { }
 }
