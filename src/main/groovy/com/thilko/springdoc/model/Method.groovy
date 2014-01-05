@@ -1,5 +1,7 @@
 package com.thilko.springdoc.model
 
+import groovy.json.JsonOutput
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 
@@ -66,5 +68,15 @@ class Method {
 
     def response() {
         Response.fromReturnType(methodElement.returnType)
+    }
+
+    def requestBody() {
+        def bodyArg = methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null }
+        if(bodyArg == null){
+            return ""
+        }
+
+        def domainClass = this.class.classLoader.loadClass(bodyArg.asType().toString())
+        JsonOutput.prettyPrint(new JsonOutput().toJson(domainClass.newInstance()))
     }
 }

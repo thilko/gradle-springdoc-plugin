@@ -1,6 +1,7 @@
 package com.thilko.springdoc;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,11 +39,17 @@ public class CustomerController {
         return null;
     }
 
-    @RequestMapping(value="/user/nubs/{userId}", method = RequestMethod.GET)
-    public User nubs(@RequestParam("test")String test, Long id) {
+    @RequestMapping(value = "/user/nubs/{userId}", method = RequestMethod.GET)
+    public User nubs(@RequestParam("test") String test, Long id) {
         return null;
     }
 
-    public void notAnApiMethod(){}
+    public void notAnApiMethod() {
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public User transform(@RequestBody User userToTransform) {
+        return null;
+    }
 
 }

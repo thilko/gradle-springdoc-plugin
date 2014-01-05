@@ -97,6 +97,11 @@ class SpringDoc {
                                             div(class: "well"){
                                                 pre apiMethod.response().asJson()
                                             }
+
+                                            h4 "Request body"
+                                            div(class: "well"){
+                                                pre apiMethod.requestBody()
+                                            }
                                         }
                                     }
                                 }
@@ -117,7 +122,7 @@ class SpringDoc {
         return classes.collect { Endpoint.create(it) }
     }
 
-    private static builder(outFile) {
+    private static builder(String outFile) {
         return new MarkupBuilder(new PrintWriter(new File(outFile)))
     }
 
