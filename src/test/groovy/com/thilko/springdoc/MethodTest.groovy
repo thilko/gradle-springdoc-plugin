@@ -136,6 +136,15 @@ class MethodTest extends Specification {
         endpoint.methods[0].url() == "http://example.com/ask?question=&priority="
     }
 
+
+    def "hasRequestBody ToDO"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        false
+    }
+
     def "requestBody returns '' if method has no @RequestBody annotation"(){
         when:
         def endpoint = Endpoint.create(compiler.customerController())
