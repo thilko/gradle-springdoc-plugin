@@ -25,10 +25,6 @@ class Method {
     }
 
     def httpMethod() {
-        if (noApi()) {
-            return ""
-        }
-
         !hasRequestMethod() ? "GET" : requestMappingAnnotation().method().first().name()
     }
 
@@ -45,10 +41,6 @@ class Method {
     }
 
     def path() {
-        if (noApi()) {
-            return ""
-        }
-
         def value = requestMappingAnnotation().value()
         value.length == 0 ? "/" : value.first()
     }
@@ -57,10 +49,6 @@ class Method {
         methodElement.parameters
                 .findAll { it.getAnnotation(RequestParam.class) != null }
                 .collect { QueryParameter.fromVariableElement(it) }
-    }
-
-    def noApi() {
-        requestMappingAnnotation() == null
     }
 
     def url() {
