@@ -27,6 +27,6 @@ class EndpointTest extends Specification {
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        endpoint.methods.find { it.name().toString() == "notAnApiMethod" } == null
+        !endpoint.methods.find { it.name().toString() == "notAnApiMethod" }
     }
 }
