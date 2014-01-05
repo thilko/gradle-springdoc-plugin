@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 
+import javax.lang.model.type.TypeKind
+
 class Method {
 
     private methodElement
@@ -68,6 +70,14 @@ class Method {
 
     def response() {
         Response.fromReturnType(methodElement.returnType)
+    }
+
+    def hasResponse(){
+        methodElement.returnType.kind != TypeKind.VOID
+    }
+
+    def hasRequestBody(){
+        methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null } != null
     }
 
     def requestBody() {

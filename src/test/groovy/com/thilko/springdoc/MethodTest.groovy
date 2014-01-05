@@ -112,6 +112,22 @@ class MethodTest extends Specification {
         endpoint.methods[0].response() != null
     }
 
+    def "hasReponse returns true if method returns a response"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[2].hasResponse()
+    }
+
+    def "hasReponse returns false if method´s return type is void"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        !endpoint.methods[0].hasResponse()
+    }
+
     def "url returns an example url"(){
         when:
         def endpoint = Endpoint.create(compiler.customerController())

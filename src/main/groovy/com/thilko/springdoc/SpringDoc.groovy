@@ -62,20 +62,19 @@ class SpringDoc {
                                                 }
                                             }
                                             div(class: "well") {
+                                                h4 "Url"
                                                 span apiMethod.url()
-                                            }
-                                            table(class: "table table-hover"){
-                                                tbody{
-                                                    tr{
-                                                        td "Method name"
-                                                        td apiMethod.name()
-                                                    }
-                                                    tr{
-                                                        td "Response class"
-                                                        td apiMethod.response().className()
-                                                    }
+                                                if(apiMethod.hasRequestBody()){
+                                                    h4 "Request"
+                                                    pre apiMethod.requestBody()
+                                                }
+
+                                                if(apiMethod.hasResponse()){
+                                                    h4 "Response"
+                                                    pre apiMethod.response().asJson()
                                                 }
                                             }
+
                                             table(class: "table table-bordered table-striped") {
                                                 caption "Method Parameters"
                                                 thead {
@@ -93,14 +92,18 @@ class SpringDoc {
                                                     }
                                                 }
                                             }
-                                            h4 "Response as JSON"
-                                            div(class: "well"){
-                                                pre apiMethod.response().asJson()
-                                            }
 
-                                            h4 "Request body"
-                                            div(class: "well"){
-                                                pre apiMethod.requestBody()
+                                            table(class: "table table-hover") {
+                                                tbody {
+                                                    tr {
+                                                        td "Method name"
+                                                        td apiMethod.name()
+                                                    }
+                                                    tr {
+                                                        td "Response class"
+                                                        td apiMethod.response().className()
+                                                    }
+                                                }
                                             }
                                         }
                                     }
