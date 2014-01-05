@@ -44,6 +44,8 @@
 out
 .gradle/*
 index.html
+springdoc.css
+springdoc.js
 
 test/build
 plugin/build
