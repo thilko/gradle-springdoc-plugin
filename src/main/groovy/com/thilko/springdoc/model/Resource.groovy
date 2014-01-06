@@ -2,21 +2,21 @@ package com.thilko.springdoc.model
 
 import org.springframework.web.bind.annotation.RequestMapping
 
-class Endpoint {
+class Resource {
 
-    private endpoint
+    private resource
 
     def methods = []
 
-    static def create(def endpoint) {
-        def docEndpoint = new Endpoint(endpoint)
-        endpoint.accept(new EndpointVisitor(), docEndpoint)
+    static def create(def resource) {
+        def doc = new Resource(resource)
+        resource.accept(new ResourceVisitor(), doc)
 
-        return docEndpoint
+        return doc
     }
 
-    private Endpoint(def endpoint) {
-        this.endpoint = endpoint
+    private Resource(def resource) {
+        this.resource = resource
     }
 
     def methods() {
@@ -24,7 +24,7 @@ class Endpoint {
     }
 
     def name() {
-        endpoint.simpleName
+        resource.simpleName
     }
 
     def applyExecutable(def executable) {

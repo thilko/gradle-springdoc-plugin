@@ -1,6 +1,6 @@
 package com.thilko.springdoc
 
-import com.thilko.springdoc.model.Endpoint
+import com.thilko.springdoc.model.Resource
 import groovy.xml.MarkupBuilder
 
 class SpringDoc {
@@ -26,20 +26,20 @@ class SpringDoc {
                 div(class: "springdoc") {
                     div(class: "row") {
                         div(class: "col-md-3 sidebar") {
-                            div(class: "panel-group", id: "api-endpoint") {
-                                endpoints().eachWithIndex { endpoint, idx ->
-                                    def endpointIdx = "api-endpoint$idx"
+                            div(class: "panel-group", id: "api-resource") {
+                                resources().eachWithIndex { resource, idx ->
+                                    def resourceIdx = "api-resource$idx"
                                     div(class: "panel panel-default") {
                                         div(class: "panel-heading") {
                                             h2(class: "panel-title") {
-                                                a("data-toggle": "collapse", "data-parent": "#api-endpoint", href: "#$endpointIdx", endpoint.name())
+                                                a("data-toggle": "collapse", "data-parent": "#api-resource", href: "#$resourceIdx", resource.name())
                                             }
                                         }
-                                        div(id: "$endpointIdx", class: "panel-collapse collapse") {
+                                        div(id: "$resourceIdx", class: "panel-collapse collapse") {
                                             ul(class: "list-unstyled") {
-                                                endpoint.methods().each { method ->
+                                                resource.methods().each { method ->
                                                     li {
-                                                        a("href": "#${endpointIdx}_${method.name()}", "data-toggle": "tab", "${method.name()}")
+                                                        a("href": "#${resourceIdx}_${method.name()}", "data-toggle": "tab", "${method.name()}")
                                                     }
                                                 }
                                             }
@@ -51,9 +51,9 @@ class SpringDoc {
 
                         div(class: "col-md-8") {
                             div(class: "tab-content content") {
-                                endpoints().eachWithIndex { endpoint, idx ->
-                                    endpoint.methods().each { apiMethod ->
-                                        def apiMethodContent = "api-endpoint${idx}_${apiMethod.name()}"
+                                resources().eachWithIndex { resource, idx ->
+                                    resource.methods().each { apiMethod ->
+                                        def apiMethodContent = "api-resource${idx}_${apiMethod.name()}"
                                         div(class: "tab-pane", id: "$apiMethodContent") {
                                             div(class: "well") {
                                                 h4 {
@@ -121,8 +121,8 @@ class SpringDoc {
         }
     }
 
-    private endpoints() {
-        return classes.collect { Endpoint.create(it) }
+    private resources() {
+        return classes.collect { Resource.create(it) }
     }
 
     private static builder(String outFile) {

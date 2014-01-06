@@ -35,4 +35,4 @@ Not yet implemented / TODOs
 =======================
 - [ ] Support all spring mvc annotations
 - [ ] Display example requests/responses as JSON
-- [ ] Send example request to a remote endpoint
+- [ ] Send example request to a remote resource
