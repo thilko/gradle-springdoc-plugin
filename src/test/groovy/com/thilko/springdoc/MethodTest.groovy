@@ -137,12 +137,20 @@ class MethodTest extends Specification {
     }
 
 
-    def "hasRequestBody ToDO"(){
+    def "hasRequestBody returns false if method has no @RequestBody annotation"(){
         when:
         def endpoint = Endpoint.create(compiler.customerController())
 
         then:
-        false
+        !endpoint.methods[0].hasRequestBody()
+    }
+
+    def "hasRequestBody returns true if method has no @RequestBody annotation"(){
+        when:
+        def endpoint = Endpoint.create(compiler.customerController())
+
+        then:
+        endpoint.methods[7].hasRequestBody()
     }
 
     def "requestBody returns '' if method has no @RequestBody annotation"(){
