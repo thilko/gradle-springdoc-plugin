@@ -50,7 +50,7 @@ class SpringDoc {
                         }
 
                         div(class: "col-md-8") {
-                            div(class: "tab-content content") {
+                            div(class: "tab-content") {
                                 resources().eachWithIndex { resource, idx ->
                                     resource.methods().each { apiMethod ->
                                         def apiMethodContent = "api-resource${idx}_${apiMethod.name()}"
@@ -61,47 +61,60 @@ class SpringDoc {
                                                     span apiMethod.path()
                                                 }
                                             }
-                                            div(class: "well") {
-                                                h4 "Url"
-                                                span apiMethod.url()
-                                                if(apiMethod.hasRequestBody()){
-                                                    h4 "Request"
-                                                    pre apiMethod.requestBody()
-                                                }
-
-                                                if(apiMethod.hasResponse()){
-                                                    h4 "Response"
-                                                    pre apiMethod.response().asJson()
-                                                }
+                                            ul(class: "nav nav-tabs") {
+                                                li() { a("href": "#summary$apiMethodContent", "data-toggle": "tab", "Summary") }
+                                                li() { a("href": "#queryparam$apiMethodContent", "data-toggle": "tab", "Query parameter") }
+                                                li() { a("href": "#impl$apiMethodContent", "data-toggle": "tab", "Implementation") }
                                             }
+                                            div(class: "tab-content") {
+                                                div(class: "tab-pane active", id: "summary$apiMethodContent") {
+                                                    div(class: "well") {
+                                                        h4 "Url"
+                                                        span apiMethod.url()
+                                                        if (apiMethod.hasRequestBody()) {
+                                                            h4 "Request"
+                                                            pre apiMethod.requestBody()
+                                                        }
 
-                                            table(class: "table table-bordered table-striped") {
-                                                caption "Method Parameters"
-                                                thead {
-                                                    th "Name"
-                                                    th "Required"
-                                                    th "Default"
-                                                }
-                                                tbody {
-                                                    apiMethod.queryParameter().each { param ->
-                                                        tr {
-                                                            td param.name()
-                                                            td param.required()
-                                                            td param.defaultValue()
+                                                        if (apiMethod.hasResponse()) {
+                                                            h4 "Response"
+                                                            pre apiMethod.response().asJson()
                                                         }
                                                     }
                                                 }
-                                            }
 
-                                            table(class: "table table-hover") {
-                                                tbody {
-                                                    tr {
-                                                        td "Method name"
-                                                        td apiMethod.name()
+                                                div(class: "tab-pane", id: "queryparam$apiMethodContent") {
+                                                    table(class: "table table-bordered table-striped") {
+                                                        caption "Method Parameters"
+                                                        thead {
+                                                            th "Name"
+                                                            th "Required"
+                                                            th "Default"
+                                                        }
+                                                        tbody {
+                                                            apiMethod.queryParameter().each { param ->
+                                                                tr {
+                                                                    td param.name()
+                                                                    td param.required()
+                                                                    td param.defaultValue()
+                                                                }
+                                                            }
+                                                        }
                                                     }
-                                                    tr {
-                                                        td "Response class"
-                                                        td apiMethod.response().className()
+                                                }
+
+                                                div(class: "tab-pane", id: "impl$apiMethodContent") {
+                                                    table(class: "table table-hover") {
+                                                        tbody {
+                                                            tr {
+                                                                td "Method name"
+                                                                td apiMethod.name()
+                                                            }
+                                                            tr {
+                                                                td "Response class"
+                                                                td apiMethod.response().className()
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
