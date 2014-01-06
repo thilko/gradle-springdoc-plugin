@@ -1,5 +1,6 @@
 gradle-springdoc-plugin
 =======================
+[![Build Status](https://travis-ci.org/thilko/gradle-springdoc-plugin.png?branch=master)](https://travis-ci.org/thilko/gradle-springdoc-plugin)
 
 Dry out your rest api documentation and generate html from your spring mvc annotations.
 
