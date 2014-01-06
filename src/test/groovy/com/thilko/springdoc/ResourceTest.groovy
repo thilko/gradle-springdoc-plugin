@@ -19,7 +19,7 @@ class ResourceTest extends Specification {
         def ressource = Resource.create(compiler.customerController())
 
         then:
-        ressource.methodCount == 7
+        ressource.methodCount == 8
     }
 
     def "methods returns only public api methods"() {
