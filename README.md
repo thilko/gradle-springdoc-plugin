@@ -3,8 +3,8 @@ gradle-springdoc-plugin
 
 Dry out your rest api documentation and generate html from your spring mvc annotations.
 
-To be used as gradle plugin. The plugin uses an annotation processor to parse the AST at compile time. I use
-twitter bootstrap for the generated html page.
+To be used as gradle plugin. The plugin uses an annotation processor to parse all relevant spring annotations. There are
+no runtime dependencies. Produces an html documentation with twitter bootstrap.
 
 Usage
 =======================
