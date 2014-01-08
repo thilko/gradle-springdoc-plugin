@@ -36,7 +36,7 @@ uploadArchives {
 
             pom.groupId = 'com.thilko.spring'
             pom.artifactId = 'gradle-springdoc-plugin'
-            pom.version = '0.1.SNAPSHOT'
+            pom.version = '0.1'
         }
     }
 }
