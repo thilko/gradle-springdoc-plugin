@@ -63,7 +63,7 @@ class SpringDoc {
                                             }
                                             ul(class: "nav nav-tabs") {
                                                 li() { a("href": "#summary$apiMethodContent", "data-toggle": "tab", "Summary") }
-                                                if(apiMethod.hasQueryParameter()){
+                                                if (apiMethod.hasQueryParameter()) {
                                                     li() { a("href": "#queryparam$apiMethodContent", "data-toggle": "tab", "Query parameter") }
                                                 }
 
@@ -71,20 +71,23 @@ class SpringDoc {
                                             }
                                             div(class: "tab-content") {
                                                 div(class: "tab-pane active", id: "summary$apiMethodContent") {
-                                                    h4 "Url"
-                                                    span apiMethod.url()
-                                                    if (apiMethod.hasRequestBody()) {
-                                                        h4 "Request"
-                                                        pre apiMethod.requestBody()
+                                                    div(class: "well") {
+                                                        h4 "Url"
+                                                        span apiMethod.url()
+                                                        if (apiMethod.hasRequestBody()) {
+                                                            h4 "Request"
+                                                            pre apiMethod.requestBody()
+                                                        }
+
+                                                        if (apiMethod.hasResponse()) {
+                                                            h4 "Response"
+                                                            pre apiMethod.response().asJson()
+                                                        }
                                                     }
 
-                                                    if (apiMethod.hasResponse()) {
-                                                        h4 "Response"
-                                                        pre apiMethod.response().asJson()
-                                                    }
                                                 }
 
-                                                if(apiMethod.hasQueryParameter()){
+                                                if (apiMethod.hasQueryParameter()) {
                                                     div(class: "tab-pane", id: "queryparam$apiMethodContent") {
                                                         table(class: "table table-bordered table-striped") {
                                                             caption "Method Parameters"
