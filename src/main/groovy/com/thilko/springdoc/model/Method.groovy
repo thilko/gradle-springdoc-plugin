@@ -80,6 +80,10 @@ class Method {
         methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null } != null
     }
 
+    def hasQueryParameter(){
+        methodElement.parameters.find { it.getAnnotation(RequestParam.class) != null } != null
+    }
+
     def requestBody() {
         def bodyArg = methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null }
         if(bodyArg == null){

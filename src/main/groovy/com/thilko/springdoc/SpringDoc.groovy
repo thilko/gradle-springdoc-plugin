@@ -49,7 +49,7 @@ class SpringDoc {
                             }
                         }
 
-                        div(class: "col-md-8") {
+                        div(class: "col-md-8 content") {
                             div(class: "tab-content") {
                                 resources().eachWithIndex { resource, idx ->
                                     resource.methods().each { apiMethod ->
@@ -63,40 +63,43 @@ class SpringDoc {
                                             }
                                             ul(class: "nav nav-tabs") {
                                                 li() { a("href": "#summary$apiMethodContent", "data-toggle": "tab", "Summary") }
-                                                li() { a("href": "#queryparam$apiMethodContent", "data-toggle": "tab", "Query parameter") }
+                                                if(apiMethod.hasQueryParameter()){
+                                                    li() { a("href": "#queryparam$apiMethodContent", "data-toggle": "tab", "Query parameter") }
+                                                }
+
                                                 li() { a("href": "#impl$apiMethodContent", "data-toggle": "tab", "Implementation") }
                                             }
                                             div(class: "tab-content") {
                                                 div(class: "tab-pane active", id: "summary$apiMethodContent") {
-                                                    div(class: "well") {
-                                                        h4 "Url"
-                                                        span apiMethod.url()
-                                                        if (apiMethod.hasRequestBody()) {
-                                                            h4 "Request"
-                                                            pre apiMethod.requestBody()
-                                                        }
+                                                    h4 "Url"
+                                                    span apiMethod.url()
+                                                    if (apiMethod.hasRequestBody()) {
+                                                        h4 "Request"
+                                                        pre apiMethod.requestBody()
+                                                    }
 
-                                                        if (apiMethod.hasResponse()) {
-                                                            h4 "Response"
-                                                            pre apiMethod.response().asJson()
-                                                        }
+                                                    if (apiMethod.hasResponse()) {
+                                                        h4 "Response"
+                                                        pre apiMethod.response().asJson()
                                                     }
                                                 }
 
-                                                div(class: "tab-pane", id: "queryparam$apiMethodContent") {
-                                                    table(class: "table table-bordered table-striped") {
-                                                        caption "Method Parameters"
-                                                        thead {
-                                                            th "Name"
-                                                            th "Required"
-                                                            th "Default"
-                                                        }
-                                                        tbody {
-                                                            apiMethod.queryParameter().each { param ->
-                                                                tr {
-                                                                    td param.name()
-                                                                    td param.required()
-                                                                    td param.defaultValue()
+                                                if(apiMethod.hasQueryParameter()){
+                                                    div(class: "tab-pane", id: "queryparam$apiMethodContent") {
+                                                        table(class: "table table-bordered table-striped") {
+                                                            caption "Method Parameters"
+                                                            thead {
+                                                                th "Name"
+                                                                th "Required"
+                                                                th "Default"
+                                                            }
+                                                            tbody {
+                                                                apiMethod.queryParameter().each { param ->
+                                                                    tr {
+                                                                        td param.name()
+                                                                        td param.required()
+                                                                        td param.defaultValue()
+                                                                    }
                                                                 }
                                                             }
                                                         }

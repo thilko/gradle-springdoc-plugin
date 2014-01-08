@@ -153,6 +153,14 @@ class MethodTest extends Specification {
         resource.methods[7].hasRequestBody()
     }
 
+    def "hasQueryParameter returns false if method has no query parameter"(){
+        when:
+        def resource = Resource.create(compiler.customerController())
+
+        then:
+        !resource.methods[1].hasQueryParameter()
+    }
+
     def "requestBody returns '' if method has no @RequestBody annotation"(){
         when:
         def resource = Resource.create(compiler.customerController())
