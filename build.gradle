@@ -20,6 +20,8 @@ sourceSets {
     generated
 }
 
+
+
 ext {
     SONATYPE_USER = System.env.SONATYPE_USER
     SONATYPE_PASSWORD = System.env.SONATYPE_PASSWORD
@@ -33,6 +35,12 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
     classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
 }
 
 signing {
