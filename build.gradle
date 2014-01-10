@@ -34,9 +34,29 @@ uploadArchives {
                 authentication(userName: "$SONATYPE_USER", password: "$SONATYPE_PASSWORD")
             }
 
-            pom.groupId = 'com.thilko.spring'
-            pom.artifactId = 'gradle-springdoc-plugin'
-            pom.version = '0.1.SNAPSHOT'
+            pom {
+                groupId = 'com.thilko.spring'
+                artifactId = 'gradle-springdoc-plugin'
+                version = "0.1.SNAPSHOT"
+
+                withXml {
+                    asNode().appendNode("name", "gradle-springdoc-plugin")
+                    asNode().appendNode("description", "A gradle plugin to generate html rest api doc from spring mvc annotations.")
+                    asNode().appendNode("packaging", "jar")
+                    asNode().appendNode("url", "http://github.com/thilko/gradle-springdoc-plugin")
+                    def license = asNode().appendNode("licenses").appendNode("license")
+                    license.appendNode("name", "MIT")
+                    license.appendNode("url", "http://opensource.org/licenses/MIT")
+                    license.appendNode("distribution", "repo")
+                    def scm = asNode().appendNode("scm")
+                    scm.appendNode("url", "http://github.com/thilko/gradle-springdoc-plugin")
+                    def developers = asNode().appendNode("developers").appendNode("developer")
+                    developers.appendNode("name", "Thilko Richter")
+                    developers.appendNode("email", "springdoc@thilko.com")
+                    developers.appendNode("timezone", "+1")
+                    developers.appendNode("properties").appendNode("picUrl", "http://www.gravatar.com/avatar/6682c3909950f44d635929ef21ec08c8.png")
+                }
+            }
         }
     }
 }
