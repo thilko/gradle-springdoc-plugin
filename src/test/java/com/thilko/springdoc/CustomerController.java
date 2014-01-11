@@ -10,45 +10,44 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CustomerController {
 
-    @RequestMapping("/ask")
-    public void askMe(@RequestParam(value = "question", defaultValue = "How much is the fish?") String question,
-                      @RequestParam("priority") Integer priority
+    @RequestMapping("/customers/invoices/completed")
+    public void getCompletedInvoices(@RequestParam(value = "amount", defaultValue = "200") String amount,
+                      @RequestParam("customerid") Integer customerId
     ) {
     }
 
-    @RequestMapping(value = "/data", method = RequestMethod.POST)
-    public void uploadData() {
+    @RequestMapping(value = "/customers", method = RequestMethod.POST)
+    public void createNewCustomer() {
     }
 
-    @RequestMapping(value = "/user", method = RequestMethod.PUT)
-    public User createNewUser(@RequestParam(value = "name", required = false) String name) {
+    @RequestMapping(value = "/customers", method = RequestMethod.PUT)
+    public User updateCustomer(@RequestParam(value = "name", required = false) String name) {
         return null;
     }
 
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
-    public void deleteUser() {
+    @RequestMapping(value = "/customers/{customerid}", method = RequestMethod.DELETE)
+    public void cancelSubscription() {
     }
 
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
-    public String getUserById() {
+    @RequestMapping(value = "/customers/{customerid}", method = RequestMethod.GET)
+    public String getCustomerDetails() {
         return null;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public User all() {
         return null;
     }
 
-    @RequestMapping(value = "/user/nubs/{userId}", method = RequestMethod.GET)
-    public User nubs(@RequestParam("test") String test, Long id) {
+    @RequestMapping(value = "/customers/{userId}/address", method = RequestMethod.GET)
+    public User getAddress(@RequestParam("test") String test, Long id) {
         return null;
     }
 
-    public void notAnApiMethod() {
-    }
+    public void notAnApiMethod() { }
 
     @RequestMapping(method = RequestMethod.POST)
-    public User transform(@RequestBody User userToTransform) {
+    public User upgradeCustomer(@RequestBody User userToTransform) {
         return null;
     }
 

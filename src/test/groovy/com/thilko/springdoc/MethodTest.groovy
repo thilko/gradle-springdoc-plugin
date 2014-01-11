@@ -68,7 +68,7 @@ class MethodTest extends Specification {
         def resource = Resource.create(compiler.customerController())
 
         then:
-        resource.methods[0].name().contentEquals("askMe")
+        resource.methods[0].name().contentEquals("getCompletedInvoices")
     }
 
     def "path returns / if no value RequestMapping is set"() {
@@ -84,7 +84,7 @@ class MethodTest extends Specification {
         def resource = Resource.create(compiler.customerController())
 
         then:
-        resource.methods[1].path() == "/data"
+        resource.methods[1].path() == "/customers"
     }
 
     def "parameter returns all params that are annotated on the mpi method"(){
@@ -133,7 +133,7 @@ class MethodTest extends Specification {
         def resource = Resource.create(compiler.customerController())
 
         then:
-        resource.methods[0].url() == "http://example.com/ask?question=&priority="
+        resource.methods[0].url() == "http://example.com/customers/invoices/completed?amount=&customerid="
     }
 
 

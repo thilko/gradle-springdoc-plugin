@@ -16,25 +16,25 @@ class ParameterTest extends Specification {
         customerController = compiler.customerController()
     }
 
-    def "name() returns 'question' if annotation 'value' is 'question'"(){
+    def "name() returns 'question' if annotation 'value' is 'amount'"(){
         when:
-        def parameter = Resource.create(customerController).methods[0].queryParameter("question")
+        def parameter = Resource.create(customerController).methods[0].queryParameter("amount")
 
         then:
-        parameter.name() == "question"
+        parameter.name() == "amount"
     }
 
     def "defaultValue() returns 'How much is the fish'"(){
         when:
-        def parameter = Resource.create(customerController).methods[0].queryParameter("question")
+        def parameter = Resource.create(customerController).methods[0].queryParameter("amount")
 
         then:
-        parameter.defaultValue() == "How much is the fish?"
+        parameter.defaultValue() == "200"
     }
 
     def "defaultValue() returns '' if not set"(){
         when:
-        def parameter = Resource.create(customerController).methods[2].queryParameter("name")
+        def parameter = Resource.create(customerController).methods[0].queryParameter("customerid")
 
         then:
         parameter.defaultValue() == ""
@@ -42,7 +42,7 @@ class ParameterTest extends Specification {
 
     def "required() returns 'true' if required not set"(){
         when:
-        def parameter = Resource.create(customerController).methods[0].queryParameter("question")
+        def parameter = Resource.create(customerController).methods[0].queryParameter("amount")
 
         then:
         parameter.required()
