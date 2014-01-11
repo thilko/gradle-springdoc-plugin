@@ -20,11 +20,10 @@ sourceSets {
     generated
 }
 
-
-
 ext {
     SONATYPE_USER = System.env.SONATYPE_USER
     SONATYPE_PASSWORD = System.env.SONATYPE_PASSWORD
+    isReleaseVersion = !version.endsWith("SNAPSHOT")
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -45,6 +44,7 @@ artifacts {
 
 signing {
     sign configurations.archives
+    required { isReleaseVersion && gradle.taskGraph.hasTask("uploadArchives") }
 }
 
 uploadArchives {
