@@ -2,38 +2,36 @@ gradle-springdoc-plugin
 =======================
 [![Build Status](https://travis-ci.org/thilko/gradle-springdoc-plugin.png?branch=master)](https://travis-ci.org/thilko/gradle-springdoc-plugin)
 
-Dry out your rest api documentation and generate html from your spring mvc annotations.
+A gradle plugin to generate rest api documention from spring mvc annotations at build time. No
+runtime dependencies.
 
-To be used as gradle plugin. The plugin uses an annotation processor to parse all relevant spring annotations. There are
-no runtime dependencies. Produces an html documentation with twitter bootstrap.
+Project is in an early development stage: ideas, issues and comments are highly appreciated.
 
 Usage
 =======================
 
-Include the plugin in your gradle script like this:
+Include the plugin in your gradle script:
 
 ```
 buildscript {
     repositories {
-        maven {
-            url uri('https://oss.sonatype.org/content/groups/public')
-        }
-        maven {
-            url uri('http://repo1.maven.org/maven2')
-        }
+      mavenCentral()
     }
     dependencies {
-        classpath "com.thilko.spring:gradle-springdoc-plugin:0.1.SNAPSHOT"
+        classpath "com.thilko.spring:gradle-springdoc-plugin:0.1"
     }
 }
+
 apply plugin: 'springdoc'
 ```
 
 You got a build task ```generateSpringDoc``` which produces HTML documentation in ```buildDir```.
 
+See [example documentation](http://thilko.com/springdoc/index.html).
 
 Not yet implemented / TODOs
 =======================
-- [ ] Support all spring mvc annotations
-- [ ] Fill example request/response with data
-- [ ] Send example request to a remote resource
+- [ ] Proper support for all relevant spring mvc anotations
+- [ ] Example requests for all api´s
+- [ ] Proper styling
+- [ ] Your idea here
