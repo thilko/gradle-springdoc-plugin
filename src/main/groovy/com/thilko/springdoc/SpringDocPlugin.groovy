@@ -13,15 +13,8 @@ class SpringDocPlugin implements Plugin<Project> {
         project.plugins.apply("java")
 
         project.dependencies {
-            compile "com.thilko.spring:gradle-springdoc-plugin:0.1.SNAPSHOT"
+            compile "com.thilko.spring:gradle-springdoc-plugin:0.1.1"
             compile localGroovy()
-        }
-
-        project.repositories {
-            maven {
-                url('https://oss.sonatype.org/content/groups/public')
-            }
-            mavenCentral()
         }
 
         project.task(type: Copy, "copyCss") {
