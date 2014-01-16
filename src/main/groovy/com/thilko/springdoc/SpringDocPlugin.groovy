@@ -12,11 +12,6 @@ class SpringDocPlugin implements Plugin<Project> {
     void apply(Project project) {
         project.plugins.apply("java")
 
-        project.dependencies {
-            compile "com.thilko.spring:gradle-springdoc-plugin:0.1.1"
-            compile localGroovy()
-        }
-
         project.task(type: Copy, "copyCss") {
             project.afterEvaluate {
                 from project.zipTree(project.configurations.compile.filter { it.name.startsWith('gradle-springdoc-plugin') }.singleFile)
