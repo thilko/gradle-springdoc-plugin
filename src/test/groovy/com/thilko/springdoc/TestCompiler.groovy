@@ -33,15 +33,15 @@ class TestCompiler {
     }
 
     public call() {
-        Path currentRelativePath = Paths.get("");
-        String path = currentRelativePath.toAbsolutePath().toString() + "/src/test/java";
-
         def options = ["-proc:only", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
-        def fileObjects = fileManager.getJavaFileObjects(
-                format("%s/com/thilko/springdoc/CustomerController.java", path),
-                format("%s/com/thilko/springdoc/StatisticsController.java", path));
 
-        task = (JavacTask) compiler.getTask(null, fileManager, collector, options, null, fileObjects)
+        task = (JavacTask) compiler.getTask(null,
+                                            fileManager,
+                                            collector,
+                                            options,
+                                            ["com.thilko.springdoc.StatisticsController",
+                                                    "com.thilko.springdoc.CustomerController"],
+                                            null)
         task.parse()
         task.analyze()
     }
