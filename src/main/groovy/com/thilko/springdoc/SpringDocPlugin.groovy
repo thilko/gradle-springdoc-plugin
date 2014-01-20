@@ -14,10 +14,6 @@ class SpringDocPlugin implements Plugin<Project> {
         if (project.configurations.findByName("springdoc")==null){
             project.configurations.create("springdoc")
         }
-
-        if (project.configurations.findByName("springdoc")==null){
-            project.configurations.create("springdoc")
-        }
         project.dependencies {
             springdoc "com.thilko.spring:gradle-springdoc-plugin:0.1.4"
             springdoc localGroovy()
