@@ -1,5 +1,7 @@
 package com.thilko.springdoc;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,4 +54,8 @@ public class CustomerController {
         return null;
     }
 
+    @RequestMapping(value = "/user/information", method = RequestMethod.POST)
+    public ResponseEntity<InformationResponse> informUser() {
+        return new ResponseEntity<InformationResponse>(new InformationResponse(), HttpStatus.OK);
+    }
 }

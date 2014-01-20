@@ -15,8 +15,11 @@ class SpringDocPlugin implements Plugin<Project> {
             project.configurations.create("springdoc")
         }
 
+        if (project.configurations.findByName("springdoc")==null){
+            project.configurations.create("springdoc")
+        }
         project.dependencies {
-            springdoc "com.thilko.spring:gradle-springdoc-plugin:0.1.3"
+            springdoc "com.thilko.spring:gradle-springdoc-plugin:0.1.4"
             springdoc localGroovy()
         }
 
@@ -30,8 +33,9 @@ class SpringDocPlugin implements Plugin<Project> {
 
         project.task(type: JavaCompile, "generateSpringDoc", dependsOn: project.copyCss) {
             project.afterEvaluate {
-                source = it.sourceSets.main.java
-                classpath = it.sourceSets.main.output + project.configurations.compile + project.configurations.springdoc
+                source = project.sourceSets.main.java
+                classpath = project.files(project.configurations.compile, project.configurations.springdoc,
+                                            project.sourceSets.main.output)
 
                 options.compilerArgs = [
                         "-s", "${project.buildDir}",
