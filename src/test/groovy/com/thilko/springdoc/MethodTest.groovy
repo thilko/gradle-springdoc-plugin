@@ -112,7 +112,7 @@ class MethodTest extends Specification {
         resource.methods[0].response() != null
     }
 
-    def "hasReponse returns true if method returns a response"(){
+    def "hasResponse returns true if method returns a response"(){
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -120,7 +120,7 @@ class MethodTest extends Specification {
         resource.methods[2].hasResponse()
     }
 
-    def "hasReponse returns false if method´s return type is void"(){
+    def "hasResponse returns false if method´s return type is void"(){
         when:
         def resource = Resource.create(compiler.customerController())
 

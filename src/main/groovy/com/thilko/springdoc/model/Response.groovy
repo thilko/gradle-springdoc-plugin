@@ -2,6 +2,7 @@ package com.thilko.springdoc.model
 
 import groovy.json.JsonOutput
 
+import javax.lang.model.type.DeclaredType
 import javax.lang.model.type.TypeKind
 
 
@@ -13,12 +14,16 @@ class Response {
         new Response(returnType)
     }
 
-    def className(){
+    def className() {
+        if (returnType.toString() =~ /.*<.*?>/) {
+            return ((DeclaredType) returnType).typeArguments[0].toString()
+
+        }
         returnType.toString()
     }
 
-    def asJson(){
-        if(returnType.kind == TypeKind.VOID){
+    def asJson() {
+        if (returnType.kind == TypeKind.VOID) {
             return ""
         }
 
@@ -26,7 +31,7 @@ class Response {
         JsonOutput.prettyPrint(new JsonOutput().toJson(domainClass.newInstance()))
     }
 
-    private Response(returnType){
+    private Response(returnType) {
         this.returnType = returnType
     }
 

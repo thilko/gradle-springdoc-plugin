@@ -39,6 +39,17 @@ class ResponseTest extends Specification {
         resource.methods[3].response().className() == "void"
     }
 
+    def "responseAsJson for ResponseEntity<InformationResponse> returns json for InformationResponse"(){
+        when:
+        def resource = Resource.create(compiler.customerController())
+
+        then:
+        resource.methods[8].response().asJson() ==
+                """{
+    "valid": true
+}"""
+    }
+
     def "responseAsJson returns json"() {
         when:
         def resource = Resource.create(compiler.customerController())

@@ -50,7 +50,6 @@ public class CustomerController {
         return null;
     }
 
-
     @RequestMapping(value = "/user/information", method = RequestMethod.POST)
     public ResponseEntity<InformationResponse> informUser() {
         return new ResponseEntity<InformationResponse>(new InformationResponse(), HttpStatus.OK);
