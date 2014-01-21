@@ -34,11 +34,16 @@ class Resource {
     }
 
     private static isApiMethod(def executable) {
-        executable.getAnnotation(RequestMapping.class) != null
+        executable.getAnnotation(RequestMapping) != null
     }
 
-    private static def createApiMethod(executable) {
-        Method.fromElement(executable)
+    private def createApiMethod(executable) {
+        def method = Method.fromElement(executable)
+        if (resource.getAnnotation(RequestMapping) != null) {
+            method.applyPathPrefix(resource.getAnnotation(RequestMapping).value().first())
+        }
+
+        method
     }
 
     private static boolean isConstructor(executable) {

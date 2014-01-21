@@ -87,6 +87,14 @@ class MethodTest extends Specification {
         resource.methods[1].path() == "/customers"
     }
 
+    def "path takes contains prefix from controller´s class mapping"(){
+        when:
+        def resource = Resource.create(compiler.metricsController())
+
+        then:
+        resource.methods[0].path() == "/metrics/spo2"
+    }
+
     def "parameter returns all params that are annotated on the mpi method"(){
         when:
         def resource = Resource.create(compiler.customerController())

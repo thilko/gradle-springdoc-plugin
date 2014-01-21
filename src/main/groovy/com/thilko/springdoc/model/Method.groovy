@@ -16,6 +16,8 @@ class Method {
             "PUT": "label label-info",
             "DELETE": "label label-danger"]
 
+    def pathPrefix = ""
+
     static def fromElement(methodElement) {
         new Method(methodElement)
     }
@@ -46,7 +48,7 @@ class Method {
 
     def path() {
         def value = requestMappingAnnotation().value()
-        value.length == 0 ? "/" : value.first()
+        value.length == 0 ? "/${pathPrefix}" : "${pathPrefix}${value.first()}"
     }
 
     def queryParameter() {
@@ -92,5 +94,9 @@ class Method {
 
         def domainClass = this.class.classLoader.loadClass(bodyArg.asType().toString())
         JsonOutput.prettyPrint(new JsonOutput().toJson(domainClass.newInstance()))
+    }
+
+    def applyPathPrefix(def pathPrefix) {
+        this.pathPrefix = pathPrefix
     }
 }
