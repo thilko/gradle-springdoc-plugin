@@ -1,5 +1,3 @@
-script: gradle check
-install: true
 language: groovy
 jdk:
   - oraclejdk7

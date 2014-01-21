@@ -44,7 +44,7 @@ artifacts {
 
 signing {
     sign configurations.archives
-    required { isReleaseVersion }
+    required { false }
 }
 
 uploadArchives {
