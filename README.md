@@ -18,7 +18,7 @@ buildscript {
       mavenCentral()
     }
     dependencies {
-        classpath "com.thilko.spring:gradle-springdoc-plugin:0.1"
+        classpath "com.thilko.spring:gradle-springdoc-plugin:0.1.4"
     }
 }
 
@@ -27,7 +27,7 @@ apply plugin: 'springdoc'
 
 You got a build task ```generateSpringDoc``` which produces HTML documentation in ```buildDir```.
 
-See [example documentation](http://thilko.com/springdoc/index.html).
+Have a look at the [example](http://thilko.com/springdoc/index.html).
 
 Not yet implemented / TODOs
 =======================
