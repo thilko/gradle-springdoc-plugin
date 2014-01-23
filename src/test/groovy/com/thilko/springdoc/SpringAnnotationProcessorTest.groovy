@@ -21,7 +21,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
         then:
         !compiler.hasErrors()
-        //new File("index.html").exists()
+        new File("index.html").exists()
     }
 
     def "html doc contains all classes"() {
@@ -30,8 +30,8 @@ class SpringAnnotationProcessorTest extends Specification {
 
         then:
         !compiler.hasErrors()
-        //indexHtml().contains("CustomerController")
-        //indexHtml().contains("StatisticsController")
+        indexHtml().contains("CustomerController")
+        indexHtml().contains("StatisticsController")
     }
 
     def "html doc contains the operations"() {
@@ -40,8 +40,8 @@ class SpringAnnotationProcessorTest extends Specification {
 
         then:
         !compiler.hasErrors()
-        //indexHtml().contains("userPerMonth")
-       // indexHtml().contains("askMe")
+        indexHtml().contains("userPerMonth")
+        indexHtml().contains("askMe")
     }
 
     def "html doc does not contain the constructor method"() {
@@ -49,7 +49,7 @@ class SpringAnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        //!indexHtml().contains("&lt;init&gt;")
+        !indexHtml().contains("&lt;init&gt;")
         true
     }
 
@@ -58,7 +58,7 @@ class SpringAnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        //indexHtml().contains("GET")
+        indexHtml().contains("GET")
         true
     }
 
@@ -67,26 +67,24 @@ class SpringAnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        //indexHtml().contains("question")
+        indexHtml().contains("question")
         true
     }
 
     def "html doc contains an example url"() {
         when:
-        println "exists: " + Files.exists(Paths.get("index.html"))
-        println Paths.get("").toAbsolutePath().toString()
-        def dir = new File(".")
-        dir.eachFileRecurse (FileType.FILES) { file ->
-            println file
-        }
         compiler.call();
 
         then:
-        //indexHtml().contains("http://example.com/ask?question=&amp;priority=")
+        indexHtml().contains("http://example.com/ask?question=&amp;priority=")
         true
     }
 
     private static def indexHtml() {
+        if(!Files.exists(Paths.get("index.html"))){
+            throw new IllegalStateException("index.html does not exists!")
+        }
+
         new File("index.html").getText()
     }
 
