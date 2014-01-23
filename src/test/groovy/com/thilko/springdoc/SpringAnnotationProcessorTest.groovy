@@ -1,6 +1,10 @@
 package com.thilko.springdoc
 
+import groovy.io.FileType
 import spock.lang.Specification
+
+import java.nio.file.Files
+import java.nio.file.Paths
 
 class SpringAnnotationProcessorTest extends Specification {
     def compiler
@@ -69,6 +73,12 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc contains an example url"() {
         when:
+        println "exists: " + Files.exists(Paths.get("index.html"))
+        println Paths.get("").toAbsolutePath().toString()
+        def dir = new File(".")
+        dir.eachFileRecurse (FileType.FILES) { file ->
+            println file
+        }
         compiler.call();
 
         then:
