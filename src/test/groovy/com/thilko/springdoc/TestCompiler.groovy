@@ -2,6 +2,7 @@ package com.thilko.springdoc
 
 import com.sun.source.util.JavacTask
 
+import javax.lang.model.element.Element
 import javax.tools.DiagnosticCollector
 import javax.tools.JavaFileObject
 import javax.tools.StandardJavaFileManager
@@ -20,6 +21,7 @@ class TestCompiler {
 
     def sources
     def task
+    Iterable<? extends Element> elements
 
     public static javaCompiler() {
         return new TestCompiler()
@@ -33,15 +35,15 @@ class TestCompiler {
     }
 
     public call() {
-        def options = ["-proc:only", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
+        Path currentRelativePath = Paths.get("");
+        String path = currentRelativePath.toAbsolutePath().toString() + "/src/test/java";
 
-        task = (JavacTask) compiler.getTask(null,
-                                            fileManager,
-                                            collector,
-                                            options,
-                                            ["com.thilko.springdoc.StatisticsController",
-                                                    "com.thilko.springdoc.CustomerController"],
-                                            null)
+        def options = ["-proc:only", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
+        def fileObjects = fileManager.getJavaFileObjects(
+                format("%s/com/thilko/springdoc/CustomerController.java", path),
+                format("%s/com/thilko/springdoc/StatisticsController.java", path));
+
+        task = (JavacTask) compiler.getTask(null, fileManager, collector, options, null, fileObjects)
         task.parse()
         task.analyze()
     }
@@ -57,10 +59,6 @@ class TestCompiler {
 
     def customerController() {
         task.elements.getTypeElement("com.thilko.springdoc.CustomerController")
-    }
-
-    def statisticsController() {
-        task.elements.getTypeElement("com.thilko.springdoc.StatisticsController")
     }
 
     def metricsController() {
