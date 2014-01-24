@@ -15,7 +15,7 @@ class SpringAnnotationProcessorTest extends Specification {
     }
 
 
-    /*def "parser can be initialized with classes"() {
+    def "parser can be initialized with classes"() {
         when:
         compiler.call();
 
@@ -23,7 +23,7 @@ class SpringAnnotationProcessorTest extends Specification {
         !compiler.hasErrors()
         new File("index.html").exists()
     }
-
+    /*
     def "html doc contains all classes"() {
         when:
         compiler.call();
@@ -87,21 +87,4 @@ class SpringAnnotationProcessorTest extends Specification {
 
         new File("index.html").getText()
     }    */
-
-    def "debugging"(){
-        when:
-        def test = Files.isWritable(Paths.get("."))
-
-        then:
-        test
-    }
-
-    def "create file"(){
-        when:
-        def createdFile = Files.createFile(Paths.get("test.txt"))
-
-        then:
-        Files.exists(createdFile)
-    }
-
 }
