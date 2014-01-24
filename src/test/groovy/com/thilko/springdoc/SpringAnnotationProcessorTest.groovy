@@ -40,8 +40,8 @@ class SpringAnnotationProcessorTest extends Specification {
 
         then:
         !compiler.hasErrors()
-        indexHtml().contains("userPerMonth")
-        indexHtml().contains("askMe")
+        indexHtml().contains("updateCustomer")
+        indexHtml().contains("getCompletedInvoices")
     }
 
     def "html doc does not contain the constructor method"() {
@@ -67,7 +67,7 @@ class SpringAnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        indexHtml().contains("question")
+        indexHtml().contains("customerid")
         true
     }
 
@@ -76,7 +76,7 @@ class SpringAnnotationProcessorTest extends Specification {
         compiler.call();
 
         then:
-        indexHtml().contains("http://example.com/ask?question=&amp;priority=")
+        indexHtml().contains("http://example.com/customers/invoices/completed?amount=&amp;customerid=")
         true
     }
 
