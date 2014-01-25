@@ -2,14 +2,25 @@ package com.thilko.springdoc
 
 import spock.lang.Specification
 
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+
 class SpringAnnotationProcessorTest extends Specification {
     def compiler
+    def indexHtmlFile
 
     def setup() {
         compiler = TestCompiler.javaCompiler()
         compiler.withTestSources()
+        indexHtmlFile = Paths.get("index.html")
     }
 
+    def cleanup() {
+        if (Files.exists(indexHtmlFile)){
+            Files.delete(indexHtmlFile)
+        }
+    }
 
     def "parser can be initialized with classes"() {
         when:
@@ -17,7 +28,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
         then:
         !compiler.hasErrors()
-        new File("index.html").exists()
+        Files.exists(indexHtmlFile)
     }
 
     def "html doc contains all classes"() {
