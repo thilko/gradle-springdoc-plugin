@@ -2,21 +2,18 @@ package com.thilko.springdoc
 
 import spock.lang.Specification
 
-import java.nio.file.Files
-import java.nio.file.Paths
-
 class SpringAnnotationProcessorTest extends Specification {
     def compiler
 
     def setup() {
         compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
+        compiler.withTestSources()
     }
 
 
     def "parser can be initialized with classes"() {
         when:
-        compiler.call();
+        compiler.call()
 
         then:
         !compiler.hasErrors()
@@ -25,7 +22,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc contains all classes"() {
         when:
-        compiler.call();
+        compiler.call()
 
         then:
         !compiler.hasErrors()
@@ -35,7 +32,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc contains the operations"() {
         when:
-        compiler.call();
+        compiler.call()
 
         then:
         !compiler.hasErrors()
@@ -45,45 +42,41 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc does not contain the constructor method"() {
         when:
-        compiler.call();
+        compiler.call()
 
         then:
-        !indexHtml().contains("&lt;init&gt;")
-        true
+        !indexHtml().contains("&ltinit&gt")
     }
 
     def "html doc contains the HTTP method of operations"() {
         when:
-        compiler.call();
+        compiler.call()
 
         then:
         indexHtml().contains("GET")
-        true
     }
 
     def "html doc contains the HTTP parameters of operations"() {
         when:
-        compiler.call();
+        startCompilation()
 
         then:
         indexHtml().contains("customerid")
-        true
     }
 
     def "html doc contains an example url"() {
         when:
-        compiler.call();
+        startCompilation()
 
         then:
         indexHtml().contains("http://example.com/customers/invoices/completed?amount=&amp;customerid=")
-        true
     }
 
     private static def indexHtml() {
-        if (!Files.exists(Paths.get("index.html"))) {
-            throw new IllegalStateException("index.html does not exists!")
-        }
-
         new File("index.html").getText()
+    }
+
+    private void startCompilation() {
+        compiler.call()
     }
 }
