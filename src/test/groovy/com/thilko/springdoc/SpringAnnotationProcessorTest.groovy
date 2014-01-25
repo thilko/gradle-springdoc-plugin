@@ -1,6 +1,5 @@
 package com.thilko.springdoc
 
-import groovy.io.FileType
 import spock.lang.Specification
 
 import java.nio.file.Files
@@ -23,7 +22,7 @@ class SpringAnnotationProcessorTest extends Specification {
         !compiler.hasErrors()
         new File("index.html").exists()
     }
-    /*
+
     def "html doc contains all classes"() {
         when:
         compiler.call();
@@ -86,5 +85,5 @@ class SpringAnnotationProcessorTest extends Specification {
         }
 
         new File("index.html").getText()
-    }    */
+    }
 }
