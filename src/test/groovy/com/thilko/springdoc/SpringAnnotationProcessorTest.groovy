@@ -13,12 +13,17 @@ class SpringAnnotationProcessorTest extends Specification {
     def setup() {
         compiler = TestCompiler.javaCompiler()
         compiler.withTestSources()
-        indexHtmlFile = Paths.get("index.html")
+        indexHtmlFile = Paths.get("springdoc/index.html")
+        Files.createDirectory(Paths.get("springdoc"))
     }
 
     def cleanup() {
-        if (Files.exists(indexHtmlFile)){
+        if (Files.exists(indexHtmlFile)) {
             Files.delete(indexHtmlFile)
+        }
+
+        if (Files.exists(Paths.get("springdoc"))) {
+            Files.delete(Paths.get("springdoc"))
         }
     }
 
@@ -92,7 +97,7 @@ class SpringAnnotationProcessorTest extends Specification {
     }
 
     private static def indexHtml() {
-        new File("index.html").getText()
+        new File("springdoc/index.html").getText()
     }
 
     private void startCompilation() {

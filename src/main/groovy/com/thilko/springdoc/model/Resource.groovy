@@ -24,7 +24,7 @@ class Resource {
     }
 
     def name() {
-        return controllerHasRequestMapping() ? controllerPath() : resource.simpleName
+        return hasRequestMapping() ? controllerPath() : resource.simpleName
     }
 
     def applyExecutable(def executable) {
@@ -39,26 +39,30 @@ class Resource {
 
     private def createApiMethod(executable) {
         def method = Method.fromElement(executable)
-        if (controllerHasRequestMapping()) {
+        if (hasRequestMapping()) {
             method.applyPathPrefix(controllerPath())
         }
 
         method
     }
 
-    private String controllerPath() {
-        resource.getAnnotation(RequestMapping).value().first()
+    private def controllerPath() {
+        requestMappingAnnotation().value().first()
     }
 
-    private boolean controllerHasRequestMapping() {
-        resource.getAnnotation(RequestMapping) != null
+    def requestMappingAnnotation() {
+        resource.getAnnotation(RequestMapping)
     }
 
-    private static boolean isConstructor(executable) {
+    private def hasRequestMapping() {
+        requestMappingAnnotation() != null
+    }
+
+    private static def isConstructor(executable) {
         executable.simpleName.contentEquals("<init>")
     }
 
-    int getMethodCount() {
+    def getMethodCount() {
         return methods.size();
     }
 }
