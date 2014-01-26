@@ -16,7 +16,7 @@ class SpringAnnotationProcessor extends AbstractProcessor {
         if (roundEnv.processingOver()) {
             return true
         }
-        def fileObject = processingEnv.filer.createResource(StandardLocation.SOURCE_OUTPUT, "", "index.html", null)
+        def fileObject = processingEnv.filer.createResource(StandardLocation.SOURCE_OUTPUT, "", "springdoc/index.html", null)
         def classes = annotations.collect { roundEnv.getElementsAnnotatedWith(it) }.flatten()
         def doc = SpringDoc.withClasses(classes)
         doc.generate(fileObject.name)

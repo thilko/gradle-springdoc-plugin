@@ -24,7 +24,7 @@ class SpringDocPlugin implements Plugin<Project> {
             project.afterEvaluate {
                 from project.zipTree(project.configurations.springdoc.filter { it.name.startsWith('gradle-springdoc-plugin') }.singleFile)
                 include "springdoc.css"
-                into project.buildDir
+                into "${project.buildDir}/springdoc"
             }
         }
 
