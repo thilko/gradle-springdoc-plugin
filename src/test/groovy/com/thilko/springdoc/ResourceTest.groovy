@@ -14,19 +14,27 @@ class ResourceTest extends Specification {
         compiler.call();
     }
 
-    def "an ressource has methods"() {
+    def "a resource has methods"() {
         when:
-        def ressource = Resource.create(compiler.customerController())
+        def resource = Resource.create(compiler.customerController())
 
         then:
-        ressource.methodCount == 9
+        resource.methodCount == 9
     }
 
     def "methods returns only public api methods"() {
         when:
-        def ressource = Resource.create(compiler.customerController())
+        def resource = Resource.create(compiler.customerController())
 
         then:
-        !ressource.methods.find { it.name().toString() == "notAnApiMethod" }
+        !resource.methods.find { it.name().toString() == "notAnApiMethod" }
+    }
+
+    def "a resource uses the path from @RequestMapping annotation if exist"(){
+        when:
+        def resource = Resource.create(compiler.metricsController())
+
+        then:
+        resource.name() == "/metrics"
     }
 }

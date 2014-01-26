@@ -41,7 +41,9 @@ class TestCompiler {
         def options = ["-proc:only", "-processor", "com.thilko.springdoc.SpringAnnotationProcessor"]
         def fileObjects = fileManager.getJavaFileObjects(
                 format("%s/com/thilko/springdoc/CustomerController.java", path),
-                format("%s/com/thilko/springdoc/StatisticsController.java", path));
+                format("%s/com/thilko/springdoc/StatisticsController.java", path),
+                format("%s/com/thilko/springdoc/MetricsController.java", path));
+
 
         task = (JavacTask) compiler.getTask(null, fileManager, collector, options, null, fileObjects)
         task.parse()

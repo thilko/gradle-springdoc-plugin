@@ -38,7 +38,15 @@ class SpringAnnotationProcessorTest extends Specification {
         then:
         !compiler.hasErrors()
         indexHtml().contains("CustomerController")
-        indexHtml().contains("StatisticsController")
+    }
+
+    def "html doc contains root path if exist"() {
+        when:
+        compiler.call()
+
+        then:
+        !compiler.hasErrors()
+        indexHtml().contains("/statistics")
     }
 
     def "html doc contains the operations"() {
