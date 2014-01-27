@@ -62,7 +62,7 @@ class SpringDoc {
                                                 }
                                             }
                                             ul(class: "nav nav-tabs") {
-                                                li() { a("href": "#summary$apiMethodContent", "data-toggle": "tab", "Summary") }
+                                                li(class: "active") { a("href": "#summary$apiMethodContent", "data-toggle": "tab", "Summary") }
                                                 if (apiMethod.hasQueryParameter()) {
                                                     li() { a("href": "#queryparam$apiMethodContent", "data-toggle": "tab", "Query parameter") }
                                                 }
