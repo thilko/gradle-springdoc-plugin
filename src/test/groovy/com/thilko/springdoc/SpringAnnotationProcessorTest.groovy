@@ -3,7 +3,6 @@ package com.thilko.springdoc
 import spock.lang.Specification
 
 import java.nio.file.Files
-import java.nio.file.Path
 import java.nio.file.Paths
 
 class SpringAnnotationProcessorTest extends Specification {
@@ -14,17 +13,11 @@ class SpringAnnotationProcessorTest extends Specification {
         compiler = TestCompiler.javaCompiler()
         compiler.withTestSources()
         indexHtmlFile = Paths.get("springdoc/index.html")
-        Files.createDirectory(Paths.get("springdoc"))
+
     }
 
     def cleanup() {
-        if (Files.exists(indexHtmlFile)) {
-            Files.delete(indexHtmlFile)
-        }
-
-        if (Files.exists(Paths.get("springdoc"))) {
-            Files.delete(Paths.get("springdoc"))
-        }
+        compiler.cleanup()
     }
 
     def "parser can be initialized with classes"() {

@@ -12,7 +12,7 @@ class MethodTest extends Specification {
         compiler = TestCompiler.javaCompiler()
         compiler.withTestSources();
         compiler.call();
-    }
+  }
 
     def "httpMethod returns GET if annotated with HttpMethod.GET"() {
         when:

@@ -12,16 +12,18 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 import static java.lang.String.format
+import static java.nio.file.Files.createDirectories
+import static java.nio.file.Files.deleteIfExists
 
 class TestCompiler {
 
+    private static def BUILD_DIR = Paths.get("springdoc")
+
     def compiler
     def collector
-    private StandardJavaFileManager fileManager
-
+    def fileManager
     def sources
     def task
-    Iterable<? extends Element> elements
 
     public static javaCompiler() {
         return new TestCompiler()
@@ -32,6 +34,8 @@ class TestCompiler {
         compiler = ToolProvider.systemJavaCompiler
 
         fileManager = compiler.getStandardFileManager(collector, Locale.GERMAN, Charset.defaultCharset())
+
+        createDirectories(BUILD_DIR)
     }
 
     public call() {
@@ -56,7 +60,11 @@ class TestCompiler {
 
     public hasErrors() {
         !collector.diagnostics.isEmpty()
+    }
 
+    public static cleanup() {
+        deleteIfExists(Paths.get("springdoc/index.html"))
+        deleteIfExists(Paths.get("springdoc"))
     }
 
     def customerController() {
