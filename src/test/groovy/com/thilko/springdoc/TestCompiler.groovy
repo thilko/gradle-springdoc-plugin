@@ -38,7 +38,7 @@ class TestCompiler {
         createDirectories(BUILD_DIR)
     }
 
-    public call() {
+    public compile() {
         Path currentRelativePath = Paths.get("");
         String path = currentRelativePath.toAbsolutePath().toString() + "/src/test/java";
 
@@ -52,10 +52,6 @@ class TestCompiler {
         task = (JavacTask) compiler.getTask(null, fileManager, collector, options, null, fileObjects)
         task.parse()
         task.analyze()
-    }
-
-    public withTestSources() {
-        sources = []
     }
 
     public hasErrors() {

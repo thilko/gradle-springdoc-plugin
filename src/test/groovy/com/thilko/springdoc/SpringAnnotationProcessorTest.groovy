@@ -11,9 +11,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def setup() {
         compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources()
         indexHtmlFile = Paths.get("springdoc/index.html")
-
     }
 
     def cleanup() {
@@ -22,7 +20,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "parser can be initialized with classes"() {
         when:
-        compiler.call()
+        compiler.compile()
 
         then:
         !compiler.hasErrors()
@@ -31,7 +29,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc contains all classes"() {
         when:
-        compiler.call()
+        compiler.compile()
 
         then:
         !compiler.hasErrors()
@@ -40,7 +38,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc contains root path if exist"() {
         when:
-        compiler.call()
+        compiler.compile()
 
         then:
         !compiler.hasErrors()
@@ -49,7 +47,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc contains the operations"() {
         when:
-        compiler.call()
+        compiler.compile()
 
         then:
         !compiler.hasErrors()
@@ -59,7 +57,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc does not contain the constructor method"() {
         when:
-        compiler.call()
+        compiler.compile()
 
         then:
         !indexHtml().contains("&ltinit&gt")
@@ -67,7 +65,7 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def "html doc contains the HTTP method of operations"() {
         when:
-        compiler.call()
+        compiler.compile()
 
         then:
         indexHtml().contains("GET")
@@ -94,6 +92,6 @@ class SpringAnnotationProcessorTest extends Specification {
     }
 
     private void startCompilation() {
-        compiler.call()
+        compiler.compile()
     }
 }

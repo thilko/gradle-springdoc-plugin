@@ -10,8 +10,7 @@ class ParameterTest extends Specification {
 
     def setup() {
         def compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
-        compiler.call();
+        compiler.compile();
 
         customerController = compiler.customerController()
     }

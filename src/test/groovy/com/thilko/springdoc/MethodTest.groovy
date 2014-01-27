@@ -10,9 +10,8 @@ class MethodTest extends Specification {
 
     def setup() {
         compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
-        compiler.call();
-  }
+        compiler.compile();
+    }
 
     def "httpMethod returns GET if annotated with HttpMethod.GET"() {
         when:
@@ -87,7 +86,7 @@ class MethodTest extends Specification {
         resource.methods[1].path() == "/customers"
     }
 
-    def "path takes contains prefix from controller´s class mapping"(){
+    def "path takes contains prefix from controller´s class mapping"() {
         when:
         def resource = Resource.create(compiler.metricsController())
 
@@ -95,7 +94,7 @@ class MethodTest extends Specification {
         resource.methods[0].path() == "/metrics/spo2"
     }
 
-    def "parameter returns all params that are annotated on the mpi method"(){
+    def "parameter returns all params that are annotated on the mpi method"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -103,7 +102,7 @@ class MethodTest extends Specification {
         resource.methods[0].queryParameter().size() == 2
     }
 
-    def "parameter returns only parameter annotated with @RequestParam"(){
+    def "parameter returns only parameter annotated with @RequestParam"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -112,7 +111,7 @@ class MethodTest extends Specification {
         resource.methods[6].queryParameter()[0].name() == "test"
     }
 
-    def "response returns a response object representing the returning data"(){
+    def "response returns a response object representing the returning data"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -120,7 +119,7 @@ class MethodTest extends Specification {
         resource.methods[0].response() != null
     }
 
-    def "hasResponse returns true if method returns a response"(){
+    def "hasResponse returns true if method returns a response"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -128,7 +127,7 @@ class MethodTest extends Specification {
         resource.methods[2].hasResponse()
     }
 
-    def "hasResponse returns false if method´s return type is void"(){
+    def "hasResponse returns false if method´s return type is void"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -136,7 +135,7 @@ class MethodTest extends Specification {
         !resource.methods[0].hasResponse()
     }
 
-    def "url returns an example url"(){
+    def "url returns an example url"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -145,7 +144,7 @@ class MethodTest extends Specification {
     }
 
 
-    def "hasRequestBody returns false if method has no @RequestBody annotation"(){
+    def "hasRequestBody returns false if method has no @RequestBody annotation"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -153,7 +152,7 @@ class MethodTest extends Specification {
         !resource.methods[0].hasRequestBody()
     }
 
-    def "hasRequestBody returns true if method has no @RequestBody annotation"(){
+    def "hasRequestBody returns true if method has no @RequestBody annotation"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -161,7 +160,7 @@ class MethodTest extends Specification {
         resource.methods[7].hasRequestBody()
     }
 
-    def "hasQueryParameter returns false if method has no query parameter"(){
+    def "hasQueryParameter returns false if method has no query parameter"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -169,7 +168,7 @@ class MethodTest extends Specification {
         !resource.methods[1].hasQueryParameter()
     }
 
-    def "requestBody returns '' if method has no @RequestBody annotation"(){
+    def "requestBody returns '' if method has no @RequestBody annotation"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
@@ -177,13 +176,13 @@ class MethodTest extends Specification {
         resource.methods[0].requestBody() == """"""
     }
 
-    def "requestBody returns the @RequestBody as json string"(){
+    def "requestBody returns the @RequestBody as json string"() {
         when:
         def resource = Resource.create(compiler.customerController())
 
         then:
         resource.methods[7].requestBody() ==
-    """{
+                """{
     "firstName": null,
     "id": null,
     "lastName": null,

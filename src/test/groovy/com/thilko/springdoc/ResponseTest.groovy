@@ -10,8 +10,7 @@ class ResponseTest extends Specification {
 
     def setup() {
         compiler = TestCompiler.javaCompiler()
-        compiler.withTestSources();
-        compiler.call();
+        compiler.compile();
     }
 
     def "responseClass returns 'String' if method returns a string"() {
