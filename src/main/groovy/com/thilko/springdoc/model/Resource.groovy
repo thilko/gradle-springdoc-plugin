@@ -2,11 +2,13 @@ package com.thilko.springdoc.model
 
 import org.springframework.web.bind.annotation.RequestMapping
 
+import javax.lang.model.element.TypeElement
+
 class Resource {
 
-    private resource
+    private TypeElement resource
 
-    def methods = []
+    private List<Method> methods = []
 
     static def create(def resource) {
         def doc = new Resource(resource)

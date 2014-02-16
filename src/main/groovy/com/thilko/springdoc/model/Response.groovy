@@ -4,11 +4,12 @@ import groovy.json.JsonOutput
 
 import javax.lang.model.type.DeclaredType
 import javax.lang.model.type.TypeKind
+import javax.lang.model.type.TypeMirror
 
 
 class Response {
 
-    def returnType
+    TypeMirror returnType
 
     static def fromReturnType(returnType) {
         new Response(returnType)

@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 
+import javax.lang.model.element.Element
+import javax.lang.model.element.ExecutableElement
 import javax.lang.model.type.TypeKind
 
 class Method {
 
-    private methodElement
+    private ExecutableElement methodElement
 
     def cssClasses = ["GET": "label label-primary",
             "POST": "label label-success",

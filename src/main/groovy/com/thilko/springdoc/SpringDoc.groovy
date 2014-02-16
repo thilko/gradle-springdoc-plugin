@@ -3,13 +3,15 @@ package com.thilko.springdoc
 import com.thilko.springdoc.model.Resource
 import groovy.xml.MarkupBuilder
 
+import javax.lang.model.element.TypeElement
+
 class SpringDoc {
 
     public static withClasses(classes) {
         return new SpringDoc(classes)
     }
 
-    def classes = []
+    TypeElement[] classes = []
 
     private SpringDoc(classes) {
         this.classes = classes
