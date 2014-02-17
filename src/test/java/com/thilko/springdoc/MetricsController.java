@@ -14,4 +14,9 @@ public class MetricsController {
     public List<Metric> getAllMetrics(){
         return null;
     }
+
+    @RequestMapping(value = "/peep", method=RequestMethod.GET)
+    public List<Long> getSpecificMetrics(){
+        return null;
+    }
 }

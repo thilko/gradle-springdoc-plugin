@@ -28,8 +28,26 @@ class Response {
             return ""
         }
 
-        def domainClass = this.class.classLoader.loadClass(className())
-        JsonOutput.prettyPrint(new JsonOutput().toJson(domainClass.newInstance()))
+        def domainClass = loadClass()
+        if (!domainClass) {
+            return ""
+        }
+
+        try {
+            JsonOutput.prettyPrint(new JsonOutput().toJson(domainClass.newInstance()))
+        } catch (all) {
+            println("unable to create instance from class with name '${className()}'")
+        }
+
+    }
+
+    private Class<?> loadClass() {
+        try {
+            this.class.classLoader.loadClass(className())
+        } catch (all) {
+            println("Unable to load reponse class with name '${className()}'")
+            return null
+        }
     }
 
     private Response(returnType) {
