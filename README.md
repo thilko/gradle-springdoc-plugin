@@ -18,7 +18,7 @@ buildscript {
       mavenCentral()
     }
     dependencies {
-        classpath "com.thilko.spring:gradle-springdoc-plugin:0.1.4"
+        classpath "com.thilko.spring:gradle-springdoc-plugin:0.2.0"
     }
 }
 
@@ -34,4 +34,5 @@ Not yet implemented / TODOs
 - [ ] Proper support for all relevant spring mvc anotations
 - [ ] Example requests for all api´s
 - [ ] Proper styling
+- [ ] Proper return type handling for @RequestMapping annotated methods
 - [ ] Your idea here
