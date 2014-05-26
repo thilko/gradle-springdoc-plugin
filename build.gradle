@@ -12,6 +12,10 @@ dependencies {
     testCompile files("${System.properties['java.home']}/../lib/tools.jar")
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.12'
+}
+
 repositories {
     mavenCentral()
 }
