@@ -12,11 +12,11 @@ class SpringDocPlugin implements Plugin<Project> {
     void apply(Project project) {
         project.plugins.apply("java")
 
-        if (project.configurations.findByName("springdoc")==null){
+        if (project.configurations.findByName("springdoc") == null) {
             project.configurations.create("springdoc")
         }
         project.dependencies {
-            springdoc "com.thilko.spring:gradle-springdoc-plugin:0.2.SNAPSHOT"
+            springdoc "com.thilko.spring:gradle-springdoc-plugin:0.3.1"
             springdoc localGroovy()
         }
 
@@ -32,7 +32,7 @@ class SpringDocPlugin implements Plugin<Project> {
             project.afterEvaluate {
                 source = project.sourceSets.main.java
                 classpath = project.files(project.configurations.compile, project.configurations.springdoc,
-                                            project.sourceSets.main.output)
+                        project.sourceSets.main.output)
 
                 options.compilerArgs = [
                         "-s", "${project.buildDir}",
@@ -43,7 +43,6 @@ class SpringDocPlugin implements Plugin<Project> {
                 destinationDir = project.buildDir
             }
         }
-
 
     }
 
