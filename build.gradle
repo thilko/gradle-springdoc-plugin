@@ -98,7 +98,8 @@ uploadArchives {
                 }
                 groupId = 'com.thilko.spring'
                 artifactId = 'gradle-springdoc-plugin'
-                version = "0.3"
+                version = "0.3.1"
+
             }
         }
     }
