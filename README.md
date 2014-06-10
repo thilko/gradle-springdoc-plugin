@@ -18,7 +18,7 @@ buildscript {
       mavenCentral()
     }
     dependencies {
-        classpath "com.thilko.spring:gradle-springdoc-plugin:0.2.0"
+        classpath "com.thilko.spring:gradle-springdoc-plugin:0.3.1"
     }
 }
 
