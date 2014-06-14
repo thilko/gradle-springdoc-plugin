@@ -45,12 +45,12 @@ class ResourceGroup {
     }
 
     private def createApiMethod(executable) {
-        def method = Resource.fromElement(executable)
+        def resource = Resource.fromElement(executable)
         if (hasRequestMapping()) {
-            method.applyPathPrefix(controllerPath())
+            resource.applyPathPrefix(controllerPath())
         }
 
-        method
+        resource
     }
 
     private def controllerPath() {
