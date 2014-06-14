@@ -1,6 +1,6 @@
 package com.thilko.springdoc
 
-import com.thilko.springdoc.model.Resource
+import com.thilko.springdoc.model.ResourceGroup
 import groovy.xml.MarkupBuilder
 
 import javax.lang.model.element.TypeElement
@@ -143,7 +143,7 @@ class SpringDoc {
     }
 
     private resources() {
-        return classes.collect { Resource.create(it) }
+        return classes.collect { ResourceGroup.create(it) }
     }
 
     private static builder(String outFile) {

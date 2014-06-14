@@ -3,9 +3,9 @@ package com.thilko.springdoc.model
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.util.ElementScanner7
 
-class ResourceVisitor extends ElementScanner7<Resource, Resource> {
+class ResourceGroupVisitor extends ElementScanner7<ResourceGroup, ResourceGroup> {
     @Override
-    Resource visitExecutable(ExecutableElement e, Resource p) {
+    ResourceGroup visitExecutable(ExecutableElement e, ResourceGroup p) {
         p.applyExecutable(e)
 
         return p
