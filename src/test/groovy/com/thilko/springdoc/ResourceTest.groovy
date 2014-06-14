@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class ResourceTest extends Specification {
 
-    def compiler
+    TestCompiler compiler
 
     def setup() {
         compiler = TestCompiler.javaCompiler()
