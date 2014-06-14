@@ -2,6 +2,7 @@ package com.thilko.springdoc.model
 
 import org.springframework.web.bind.annotation.RequestMapping
 
+import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 
 class Resource {
@@ -19,6 +20,10 @@ class Resource {
 
     private Resource(def resource) {
         this.resource = resource
+    }
+
+    static def withController(List<Element> controllerAnnotations) {
+        controllerAnnotations.collect {create(it)}.collect{it.methods}.flatten()
     }
 
     def methods() {

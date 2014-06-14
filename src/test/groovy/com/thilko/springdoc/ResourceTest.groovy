@@ -26,7 +26,7 @@ class ResourceTest extends Specification {
         def resource = Resource.create(compiler.customerController())
 
         then:
-        !resource.methods.find { it.name().toString() == "notAnApiMethod" }
+        !resource.methods().find { it.name().toString() == "notAnApiMethod" }
     }
 
     def "a resource uses the path from @RequestMapping annotation if exist"(){
@@ -35,5 +35,13 @@ class ResourceTest extends Specification {
 
         then:
         resource.name() == "/metrics"
+    }
+
+    def "methods of the controller clasess are mapped to resource objects"(){
+        when:
+        def resources = Resource.withController(compiler.controller())
+
+        then:
+        resources.size() == 11
     }
 }

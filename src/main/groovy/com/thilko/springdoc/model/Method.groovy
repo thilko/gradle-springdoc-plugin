@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 
-import javax.lang.model.element.Element
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.type.TypeKind
 
@@ -76,21 +75,21 @@ class Method {
         Response.fromReturnType(methodElement.returnType)
     }
 
-    def hasResponse(){
+    def hasResponse() {
         methodElement.returnType.kind != TypeKind.VOID
     }
 
-    def hasRequestBody(){
+    def hasRequestBody() {
         methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null } != null
     }
 
-    def hasQueryParameter(){
+    def hasQueryParameter() {
         methodElement.parameters.find { it.getAnnotation(RequestParam.class) != null } != null
     }
 
     def requestBody() {
         def bodyArg = methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null }
-        if(bodyArg == null){
+        if (bodyArg == null) {
             return ""
         }
 
@@ -100,5 +99,12 @@ class Method {
 
     def applyPathPrefix(def pathPrefix) {
         this.pathPrefix = pathPrefix
+    }
+
+
+    @Override
+    public String toString() {
+        return com.google.common.base.Objects.toStringHelper(this)
+                .add("method", methodElement.simpleName.toString()).toString()
     }
 }

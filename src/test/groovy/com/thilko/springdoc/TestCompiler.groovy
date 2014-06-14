@@ -70,4 +70,8 @@ class TestCompiler {
     def metricsController() {
         task.elements.getTypeElement("com.thilko.springdoc.MetricsController")
     }
+
+    def controller(){
+        [customerController(), metricsController()]
+    }
 }
