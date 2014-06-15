@@ -1,6 +1,6 @@
 package com.thilko.springdoc
 
-import com.thilko.springdoc.model.ResourceGroup
+import com.thilko.springdoc.model.Controller
 import spock.lang.Specification
 
 
@@ -17,7 +17,7 @@ class ParameterTest extends Specification {
 
     def "name() returns 'question' if annotation 'value' is 'amount'"(){
         when:
-        def parameter = ResourceGroup.create(customerController).methods[0].queryParameter("amount")
+        def parameter = Controller.create(customerController).methods[0].queryParameter("amount")
 
         then:
         parameter.name() == "amount"
@@ -25,7 +25,7 @@ class ParameterTest extends Specification {
 
     def "defaultValue() returns 'How much is the fish'"(){
         when:
-        def parameter = ResourceGroup.create(customerController).methods[0].queryParameter("amount")
+        def parameter = Controller.create(customerController).methods[0].queryParameter("amount")
 
         then:
         parameter.defaultValue() == "200"
@@ -33,7 +33,7 @@ class ParameterTest extends Specification {
 
     def "defaultValue() returns '' if not set"(){
         when:
-        def parameter = ResourceGroup.create(customerController).methods[0].queryParameter("customerid")
+        def parameter = Controller.create(customerController).methods[0].queryParameter("customerid")
 
         then:
         parameter.defaultValue() == ""
@@ -41,7 +41,7 @@ class ParameterTest extends Specification {
 
     def "required() returns 'true' if required not set"(){
         when:
-        def parameter = ResourceGroup.create(customerController).methods[0].queryParameter("amount")
+        def parameter = Controller.create(customerController).methods[0].queryParameter("amount")
 
         then:
         parameter.required()
@@ -49,7 +49,7 @@ class ParameterTest extends Specification {
 
     def "required() returns 'false' if required set to false"(){
         when:
-        def parameter = ResourceGroup.create(customerController).methods[2].queryParameter("name")
+        def parameter = Controller.create(customerController).methods[2].queryParameter("name")
 
         then:
         !parameter.required()

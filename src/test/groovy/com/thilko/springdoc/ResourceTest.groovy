@@ -1,6 +1,6 @@
 package com.thilko.springdoc
 
-import com.thilko.springdoc.model.ResourceGroup
+import com.thilko.springdoc.model.Controller
 import spock.lang.Specification
 
 
@@ -15,7 +15,7 @@ class ResourceTest extends Specification {
 
     def "httpMethod returns GET if annotated with HttpMethod.GET"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[0].httpMethod() == "GET"
@@ -23,7 +23,7 @@ class ResourceTest extends Specification {
 
     def "httpMethod returns POST if annotated with HttpMethod.POST"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[1].httpMethod() == "POST"
@@ -31,7 +31,7 @@ class ResourceTest extends Specification {
 
     def "httpMethodCssClass returns 'label label-primary' for GET"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[0].httpMethodCssClass() == "label label-primary"
@@ -39,7 +39,7 @@ class ResourceTest extends Specification {
 
     def "httpMethodCssClass returns 'label label-success' for POST"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[1].httpMethodCssClass() == "label label-success"
@@ -47,7 +47,7 @@ class ResourceTest extends Specification {
 
     def "httpMethodCssClass returns 'label label-info' for PUT"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[2].httpMethodCssClass() == "label label-info"
@@ -55,7 +55,7 @@ class ResourceTest extends Specification {
 
     def "httpMethodCssClass returns 'label label-danger' for DELETE"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[3].httpMethodCssClass() == "label label-danger"
@@ -64,7 +64,7 @@ class ResourceTest extends Specification {
 
     def "name returns correct name of the annotated method"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[0].name().contentEquals("getCompletedInvoices")
@@ -72,7 +72,7 @@ class ResourceTest extends Specification {
 
     def "path returns / if no value RequestMapping is set"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[5].path() == "/"
@@ -80,7 +80,7 @@ class ResourceTest extends Specification {
 
     def "path returns correct value if value of RequestMapping is set"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[1].path() == "/customers"
@@ -88,7 +88,7 @@ class ResourceTest extends Specification {
 
     def "path takes contains prefix from controller´s class mapping"() {
         when:
-        def resource = ResourceGroup.create(compiler.metricsController())
+        def resource = Controller.create(compiler.metricsController())
 
         then:
         resource.methods[0].path() == "/metrics/spo2"
@@ -96,7 +96,7 @@ class ResourceTest extends Specification {
 
     def "parameter returns all params that are annotated on the mpi method"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[0].queryParameter().size() == 2
@@ -104,7 +104,7 @@ class ResourceTest extends Specification {
 
     def "parameter returns only parameter annotated with @RequestParam"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[6].queryParameter().size() == 1
@@ -113,7 +113,7 @@ class ResourceTest extends Specification {
 
     def "response returns a response object representing the returning data"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[0].response() != null
@@ -121,7 +121,7 @@ class ResourceTest extends Specification {
 
     def "hasResponse returns true if method returns a response"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[2].hasResponse()
@@ -129,7 +129,7 @@ class ResourceTest extends Specification {
 
     def "hasResponse returns false if method´s return type is void"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         !resource.methods[0].hasResponse()
@@ -137,7 +137,7 @@ class ResourceTest extends Specification {
 
     def "url returns an example url"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[0].url() == "http://example.com/customers/invoices/completed?amount=&customerid="
@@ -146,7 +146,7 @@ class ResourceTest extends Specification {
 
     def "hasRequestBody returns false if method has no @RequestBody annotation"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         !resource.methods[0].hasRequestBody()
@@ -154,7 +154,7 @@ class ResourceTest extends Specification {
 
     def "hasRequestBody returns true if method has no @RequestBody annotation"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[7].hasRequestBody()
@@ -162,7 +162,7 @@ class ResourceTest extends Specification {
 
     def "hasQueryParameter returns false if method has no query parameter"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         !resource.methods[1].hasQueryParameter()
@@ -170,7 +170,7 @@ class ResourceTest extends Specification {
 
     def "requestBody returns '' if method has no @RequestBody annotation"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[0].requestBody() == """"""
@@ -178,7 +178,7 @@ class ResourceTest extends Specification {
 
     def "requestBody returns the @RequestBody as json string"() {
         when:
-        def resource = ResourceGroup.create(compiler.customerController())
+        def resource = Controller.create(compiler.customerController())
 
         then:
         resource.methods[7].requestBody() ==

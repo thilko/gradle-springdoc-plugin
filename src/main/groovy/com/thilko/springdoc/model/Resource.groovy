@@ -31,6 +31,11 @@ class Resource {
         this.methodElement.simpleName
     }
 
+    def resourceName(){
+        def pathElements = path().split("/")
+        pathElements ? "/${pathElements[1]}" : "/"
+    }
+
     def httpMethod() {
         !hasRequestMethod() ? "GET" : requestMappingAnnotation().method().first().name()
     }
