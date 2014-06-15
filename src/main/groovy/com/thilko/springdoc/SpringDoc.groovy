@@ -1,6 +1,7 @@
 package com.thilko.springdoc
 
 import com.thilko.springdoc.model.Controller
+import com.thilko.springdoc.model.Resource
 import groovy.xml.MarkupBuilder
 
 import javax.lang.model.element.TypeElement
@@ -29,19 +30,19 @@ class SpringDoc {
                     div(class: "row") {
                         div(class: "col-md-3 sidebar") {
                             div(class: "panel-group", id: "api-resource") {
-                                resources().eachWithIndex { resource, idx ->
+                                resources().eachWithIndex { group, idx ->
                                     def resourceIdx = "api-resource$idx"
                                     div(class: "panel panel-default") {
                                         div(class: "panel-heading") {
                                             h2(class: "panel-title") {
-                                                a("data-toggle": "collapse", "data-parent": "#api-resource", href: "#$resourceIdx", resource.name())
+                                                a("data-toggle": "collapse", "data-parent": "#api-resource", href: "#$resourceIdx", group.name)
                                             }
                                         }
                                         div(id: "$resourceIdx", class: "panel-collapse collapse") {
                                             ul(class: "list-unstyled") {
-                                                resource.methods().each { method ->
+                                                group.resources.each { Resource resource ->
                                                     li {
-                                                        a("href": "#${resourceIdx}_${method.name()}", "data-toggle": "tab", "${method.name()}")
+                                                        a("href": "#${resourceIdx}_${resource.name()}", "data-toggle": "tab", "${resource.name()}")
                                                     }
                                                 }
                                             }
@@ -53,8 +54,8 @@ class SpringDoc {
 
                         div(class: "col-md-8 content") {
                             div(class: "tab-content") {
-                                resources().eachWithIndex { resource, idx ->
-                                    resource.methods().each { apiMethod ->
+                                resources().eachWithIndex { group, idx ->
+                                    group.resources.each { apiMethod ->
                                         def apiMethodContent = "api-resource${idx}_${apiMethod.name()}"
                                         div(class: "tab-pane", id: "$apiMethodContent") {
                                             div(class: "well") {
@@ -143,7 +144,7 @@ class SpringDoc {
     }
 
     private resources() {
-        return classes.collect { Controller.createController(it) }
+        return Controller.withController(classes as List<TypeElement>)
     }
 
     private static builder(String outFile) {

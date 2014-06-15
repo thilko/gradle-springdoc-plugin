@@ -15,7 +15,7 @@ class SpringAnnotationProcessorTest extends Specification {
     }
 
     def cleanup() {
-        compiler.cleanup()
+        //compiler.cleanup()
     }
 
     def "parser can be initialized with classes"() {
@@ -27,13 +27,13 @@ class SpringAnnotationProcessorTest extends Specification {
         Files.exists(indexHtmlFile)
     }
 
-    def "html doc contains all classes"() {
+    def "html doc contains resources"() {
         when:
         compiler.compile()
 
         then:
         !compiler.hasErrors()
-        indexHtml().contains("CustomerController")
+        indexHtml().contains("/customer")
     }
 
     def "html doc contains root path if exist"() {

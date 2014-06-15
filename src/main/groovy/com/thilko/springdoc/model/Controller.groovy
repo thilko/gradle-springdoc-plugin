@@ -22,7 +22,7 @@ class Controller {
         this.resource = resource
     }
 
-    static def withController(List<Element> controllerAnnotations) {
+    static def withController(List<TypeElement> controllerAnnotations) {
         def allMethods = controllerAnnotations.collect { createController(it) }
                                               .collect { it.methods() }
                                               .flatten()
