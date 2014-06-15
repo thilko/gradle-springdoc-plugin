@@ -15,7 +15,7 @@ class ControllerTest extends Specification {
 
     def "a resource has methods"() {
         when:
-        def resource = Controller.create(compiler.customerController())
+        def resource = Controller.createController(compiler.customerController())
 
         then:
         resource.methodCount == 9
@@ -23,7 +23,7 @@ class ControllerTest extends Specification {
 
     def "methods returns only public api methods"() {
         when:
-        def resource = Controller.create(compiler.customerController())
+        def resource = Controller.createController(compiler.customerController())
 
         then:
         !resource.methods().find { it.name().toString() == "notAnApiMethod" }
@@ -31,7 +31,7 @@ class ControllerTest extends Specification {
 
     def "a resource uses the path from @RequestMapping annotation if exist"(){
         when:
-        def resource = Controller.create(compiler.metricsController())
+        def resource = Controller.createController(compiler.metricsController())
 
         then:
         resource.name() == "/metrics"

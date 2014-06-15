@@ -143,7 +143,7 @@ class SpringDoc {
     }
 
     private resources() {
-        return classes.collect { Controller.create(it) }
+        return classes.collect { Controller.createController(it) }
     }
 
     private static builder(String outFile) {

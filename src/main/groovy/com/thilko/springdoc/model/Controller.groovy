@@ -11,7 +11,7 @@ class Controller {
 
     private List<Resource> methods = []
 
-    static def create(def resource) {
+    static def createController(def resource) {
         def doc = new Controller(resource)
         resource.accept(new ControllerVisitor(), doc)
 
@@ -23,7 +23,8 @@ class Controller {
     }
 
     static def withController(List<Element> controllerAnnotations) {
-        def allMethods = controllerAnnotations.collect { create(it) }.collect { it.methods() }.flatten()
+        def allMethods = controllerAnnotations.collect { createController(it) }
+                                              .collect { it.methods() }.flatten()
         allMethods.groupBy { it.resourceName() }.collect {
             new ResourceGroup(resources: it.value, name: it.key.toString())
         }
