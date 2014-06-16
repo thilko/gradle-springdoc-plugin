@@ -42,7 +42,7 @@ class SpringDoc {
                                             ul(class: "list-unstyled") {
                                                 group.resources.each { Resource resource ->
                                                     li {
-                                                        a("href": "#${resourceIdx}_${resource.name()}", "data-toggle": "tab", "${resource.name()}")
+                                                        a("href": "#${resourceIdx}_${resource.name()}", "data-toggle": "tab", "${resource.path()}")
                                                     }
                                                 }
                                             }
@@ -55,7 +55,7 @@ class SpringDoc {
                         div(class: "col-md-8 content") {
                             div(class: "tab-content") {
                                 resources().eachWithIndex { group, idx ->
-                                    group.resources.each { apiMethod ->
+                                    group.resources.each { Resource apiMethod ->
                                         def apiMethodContent = "api-resource${idx}_${apiMethod.name()}"
                                         div(class: "tab-pane", id: "$apiMethodContent") {
                                             div(class: "well") {
