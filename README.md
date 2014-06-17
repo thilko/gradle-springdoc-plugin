@@ -2,7 +2,7 @@ gradle-springdoc-plugin
 =======================
 [![Build Status](https://travis-ci.org/thilko/gradle-springdoc-plugin.png?branch=master)](https://travis-ci.org/thilko/gradle-springdoc-plugin)
 
-A gradle plugin to generate rest api documention from spring mvc annotations at build time. No
+A gradle plugin to generate rest api documentation from spring mvc annotations at build time. No
 runtime dependencies.
 
 Project is in an early development stage: ideas, issues and comments are highly appreciated.
@@ -32,7 +32,7 @@ Have a look at the [example](http://thilko.com/springdoc/index.html).
 Not yet implemented / TODOs
 =======================
 - [ ] Proper support for all relevant spring mvc anotations
-- [ ] Example requests for all api´s
+- [ ] Possibility to send requests to your api
 - [ ] Proper styling
 - [ ] Proper return type handling for @RequestMapping annotated methods
-- [ ] Your idea here
+
