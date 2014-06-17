@@ -11,11 +11,11 @@ class SpringAnnotationProcessorTest extends Specification {
 
     def setup() {
         compiler = TestCompiler.javaCompiler()
-        indexHtmlFile = Paths.get("springdoc/index.html")
+        indexHtmlFile = Paths.get("index.html")
     }
 
     def cleanup() {
-        //compiler.cleanup()
+        compiler.cleanup()
     }
 
     def "parser can be initialized with classes"() {
@@ -88,7 +88,7 @@ class SpringAnnotationProcessorTest extends Specification {
     }
 
     private static def indexHtml() {
-        new File("springdoc/index.html").getText()
+        new File("index.html").getText()
     }
 
     private void startCompilation() {
