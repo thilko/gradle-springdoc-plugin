@@ -52,11 +52,15 @@ class Controller {
 
     private def createApiMethod(executable) {
         def resource = Resource.fromElement(executable)
-        if (hasRequestMapping()) {
+        if (hasRequestMapping() && !hasRootPath()) {
             resource.applyPathPrefix(controllerPath())
         }
 
         resource
+    }
+
+    boolean hasRootPath() {
+        return requestMappingAnnotation().value().first() == "/"
     }
 
     private def controllerPath() {

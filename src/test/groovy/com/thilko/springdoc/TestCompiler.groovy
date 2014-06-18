@@ -22,7 +22,6 @@ class TestCompiler {
     def compiler
     def collector
     def fileManager
-    def sources
     def task
 
     public static javaCompiler() {
@@ -71,7 +70,11 @@ class TestCompiler {
         task.elements.getTypeElement("com.thilko.springdoc.MetricsController")
     }
 
+    def deviceController() {
+        task.elements.getTypeElement("com.thilko.springdoc.DeviceController")
+    }
+
     def controller(){
-        [customerController(), metricsController()]
+        [customerController(), metricsController(), deviceController()]
     }
 }

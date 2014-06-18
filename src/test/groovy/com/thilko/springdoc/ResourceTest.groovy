@@ -1,12 +1,13 @@
 package com.thilko.springdoc
 
 import com.thilko.springdoc.model.Controller
+import com.thilko.springdoc.model.ResourceGroup
 import spock.lang.Specification
 
 
 class ResourceTest extends Specification {
 
-    def compiler
+    TestCompiler compiler
 
     def setup() {
         compiler = TestCompiler.javaCompiler()
@@ -18,7 +19,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[0].httpMethod() == "GET"
+        resource.methods()[0].httpMethod() == "GET"
     }
 
     def "httpMethod returns POST if annotated with HttpMethod.POST"() {
@@ -26,7 +27,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[1].httpMethod() == "POST"
+        resource.methods()[1].httpMethod() == "POST"
     }
 
     def "httpMethodCssClass returns 'label label-primary' for GET"() {
@@ -34,7 +35,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[0].httpMethodCssClass() == "label label-primary"
+        resource.methods()[0].httpMethodCssClass() == "label label-primary"
     }
 
     def "httpMethodCssClass returns 'label label-success' for POST"() {
@@ -42,7 +43,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[1].httpMethodCssClass() == "label label-success"
+        resource.methods()[1].httpMethodCssClass() == "label label-success"
     }
 
     def "httpMethodCssClass returns 'label label-info' for PUT"() {
@@ -50,7 +51,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[2].httpMethodCssClass() == "label label-info"
+        resource.methods()[2].httpMethodCssClass() == "label label-info"
     }
 
     def "httpMethodCssClass returns 'label label-danger' for DELETE"() {
@@ -58,7 +59,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[3].httpMethodCssClass() == "label label-danger"
+        resource.methods()[3].httpMethodCssClass() == "label label-danger"
     }
 
 
@@ -67,7 +68,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[0].name().contentEquals("getCompletedInvoices")
+        resource.methods()[0].name().contentEquals("getCompletedInvoices")
     }
 
     def "path returns / if no value RequestMapping is set"() {
@@ -75,7 +76,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[5].path() == "/"
+        resource.methods()[5].path() == "/"
     }
 
     def "path returns correct value if value of RequestMapping is set"() {
@@ -83,7 +84,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[1].path() == "/customers"
+        resource.methods()[1].path() == "/customers"
     }
 
     def "path takes contains prefix from controller´s class mapping"() {
@@ -91,7 +92,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.metricsController())
 
         then:
-        resource.methods[0].path() == "/metrics/spo2"
+        resource.methods()[0].path() == "/metrics/spo2"
     }
 
     def "parameter returns all params that are annotated on the mpi method"() {
@@ -99,7 +100,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[0].queryParameter().size() == 2
+        resource.methods()[0].queryParameter().size() == 2
     }
 
     def "parameter returns only parameter annotated with @RequestParam"() {
@@ -107,8 +108,8 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[6].queryParameter().size() == 1
-        resource.methods[6].queryParameter()[0].name() == "test"
+        resource.methods()[6].queryParameter().size() == 1
+        resource.methods()[6].queryParameter()[0].name() == "test"
     }
 
     def "response returns a response object representing the returning data"() {
@@ -116,7 +117,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[0].response() != null
+        resource.methods()[0].response() != null
     }
 
     def "hasResponse returns true if method returns a response"() {
@@ -124,7 +125,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[2].hasResponse()
+        resource.methods()[2].hasResponse()
     }
 
     def "hasResponse returns false if method´s return type is void"() {
@@ -132,7 +133,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        !resource.methods[0].hasResponse()
+        !resource.methods()[0].hasResponse()
     }
 
     def "url returns an example url"() {
@@ -140,7 +141,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[0].url() == "http://example.com/customers/invoices/completed?amount=&customerid="
+        resource.methods()[0].url() == "http://example.com/customers/invoices/completed?amount=&customerid="
     }
 
 
@@ -149,7 +150,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        !resource.methods[0].hasRequestBody()
+        !resource.methods()[0].hasRequestBody()
     }
 
     def "hasRequestBody returns true if method has no @RequestBody annotation"() {
@@ -157,7 +158,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[7].hasRequestBody()
+        resource.methods()[7].hasRequestBody()
     }
 
     def "hasQueryParameter returns false if method has no query parameter"() {
@@ -165,7 +166,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        !resource.methods[1].hasQueryParameter()
+        !resource.methods()[1].hasQueryParameter()
     }
 
     def "requestBody returns '' if method has no @RequestBody annotation"() {
@@ -173,7 +174,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[0].requestBody() == """"""
+        resource.methods()[0].requestBody() == """"""
     }
 
     def "requestBody returns the @RequestBody as json string"() {
@@ -181,7 +182,7 @@ class ResourceTest extends Specification {
         def resource = Controller.createController(compiler.customerController())
 
         then:
-        resource.methods[7].requestBody() ==
+        resource.methods()[7].requestBody() ==
                 """{
     "firstName": null,
     "id": null,
@@ -189,4 +190,13 @@ class ResourceTest extends Specification {
     "dateOfBirth": null
 }"""
     }
+
+    def "path returns /foo if class request mapping is '/' and method mapping is '/foo"(){
+        when:
+        def resourceGroups = Controller.withController([compiler.deviceController()] as List<DeviceController>)
+
+        then:
+        resourceGroups.first().resources[0].path() == "/foo"
+    }
+
 }

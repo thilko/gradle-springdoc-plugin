@@ -42,8 +42,7 @@ class ControllerTest extends Specification {
         def resourceGroups = Controller.withController(compiler.controller())
 
         then:
-        resourceGroups.size() == 4
-
+        resourceGroups.size() == 5
     }
 
     def "each resource group has a name"(){
