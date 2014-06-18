@@ -24,12 +24,16 @@ class Controller {
 
     static def withController(List<TypeElement> controllerAnnotations) {
         def allMethods = controllerAnnotations.collect { createController(it) }
-                                              .collect { it.methods() }
-                                              .flatten()
+                .collect { it.methods() }
+                .flatten()
 
         allMethods.groupBy { it.resourceName() }.collect {
             new ResourceGroup(resources: it.value, name: it.key.toString())
         }
+    }
+
+    static def withController(TypeElement controllerAnnotation) {
+        withController([controllerAnnotation] as List)
     }
 
     def methods() {

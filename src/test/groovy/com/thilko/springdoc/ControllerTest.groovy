@@ -33,10 +33,10 @@ class ControllerTest extends Specification {
 
     def "a resource uses the path from @RequestMapping annotation if exist"(){
         when:
-        def resource = Controller.createController(compiler.metricsController())
+        def resourceGroup = Controller.withController(compiler.metricsController())
 
         then:
-        resource.name() == "/metrics"
+        resourceGroup[0].name == "/metrics"
     }
 
     def "methods of the controller clasess are mapped to resource group objects"(){
