@@ -13,20 +13,22 @@ class ControllerTest extends Specification {
         compiler.compile();
     }
 
-    def "a resource has methods"() {
+    def "a controller contains resource groups"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resourceGroup = Controller.withController([compiler.customerController()] as List)
 
         then:
-        resource.methodCount == 9
+        resourceGroup[0].resources.size() == 6
+        resourceGroup[1].resources.size() == 2
+        resourceGroup[2].resources.size() == 1
     }
 
-    def "methods returns only public api methods"() {
+    def "private methods are not detected as an api method"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resourceGroup = Controller.withController(compiler.controller())
 
         then:
-        !resource.methods().find { it.name().toString() == "notAnApiMethod" }
+        !resourceGroup.collect{it.resources}.flatten().find{it.name() == "notAnApiMethod"}
     }
 
     def "a resource uses the path from @RequestMapping annotation if exist"(){
