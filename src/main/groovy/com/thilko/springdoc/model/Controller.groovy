@@ -2,7 +2,6 @@ package com.thilko.springdoc.model
 
 import org.springframework.web.bind.annotation.RequestMapping
 
-import javax.lang.model.element.Element
 import javax.lang.model.element.TypeElement
 
 class Controller {
@@ -15,7 +14,7 @@ class Controller {
         this.resource = resource
     }
 
-    static def withController(List<TypeElement> controllerAnnotations) {
+    static def resourceGroupsFor(List<TypeElement> controllerAnnotations) {
         def allMethods = controllerAnnotations.collect { createController(it) }
                 .collect { it.methods() }
                 .flatten()
@@ -25,8 +24,8 @@ class Controller {
         }
     }
 
-    static def withController(TypeElement controllerAnnotation) {
-        withController([controllerAnnotation] as List)
+    static def resourceGroupsFor(TypeElement controllerAnnotation) {
+        resourceGroupsFor([controllerAnnotation] as List)
     }
 
     private static def createController(TypeElement resource) {

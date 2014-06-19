@@ -15,7 +15,7 @@ class ResponseTest extends Specification {
 
     def "responseClass returns 'String' if method returns a string"() {
         when:
-        def resourceGroups = Controller.withController(compiler.customerController())
+        def resourceGroups = Controller.resourceGroupsFor(compiler.customerController())
 
         then:
         resourceGroups[0].resources[4].response().className() == "java.lang.String"
@@ -23,7 +23,7 @@ class ResponseTest extends Specification {
 
     def "responseClass returns 'com.thilko.springdoc.User' if method returns a User"() {
         when:
-        def resourceGroups = Controller.withController(compiler.customerController())
+        def resourceGroups = Controller.resourceGroupsFor(compiler.customerController())
 
         then:
         resourceGroups[0].resources[2].response().className() == "com.thilko.springdoc.User"
@@ -32,7 +32,7 @@ class ResponseTest extends Specification {
 
     def "responseClass returns 'void' if method returns nothing"() {
         when:
-        def resourceGroups = Controller.withController(compiler.customerController())
+        def resourceGroups = Controller.resourceGroupsFor(compiler.customerController())
 
         then:
         resourceGroups[0].resources[3].response().className() == "void"
@@ -40,7 +40,7 @@ class ResponseTest extends Specification {
 
     def "responseAsJson for ResponseEntity<InformationResponse> returns json for InformationResponse"(){
         when:
-        def resourceGroups = Controller.withController(compiler.customerController())
+        def resourceGroups = Controller.resourceGroupsFor(compiler.customerController())
 
         then:
         resourceGroups[2].resources[0].response().asJson() ==
@@ -51,7 +51,7 @@ class ResponseTest extends Specification {
 
     def "responseAsJson returns json"() {
         when:
-        def resourceGroups = Controller.withController(compiler.customerController())
+        def resourceGroups = Controller.resourceGroupsFor(compiler.customerController())
 
         then:
         resourceGroups[0].resources[2].response().asJson() ==
@@ -65,7 +65,7 @@ class ResponseTest extends Specification {
 
     def "responseAsJson returns '' when response is void"() {
         when:
-        def resourceGroups = Controller.withController(compiler.customerController())
+        def resourceGroups = Controller.resourceGroupsFor(compiler.customerController())
 
         then:
         resourceGroups[0].resources[3].response().asJson() == ""

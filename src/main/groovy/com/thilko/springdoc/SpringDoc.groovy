@@ -144,7 +144,7 @@ class SpringDoc {
     }
 
     private resources() {
-        return Controller.withController(classes as List<TypeElement>)
+        return Controller.resourceGroupsFor(classes as List<TypeElement>)
     }
 
     private static builder(String outFile) {

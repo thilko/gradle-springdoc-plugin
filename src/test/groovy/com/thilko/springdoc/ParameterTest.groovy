@@ -17,7 +17,7 @@ class ParameterTest extends Specification {
 
     def "name() returns 'question' if annotation 'value' is 'amount'"(){
         when:
-        def resourceGroup = Controller.withController(customerController)
+        def resourceGroup = Controller.resourceGroupsFor(customerController)
         def parameter = resourceGroup[0].resources[0].queryParameter("amount")
 
         then:
@@ -26,7 +26,7 @@ class ParameterTest extends Specification {
 
     def "defaultValue() returns '200'"(){
         when:
-        def resourceGroup = Controller.withController(customerController)
+        def resourceGroup = Controller.resourceGroupsFor(customerController)
         def parameter = resourceGroup[0].resources[0].queryParameter("amount")
 
         then:
@@ -35,7 +35,7 @@ class ParameterTest extends Specification {
 
     def "defaultValue() returns '' if not set"(){
         when:
-        def resourceGroup = Controller.withController(customerController)
+        def resourceGroup = Controller.resourceGroupsFor(customerController)
         def parameter = resourceGroup[0].resources[0].queryParameter("customerid")
 
         then:
@@ -44,7 +44,7 @@ class ParameterTest extends Specification {
 
     def "required() returns 'true' if required not set"(){
         when:
-        def resourceGroup = Controller.withController(customerController)
+        def resourceGroup = Controller.resourceGroupsFor(customerController)
         def parameter = resourceGroup[0].resources[0].queryParameter("customerid")
 
         then:
@@ -53,7 +53,7 @@ class ParameterTest extends Specification {
 
     def "required() returns 'false' if required set to false"(){
         when:
-        def resourceGroup = Controller.withController(customerController)
+        def resourceGroup = Controller.resourceGroupsFor(customerController)
         def parameter = resourceGroup[0].resources[2].queryParameter("name")
 
         then:

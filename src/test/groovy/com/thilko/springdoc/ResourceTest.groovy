@@ -23,7 +23,7 @@ class ResourceTest extends Specification {
     }
 
     private List<Resource> customerResources() {
-        Controller.withController(compiler.customerController())[0].resources
+        Controller.resourceGroupsFor(compiler.customerController())[0].resources
     }
 
     def "httpMethod returns POST if annotated with HttpMethod.POST"() {
@@ -77,7 +77,7 @@ class ResourceTest extends Specification {
 
     def "path returns / if no value RequestMapping is set"() {
         when:
-        def resources = Controller.withController(compiler.customerController())[1].resources
+        def resources = Controller.resourceGroupsFor(compiler.customerController())[1].resources
 
         then:
         resources[0].path() == "/"
@@ -93,7 +93,7 @@ class ResourceTest extends Specification {
 
     def "path takes contains prefix from controller´s class mapping"() {
         when:
-        def resources = Controller.withController(compiler.metricsController())[0].resources
+        def resources = Controller.resourceGroupsFor(compiler.metricsController())[0].resources
 
         then:
         resources[0].path() == "/metrics/spo2"
@@ -109,7 +109,7 @@ class ResourceTest extends Specification {
 
     def "parameter returns only parameter annotated with @RequestParam"() {
         when:
-        def resources = Controller.withController(compiler.customerController())[0].resources
+        def resources = Controller.resourceGroupsFor(compiler.customerController())[0].resources
 
         then:
         resources[5].queryParameter().size() == 1
@@ -159,7 +159,7 @@ class ResourceTest extends Specification {
 
     def "hasRequestBody returns true if method has a @RequestBody annotation"() {
         when:
-        def resources = Controller.withController(compiler.customerController())[1].resources
+        def resources = Controller.resourceGroupsFor(compiler.customerController())[1].resources
 
         then:
         resources[1].hasRequestBody()
@@ -183,7 +183,7 @@ class ResourceTest extends Specification {
 
     def "requestBody returns the @RequestBody as json string"() {
         when:
-        def resources = Controller.withController(compiler.customerController())[1].resources
+        def resources = Controller.resourceGroupsFor(compiler.customerController())[1].resources
 
         then:
         resources[1].requestBody() ==
@@ -197,7 +197,7 @@ class ResourceTest extends Specification {
 
     def "path returns /foo if class request mapping is '/' and method mapping is '/foo"(){
         when:
-        def resourceGroups = Controller.withController([compiler.deviceController()] as List<DeviceController>)
+        def resourceGroups = Controller.resourceGroupsFor([compiler.deviceController()] as List<DeviceController>)
 
         then:
         resourceGroups.first().resources[0].path() == "/foo"
