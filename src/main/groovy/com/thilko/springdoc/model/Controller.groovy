@@ -54,7 +54,7 @@ class Controller {
         resource
     }
 
-    boolean hasRootPath() {
+    private boolean hasRootPath() {
         return requestMappingAnnotation().value().first() == "/"
     }
 
