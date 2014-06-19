@@ -19,7 +19,7 @@ class Controller {
                 .collect { it.methods }
                 .flatten()
 
-        allMethods.groupBy { it.resourceName() }.collect {
+        allMethods.groupBy { it.baseName() }.collect {
             new ResourceGroup(resources: it.value, name: it.key.toString())
         }
     }

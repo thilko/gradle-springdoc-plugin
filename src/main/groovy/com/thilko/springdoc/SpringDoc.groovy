@@ -42,7 +42,7 @@ class SpringDoc {
                                             ul(class: "list-unstyled") {
                                                 group.resources.each { Resource resource ->
                                                     li {
-                                                        a("href": "#${resourceIdx}_${resource.name()}", "data-toggle": "tab", "${resource.path()}")
+                                                        a("href": "#${resourceIdx}_${resource.implementationName()}", "data-toggle": "tab", "${resource.path()}")
                                                     }
                                                 }
                                             }
@@ -56,7 +56,7 @@ class SpringDoc {
                             div(class: "tab-content") {
                                 resources().eachWithIndex { group, idx ->
                                     group.resources.each { Resource apiMethod ->
-                                        def apiMethodContent = "api-resource${idx}_${apiMethod.name()}"
+                                        def apiMethodContent = "api-resource${idx}_${apiMethod.implementationName()}"
                                         div(class: "tab-pane", id: "$apiMethodContent") {
                                             div(class: "well") {
                                                 h4 {
@@ -117,7 +117,7 @@ class SpringDoc {
                                                         tbody {
                                                             tr {
                                                                 td "Method name"
-                                                                td apiMethod.name()
+                                                                td apiMethod.implementationName()
                                                             }
                                                             tr {
                                                                 td "Response class"

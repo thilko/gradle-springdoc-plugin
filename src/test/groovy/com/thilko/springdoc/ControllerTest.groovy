@@ -28,7 +28,7 @@ class ControllerTest extends Specification {
         def resourceGroup = Controller.resourceGroupsFor(compiler.controller())
 
         then:
-        !resourceGroup.collect{it.resources}.flatten().find{it.name() == "notAnApiMethod"}
+        !resourceGroup.collect{it.resources}.flatten().find{it.implementationName() == "notAnApiMethod"}
     }
 
     def "a resource uses the path from @RequestMapping annotation if exist"(){

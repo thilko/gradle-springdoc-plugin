@@ -72,7 +72,7 @@ class ResourceTest extends Specification {
         def resources = customerResources()
 
         then:
-        resources[0].name().contentEquals("getCompletedInvoices")
+        resources[0].implementationName().contentEquals("getCompletedInvoices")
     }
 
     def "path returns / if no value RequestMapping is set"() {
