@@ -1,7 +1,7 @@
 package com.thilko.springdoc
 
 import com.thilko.springdoc.model.Controller
-import com.thilko.springdoc.model.ResourceGroup
+import com.thilko.springdoc.model.Resource
 import spock.lang.Specification
 
 
@@ -16,173 +16,177 @@ class ResourceTest extends Specification {
 
     def "httpMethod returns GET if annotated with HttpMethod.GET"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[0].httpMethod() == "GET"
+        resources[0].httpMethod() == "GET"
+    }
+
+    private List<Resource> customerResources() {
+        Controller.withController(compiler.customerController())[0].resources
     }
 
     def "httpMethod returns POST if annotated with HttpMethod.POST"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[1].httpMethod() == "POST"
+        resources[1].httpMethod() == "POST"
     }
 
     def "httpMethodCssClass returns 'label label-primary' for GET"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[0].httpMethodCssClass() == "label label-primary"
+        resources[0].httpMethodCssClass() == "label label-primary"
     }
 
     def "httpMethodCssClass returns 'label label-success' for POST"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[1].httpMethodCssClass() == "label label-success"
+        resources[1].httpMethodCssClass() == "label label-success"
     }
 
     def "httpMethodCssClass returns 'label label-info' for PUT"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[2].httpMethodCssClass() == "label label-info"
+        resources[2].httpMethodCssClass() == "label label-info"
     }
 
     def "httpMethodCssClass returns 'label label-danger' for DELETE"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[3].httpMethodCssClass() == "label label-danger"
+        resources[3].httpMethodCssClass() == "label label-danger"
     }
 
 
     def "name returns correct name of the annotated method"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[0].name().contentEquals("getCompletedInvoices")
+        resources[0].name().contentEquals("getCompletedInvoices")
     }
 
     def "path returns / if no value RequestMapping is set"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = Controller.withController(compiler.customerController())[1].resources
 
         then:
-        resource.methods()[5].path() == "/"
+        resources[0].path() == "/"
     }
 
     def "path returns correct value if value of RequestMapping is set"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[1].path() == "/customers"
+        resources[1].path() == "/customers"
     }
 
     def "path takes contains prefix from controller´s class mapping"() {
         when:
-        def resource = Controller.createController(compiler.metricsController())
+        def resources = Controller.withController(compiler.metricsController())[0].resources
 
         then:
-        resource.methods()[0].path() == "/metrics/spo2"
+        resources[0].path() == "/metrics/spo2"
     }
 
     def "parameter returns all params that are annotated on the mpi method"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[0].queryParameter().size() == 2
+        resources[0].queryParameter().size() == 2
     }
 
     def "parameter returns only parameter annotated with @RequestParam"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = Controller.withController(compiler.customerController())[0].resources
 
         then:
-        resource.methods()[6].queryParameter().size() == 1
-        resource.methods()[6].queryParameter()[0].name() == "test"
+        resources[5].queryParameter().size() == 1
+        resources[5].queryParameter()[0].name() == "test"
     }
 
     def "response returns a response object representing the returning data"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[0].response() != null
+        resources[0].response() != null
     }
 
     def "hasResponse returns true if method returns a response"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[2].hasResponse()
+        resources[2].hasResponse()
     }
 
     def "hasResponse returns false if method´s return type is void"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        !resource.methods()[0].hasResponse()
+        !resources[0].hasResponse()
     }
 
     def "url returns an example url"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[0].url() == "http://example.com/customers/invoices/completed?amount=&customerid="
+        resources[0].url() == "http://example.com/customers/invoices/completed?amount=&customerid="
     }
 
 
     def "hasRequestBody returns false if method has no @RequestBody annotation"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        !resource.methods()[0].hasRequestBody()
+        !resources[0].hasRequestBody()
     }
 
-    def "hasRequestBody returns true if method has no @RequestBody annotation"() {
+    def "hasRequestBody returns true if method has a @RequestBody annotation"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = Controller.withController(compiler.customerController())[1].resources
 
         then:
-        resource.methods()[7].hasRequestBody()
+        resources[1].hasRequestBody()
     }
 
     def "hasQueryParameter returns false if method has no query parameter"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        !resource.methods()[1].hasQueryParameter()
+        !resources[1].hasQueryParameter()
     }
 
     def "requestBody returns '' if method has no @RequestBody annotation"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = customerResources()
 
         then:
-        resource.methods()[0].requestBody() == """"""
+        resources[0].requestBody() == """"""
     }
 
     def "requestBody returns the @RequestBody as json string"() {
         when:
-        def resource = Controller.createController(compiler.customerController())
+        def resources = Controller.withController(compiler.customerController())[1].resources
 
         then:
-        resource.methods()[7].requestBody() ==
+        resources[1].requestBody() ==
                 """{
     "firstName": null,
     "id": null,
