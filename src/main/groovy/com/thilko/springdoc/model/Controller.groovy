@@ -16,7 +16,7 @@ class Controller {
 
     static def resourceGroupsFor(List<TypeElement> controllerAnnotations) {
         def allMethods = controllerAnnotations.collect { createController(it) }
-                .collect { it.methods() }
+                .collect { it.methods }
                 .flatten()
 
         allMethods.groupBy { it.resourceName() }.collect {
@@ -33,14 +33,6 @@ class Controller {
         resource.accept(new ControllerVisitor(), doc)
 
         return doc
-    }
-
-    def methods() {
-        this.methods
-    }
-
-    def name() {
-        return hasRequestMapping() ? controllerPath() : resource.simpleName
     }
 
     def applyExecutable(def executable) {
@@ -80,9 +72,5 @@ class Controller {
 
     private static def isConstructor(executable) {
         executable.simpleName.contentEquals("<init>")
-    }
-
-    def getMethodCount() {
-        return methods.size();
     }
 }
