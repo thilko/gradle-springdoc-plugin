@@ -11,13 +11,6 @@ class Controller {
 
     private List<Resource> methods = []
 
-    static def createController(def resource) {
-        def doc = new Controller(resource)
-        resource.accept(new ControllerVisitor(), doc)
-
-        return doc
-    }
-
     private Controller(def resource) {
         this.resource = resource
     }
@@ -34,6 +27,13 @@ class Controller {
 
     static def withController(TypeElement controllerAnnotation) {
         withController([controllerAnnotation] as List)
+    }
+
+    private static def createController(TypeElement resource) {
+        def doc = new Controller(resource)
+        resource.accept(new ControllerVisitor(), doc)
+
+        return doc
     }
 
     def methods() {
