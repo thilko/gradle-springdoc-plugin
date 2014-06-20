@@ -49,20 +49,6 @@ class ResponseTest extends Specification {
 }"""
     }
 
-    def "responseAsJson returns json"() {
-        when:
-        def resourceGroups = Controller.resourceGroupsFor(compiler.customerController())
-
-        then:
-        resourceGroups[0].resources[2].response().asJson() ==
-                """{
-    "firstName": null,
-    "id": null,
-    "lastName": null,
-    "dateOfBirth": null
-}"""
-    }
-
     def "responseAsJson returns '' when response is void"() {
         when:
         def resourceGroups = Controller.resourceGroupsFor(compiler.customerController())
