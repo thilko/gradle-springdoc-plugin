@@ -31,7 +31,7 @@ class Resource {
         this.methodElement.simpleName
     }
 
-    def baseName(){
+    def baseName() {
         def pathElements = path().split("/")
         pathElements ? "/${pathElements[1]}" : "/"
     }
@@ -99,9 +99,22 @@ class Resource {
         }
 
         def domainClass = this.class.classLoader.loadClass(bodyArg.asType().toString())
-        JsonOutput.prettyPrint(new JsonOutput().toJson(domainClass.newInstance()))
+        def instance = ModelInstance.fromClass(domainClass)
+
+        instance.toJson();
     }
 
+    /*
+            instance.class.declaredFields.each {
+            it.setAccessible(true)
+            if (it.type == String.class) {
+                it.set(instance, "a string")
+            } else if (it.type == Long.class) {
+                it.set(instance, 42L)
+            }
+        }
+
+     */
     def applyPathPrefix(def pathPrefix) {
         this.pathPrefix = pathPrefix
     }
