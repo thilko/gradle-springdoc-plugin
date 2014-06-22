@@ -188,9 +188,9 @@ class ResourceTest extends Specification {
         then:
         resources[1].requestBody() ==
                 """{
-    "firstName": null,
-    "id": null,
-    "lastName": null,
+    "firstName": \"a string\",
+    "id": 42,
+    "lastName": \"a string",
     "dateOfBirth": null
 }"""
     }
