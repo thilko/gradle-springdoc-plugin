@@ -16,12 +16,12 @@ class ModelInstance {
             [accepts: { it.type == Date.class }, value: { new Date(0) }],
     ] as ModelInstanceType[]
 
-    private ModelInstanceType[] ignoredValues = [
-            [accepts: {it.type == ClassInfo.class}],
-            [accepts: {it.type == MetaClass.class}],
-            [accepts: {it.type == SoftReference.class}],
-            [accepts: {it.type == Class.class}],
-            [accepts: {it.name.startsWith("_")}]
+    private ModelInstanceType[] fieldsToIgnore = [
+            [accepts: { it.type == ClassInfo.class }],
+            [accepts: { it.type == MetaClass.class }],
+            [accepts: { it.type == SoftReference.class }],
+            [accepts: { it.type == Class.class }],
+            [accepts: { it.name.startsWith("_") }]
     ] as ModelInstanceType[]
 
     static def fromClass(Class<?> aClass) {
@@ -36,8 +36,8 @@ class ModelInstance {
     }
 
     def fillInstance(def instance) {
-        instance.class.declaredFields.findAll { fieldToFilter ->
-            !ignoredValues.any {it.accepts(fieldToFilter)}
+        instance.class.declaredFields.toList().findAll { fieldToFilter ->
+            !fieldsToIgnore.any { it.accepts(fieldToFilter) }
         }.each { field ->
             boolean wasApplied = false
             field.setAccessible(true)
