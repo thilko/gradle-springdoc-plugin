@@ -67,12 +67,20 @@ class ResourceTest extends Specification {
     }
 
 
-    def "name returns correct name of the annotated method"() {
+    def "implementationName returns correct name of the annotated method"() {
         when:
         def resources = customerResources()
 
         then:
         resources[0].implementationName().contentEquals("getCompletedInvoices")
+    }
+
+    def "implementationName returns correct name of the implementation class"() {
+        when:
+        def resources = customerResources()
+
+        then:
+        resources[0].implementationClassName().contentEquals("CustomerController")
     }
 
     def "path returns / if no value RequestMapping is set"() {

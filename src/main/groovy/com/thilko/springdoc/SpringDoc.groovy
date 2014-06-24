@@ -116,6 +116,10 @@ class SpringDoc {
                                                     table(class: "table table-hover") {
                                                         tbody {
                                                             tr {
+                                                                td "Implementation class"
+                                                                td apiMethod.implementationClassName()
+                                                            }
+                                                            tr {
                                                                 td "Method name"
                                                                 td apiMethod.implementationName()
                                                             }

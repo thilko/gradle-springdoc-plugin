@@ -31,6 +31,10 @@ class Resource {
         this.methodElement.simpleName
     }
 
+    def implementationClassName() {
+        this.methodElement.enclosingElement.simpleName
+    }
+
     def baseName() {
         def pathElements = path().split("/")
         pathElements ? "/${pathElements[1]}" : "/"
