@@ -199,13 +199,14 @@ class ResourceTest extends Specification {
     "credentials": {
         "user": "a string",
         "code": {
-            "age": 41
+            "age": 41,
+            "anotherValue": 77.7
         }
     },
-    "firstName": \"a string\",
+    "firstName": "a string",
     "id": 42,
-    "lastName": \"a string\",
-    "dateOfBirth": \"1970-01-01T00:00:00+0000\"
+    "lastName": "a string",
+    "dateOfBirth": "1970-01-01T00:00:00+0000"
 }"""
     }
 

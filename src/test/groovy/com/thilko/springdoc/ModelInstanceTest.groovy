@@ -15,7 +15,8 @@ class ModelInstanceTest extends Specification{
     "credentials": {
         "user": "a string",
         "code": {
-            "age": 41
+            "age": 41,
+            "anotherValue": 77.7
         }
     },
     "firstName": \"a string\",

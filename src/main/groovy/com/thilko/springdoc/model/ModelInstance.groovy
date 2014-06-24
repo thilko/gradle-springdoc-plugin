@@ -12,7 +12,11 @@ class ModelInstance {
     private ModelInstanceType[] defaultValues = [
             [accepts: { Field field -> field.type == String.class }, value: { "a string" }],
             [accepts: { Field field -> field.type == Long.class }, value: { 42L }],
+            [accepts: { Field field -> field.type == long.class }, value: { 42L }],
             [accepts: { Field field -> field.type == Integer.class }, value: { 41 }],
+            [accepts: { Field field -> field.type == int.class }, value: { 41 }],
+            [accepts: { Field field -> field.type == Double.class }, value: { 77.7d }],
+            [accepts: { Field field -> field.type == double.class }, value: { 77.7d }],
             [accepts: { it.type == Date.class }, value: { new Date(0) }],
     ] as ModelInstanceType[]
 
