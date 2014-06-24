@@ -3,11 +3,13 @@ package com.thilko.springdoc;
 
 import java.util.Date;
 
+@SuppressWarnings("unused")
 public class User {
     Long id;
     String firstName;
     String lastName;
     Date dateOfBirth;
+    Credentials credentials;
 
     public Long getId() {
         return id;
@@ -39,6 +41,14 @@ public class User {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
     }
 }
 

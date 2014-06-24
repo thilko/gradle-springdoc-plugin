@@ -12,10 +12,16 @@ class ModelInstanceTest extends Specification{
 
         then:
         instance.toJson() == """{
+    "credentials": {
+        "credentialsCode": {
+            "age": 41
+        },
+        "user": \"a string\"
+    },
     "firstName": \"a string\",
     "id": 42,
     "lastName": \"a string\",
-    "dateOfBirth": null
+    "dateOfBirth": \"1970-01-01T00:00:00+0000\"
 }"""
     }
 }

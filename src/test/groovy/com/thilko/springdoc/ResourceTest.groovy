@@ -188,10 +188,16 @@ class ResourceTest extends Specification {
         then:
         resources[1].requestBody() ==
                 """{
+    "credentials": {
+        "credentialsCode": {
+            "age": 41
+        },
+        "user": \"a string\"
+    },
     "firstName": \"a string\",
     "id": 42,
-    "lastName": \"a string",
-    "dateOfBirth": null
+    "lastName": \"a string\",
+    "dateOfBirth": \"1970-01-01T00:00:00+0000\"
 }"""
     }
 
