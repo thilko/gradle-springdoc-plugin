@@ -16,7 +16,7 @@ class SpringDocPlugin implements Plugin<Project> {
             project.configurations.create("springdoc")
         }
         project.dependencies {
-            springdoc "com.thilko.spring:gradle-springdoc-plugin:0.5"
+            springdoc "com.thilko.spring:gradle-springdoc-plugin:0.6"
             springdoc localGroovy()
         }
 
