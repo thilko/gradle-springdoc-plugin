@@ -4,20 +4,20 @@ import groovy.json.JsonOutput
 import org.codehaus.groovy.reflection.ClassInfo
 
 import java.lang.ref.SoftReference
-import java.lang.reflect.Field
+import java.lang.reflect.ParameterizedType
 
 
 class ModelInstance {
     def instance
     private ModelInstanceType[] defaultValues = [
-            [accepts: { Field field -> field.type == String.class }, value: { "a string" }],
-            [accepts: { Field field -> field.type == Long.class }, value: { 42L }],
-            [accepts: { Field field -> field.type == long.class }, value: { 42L }],
-            [accepts: { Field field -> field.type == Integer.class }, value: { 41 }],
-            [accepts: { Field field -> field.type == int.class }, value: { 41 }],
-            [accepts: { Field field -> field.type == Double.class }, value: { 77.7d }],
-            [accepts: { Field field -> field.type == double.class }, value: { 77.7d }],
-            [accepts: { it.type == Date.class }, value: { new Date(0) }],
+            [accepts: { it == String.class }, value: { "a string" }],
+            [accepts: { it == Long.class }, value: { 42L }],
+            [accepts: { it == long.class }, value: { 42L }],
+            [accepts: { it == Integer.class }, value: { 41 }],
+            [accepts: { it == int.class }, value: { 41 }],
+            [accepts: { it == Double.class }, value: { 77.7d }],
+            [accepts: { it == double.class }, value: { 77.7d }],
+            [accepts: { it == Date.class }, value: { new Date(0) }],
     ] as ModelInstanceType[]
 
     private ModelInstanceType[] fieldsToIgnore = [
@@ -46,17 +46,32 @@ class ModelInstance {
             boolean wasApplied = false
             field.setAccessible(true)
             defaultValues.each {
-                if (it.accepts(field)) {
+                if (it.accepts(field.type)) {
                     field.set(instance, it.value())
                     wasApplied = true
-
                 }
             }
 
             if (!wasApplied) {
-                def newInstance = field.type.newInstance()
-                fillInstance(newInstance)
-                field.set(instance, newInstance);
+                if (field.type.is(List)) {
+                    ParameterizedType t = (ParameterizedType) field.getGenericType();
+
+                    def clazz = Class.forName(t.actualTypeArguments[0].typeName)
+                    def defaultValue = defaultValues.find{it.accepts(clazz)}
+                    if(!defaultValue){
+                        def newInstance = clazz.newInstance()
+                        fillInstance(newInstance)
+                        field.set(instance, Arrays.asList(newInstance))
+                    }else{
+                        field.set(instance, Arrays.asList(defaultValue.value()))
+                    }
+
+
+                } else {
+                    def newInstance = field.type.newInstance()
+                    fillInstance(newInstance)
+                    field.set(instance, newInstance);
+                }
             }
         }
     }

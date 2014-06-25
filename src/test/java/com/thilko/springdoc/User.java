@@ -2,6 +2,7 @@ package com.thilko.springdoc;
 
 
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class User {
@@ -10,6 +11,8 @@ public class User {
     String lastName;
     Date dateOfBirth;
     Credentials credentials;
+    List<Address> addresses;
+    List<Long> anyIds;
 
     public Long getId() {
         return id;
@@ -49,6 +52,22 @@ public class User {
 
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public List<Long> getAnyIds() {
+        return anyIds;
+    }
+
+    public void setAnyIds(List<Long> anyIds) {
+        this.anyIds = anyIds;
     }
 }
 

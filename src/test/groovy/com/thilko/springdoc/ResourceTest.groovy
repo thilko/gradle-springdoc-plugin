@@ -196,6 +196,11 @@ class ResourceTest extends Specification {
         then:
         resources[1].requestBody() ==
                 """{
+    "addresses": [
+        {
+            "street": "a string"
+        }
+    ],
     "credentials": {
         "user": "a string",
         "code": {
@@ -203,6 +208,9 @@ class ResourceTest extends Specification {
             "anotherValue": 77.7
         }
     },
+    "anyIds": [
+        42
+    ],
     "firstName": "a string",
     "id": 42,
     "lastName": "a string",

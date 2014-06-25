@@ -12,6 +12,11 @@ class ModelInstanceTest extends Specification{
 
         then:
         instance.toJson() == """{
+    "addresses": [
+        {
+            "street": "a string"
+        }
+    ],
     "credentials": {
         "user": "a string",
         "code": {
@@ -19,10 +24,13 @@ class ModelInstanceTest extends Specification{
             "anotherValue": 77.7
         }
     },
-    "firstName": \"a string\",
+    "anyIds": [
+        42
+    ],
+    "firstName": "a string",
     "id": 42,
-    "lastName": \"a string\",
-    "dateOfBirth": \"1970-01-01T00:00:00+0000\"
+    "lastName": "a string",
+    "dateOfBirth": "1970-01-01T00:00:00+0000"
 }"""
     }
 }
