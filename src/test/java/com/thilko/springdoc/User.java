@@ -1,6 +1,7 @@
 package com.thilko.springdoc;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class User {
     String lastName;
     Date dateOfBirth;
     Credentials credentials;
-    List<Address> addresses;
+    List<Address> addresses = new ArrayList<>();
     List<Long> anyIds;
 
     public Long getId() {
