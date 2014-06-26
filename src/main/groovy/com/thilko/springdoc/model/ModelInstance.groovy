@@ -56,7 +56,7 @@ class ModelInstance {
                 if (field.type.is(List)) {
                     ParameterizedType t = (ParameterizedType) field.getGenericType();
 
-                    def clazz = Class.forName(t.actualTypeArguments[0].typeName)
+                    def clazz = Class.forName(((Class)t.actualTypeArguments[0]).name)
                     def defaultValue = defaultValues.find{it.accepts(clazz)}
                     if(!defaultValue){
                         def newInstance = clazz.newInstance()
