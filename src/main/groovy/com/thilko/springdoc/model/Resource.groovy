@@ -85,7 +85,7 @@ class Resource {
     }
 
     def hasResponse() {
-        methodElement.returnType.kind != TypeKind.VOID
+        methodElement.parameters.any { it.getAnnotation(RequestBody.class) != null }
     }
 
     def hasRequestBody() {

@@ -15,7 +15,7 @@ class SpringAnnotationProcessorTest extends Specification {
     }
 
     def cleanup() {
-        //compiler.cleanup()
+        compiler.cleanup()
     }
 
     def "parser can be initialized with classes"() {

@@ -1,6 +1,7 @@
 package com.thilko.springdoc.model
 
 import groovy.json.JsonOutput
+import org.springframework.web.bind.annotation.RequestBody
 
 import javax.lang.model.type.DeclaredType
 import javax.lang.model.type.TypeKind
@@ -28,31 +29,11 @@ class Response {
             return ""
         }
 
-        def domainClass = loadClass()
-        if (!domainClass) {
-            return ""
-        }
-
-        try {
-            JsonOutput.prettyPrint(new JsonOutput().toJson(domainClass.newInstance()))
-        } catch (all) {
-            println("unable to create instance from class with name '${className()}'")
-        }
-
-    }
-
-    private Class<?> loadClass() {
-        try {
-            this.class.classLoader.loadClass(className())
-        } catch (all) {
-            println("Unable to load reponse class with name '${className()}'")
-            return null
-        }
+        def domainClass = this.class.classLoader.loadClass(className())
+        return ModelInstance.fromClass(domainClass).toJson()
     }
 
     private Response(returnType) {
         this.returnType = returnType
     }
-
-
 }

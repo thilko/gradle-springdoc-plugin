@@ -18,6 +18,8 @@ class ModelInstance {
             [accepts: { it == Double.class }, value: { 77.7d }],
             [accepts: { it == double.class }, value: { 77.7d }],
             [accepts: { it == Date.class }, value: { new Date(0) }],
+            [accepts: { it == boolean.class }, value: { true }],
+            [accepts: { it == Boolean.class }, value: { true }],
     ] as ModelInstanceType[]
 
     private ModelInstanceType[] fieldsToIgnore = [
@@ -31,6 +33,7 @@ class ModelInstance {
     static def fromClass(Class<?> aClass) {
         ModelInstance instance = new ModelInstance()
         instance.instance = aClass.newInstance()
+
         return instance
     }
 
