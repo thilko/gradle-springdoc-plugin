@@ -103,9 +103,7 @@ class Resource {
 
         def bodyArg = methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null }
         def domainClass = this.class.classLoader.loadClass(bodyArg.asType().toString())
-        def instance = ModelInstance.fromClass(domainClass)
-
-        instance.toJson();
+        return ModelInstance.fromClass(domainClass).toJson()
     }
 
     def applyPathPrefix(def pathPrefix) {
