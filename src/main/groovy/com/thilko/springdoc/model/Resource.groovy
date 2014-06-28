@@ -97,11 +97,11 @@ class Resource {
     }
 
     def requestBody() {
-        def bodyArg = methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null }
-        if (bodyArg == null) {
+        if (!hasRequestBody()) {
             return ""
         }
 
+        def bodyArg = methodElement.parameters.find { it.getAnnotation(RequestBody.class) != null }
         def domainClass = this.class.classLoader.loadClass(bodyArg.asType().toString())
         def instance = ModelInstance.fromClass(domainClass)
 
