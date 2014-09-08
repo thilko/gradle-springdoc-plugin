@@ -32,7 +32,11 @@ class ModelInstance {
 
     static def fromClass(Class<?> aClass) {
         ModelInstance instance = new ModelInstance()
-        instance.instance = aClass.newInstance()
+        if (aClass.is(List)) {
+            instance.instance = new ArrayList<>()
+        } else {
+            instance.instance = aClass.newInstance()
+        }
 
         return instance
     }
@@ -59,13 +63,13 @@ class ModelInstance {
                 if (field.type.is(List)) {
                     ParameterizedType t = (ParameterizedType) field.getGenericType();
 
-                    def clazz = Class.forName(((Class)t.actualTypeArguments[0]).name)
-                    def defaultValue = defaultValues.find{it.accepts(clazz)}
-                    if(!defaultValue){
+                    def clazz = Class.forName(((Class) t.actualTypeArguments[0]).name)
+                    def defaultValue = defaultValues.find { it.accepts(clazz) }
+                    if (!defaultValue) {
                         def newInstance = clazz.newInstance()
                         fillInstance(newInstance)
                         field.set(instance, Arrays.asList(newInstance))
-                    }else{
+                    } else {
                         field.set(instance, Arrays.asList(defaultValue.value()))
                     }
 

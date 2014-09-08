@@ -20,6 +20,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/customers", method = RequestMethod.PUT)
+    @ResponseBody
     public User updateCustomer(@RequestParam(value = "name", required = false) String name) {
         return null;
     }

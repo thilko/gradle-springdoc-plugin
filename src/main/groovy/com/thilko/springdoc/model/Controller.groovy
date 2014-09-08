@@ -41,6 +41,10 @@ class Controller {
         }
     }
 
+    def requestMappingAnnotation() {
+        resource.getAnnotation(RequestMapping)
+    }
+
     private static isApiMethod(def executable) {
         executable.getAnnotation(RequestMapping) != null
     }
@@ -60,10 +64,6 @@ class Controller {
 
     private def controllerPath() {
         requestMappingAnnotation().value().first()
-    }
-
-    def requestMappingAnnotation() {
-        resource.getAnnotation(RequestMapping)
     }
 
     private def hasRequestMapping() {

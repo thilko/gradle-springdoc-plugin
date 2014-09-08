@@ -4,6 +4,7 @@ import groovy.json.JsonOutput
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.ResponseBody
 
 import javax.lang.model.element.ExecutableElement
 import javax.lang.model.type.TypeKind
@@ -85,7 +86,7 @@ class Resource {
     }
 
     def hasResponse() {
-        methodElement.parameters.any { it.getAnnotation(RequestBody.class) != null }
+        methodElement.getAnnotation(ResponseBody) != null
     }
 
     def hasRequestBody() {
