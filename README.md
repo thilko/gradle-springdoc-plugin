@@ -18,7 +18,7 @@ buildscript {
       mavenCentral()
     }
     dependencies {
-        classpath "com.thilko.spring:gradle-springdoc-plugin:0.4"
+        classpath "com.thilko.spring:gradle-springdoc-plugin:0.7"
     }
 }
 
@@ -29,10 +29,4 @@ You got a build task ```generateSpringDoc``` which produces HTML documentation i
 
 Have a look at the [example](http://thilko.com/springdoc/index.html).
 
-Not yet implemented / TODOs
-=======================
-- [ ] Proper support for all relevant spring mvc anotations
-- [ ] Possibility to send requests to your api
-- [ ] Proper styling
-- [ ] Proper return type handling for @RequestMapping annotated methods
 
