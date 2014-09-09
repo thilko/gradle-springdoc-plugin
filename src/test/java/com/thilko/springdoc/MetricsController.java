@@ -3,6 +3,7 @@ package com.thilko.springdoc;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class MetricsController {
         return null;
     }
 
-    /*@RequestMapping(value = "/peep", method=RequestMethod.GET)
+    @RequestMapping(value = "/peep", method=RequestMethod.GET)
     @ResponseBody
     public List<Long> getSpecificMetrics(){
         return null;
-    } */
+    }
 }

@@ -1,12 +1,8 @@
 package com.thilko.springdoc.model
 
-import groovy.json.JsonOutput
-import org.springframework.web.bind.annotation.RequestBody
-
 import javax.lang.model.type.DeclaredType
 import javax.lang.model.type.TypeKind
 import javax.lang.model.type.TypeMirror
-
 
 class Response {
 
@@ -17,16 +13,20 @@ class Response {
     }
 
     def className() {
-        if (returnType.toString() =~ /.*<.*?>/) {
+        if (returnType.toString() =~ /.*ResponseEntity<.*?>$/) {
             return ((DeclaredType) returnType).typeArguments[0].toString()
-
         }
+
         returnType.toString()
     }
 
     def asJson() {
         if (returnType.kind == TypeKind.VOID) {
             return ""
+        }
+
+        if(returnType.toString() =~ /List<.*>$/){
+            return "returned lists currently not supported in json output"
         }
 
         def domainClass = this.class.classLoader.loadClass(className())
