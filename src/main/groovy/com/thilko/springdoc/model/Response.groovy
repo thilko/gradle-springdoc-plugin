@@ -25,12 +25,17 @@ class Response {
             return ""
         }
 
-        if(returnType.toString() =~ /List<.*>$/){
+        if (returnType.toString() =~ /List<.*>$/) {
             return "returned lists currently not supported in json output"
         }
 
-        def domainClass = this.class.classLoader.loadClass(className())
-        return ModelInstance.fromClass(domainClass).toJson()
+        try {
+            def domainClass = this.class.classLoader.loadClass(className())
+            return ModelInstance.fromClass(domainClass).toJson()
+        } catch (all) {
+            println "Unable to parse class ${className()} as json ${all}"
+            return "Unable to parse class ${className()} as json"
+        }
     }
 
     private Response(returnType) {
